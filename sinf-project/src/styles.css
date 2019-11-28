@@ -1,3 +1,5 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
 /* You can add global styles to this file, and also import other style files */
 /* Application-wide Styles */
 h1 {
@@ -20,4 +22,8 @@ h1 {
   /* everywhere else */
   * {
     font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .teste {
+    color: red;
   }

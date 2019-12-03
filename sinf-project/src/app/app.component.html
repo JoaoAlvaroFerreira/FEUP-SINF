@@ -46,3 +46,20 @@
     </div>
 
 </div>
+
+<div class="container">    
+        <table class="table table-bordered table-hover">    
+          <tr>    
+            <th>Id</th>    
+            <th>Name</th>    
+            <th>TaxRegistrationNumber</th>    
+            <th>TaxAccountingBasis</th>    
+          </tr>    
+          <tr *ngFor="let item of xmlItems">    
+            <td>{{item.id}}</td>    
+            <td>{{item.name}}</td>    
+            <td>{{item.taxRegistrationNumber}}</td>    
+            <td>{{item.taxAccountingBasis}}</td>    
+          </tr>    
+        </table>    
+      </div>   

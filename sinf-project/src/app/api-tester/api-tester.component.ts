@@ -9,12 +9,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiTesterComponent implements OnInit {
   a;
+  b;
   constructor() {
     this.a = "hi, this is the api not working yet";
-    //this.a = new ApiInteractions().get("sales/orders");
+    this.b = new ApiInteractions();
    }
 
   ngOnInit() {
   }
 
+  apicall(){
+    this.a = "in api call";
+    this.a = this.b.get("");
+  
+  }
 }

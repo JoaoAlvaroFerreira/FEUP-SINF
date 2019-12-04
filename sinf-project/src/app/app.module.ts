@@ -8,19 +8,16 @@ import { ChartsModule } from 'ng2-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GeneralComponent } from './general/general.component';
-import { SalesComponent } from './sales/sales.component';
-import { ApiComponent } from './api/api.component';
-import { ConfigComponent } from './config/config.component';
 import { GraficoBarrasComponent } from './grafico-barras/grafico-barras.component';
+import { ApiTesterComponent } from './api-tester/api-tester.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     GeneralComponent,
-    SalesComponent,
-    ApiComponent,
-    ConfigComponent,
-    GraficoBarrasComponent
+    GraficoBarrasComponent,
+    ApiTesterComponent,
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,28 @@
 
     <h3 class="mt-4">Visão Geral</h3>
     <hr>
+    <!--period selector-->
+    <div class="row mt-3">
+        <div class="col-12 d-flex flex-row">
+            <div class="ano mr-2">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                </select>
+            </div>
+            <div class="mes">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>--</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                </select>
+            </div>
+        </div>
+    </div>
 
     <div class="row mt-3">
         <div class="col-sm-6 col-md-3 mb-2">
@@ -93,6 +115,30 @@
 
     <h3 class="mt-4">Vendas</h3>
     <hr>
+
+    <!--period selector-->
+    <div class="row mt-3">
+        <div class="col-12 d-flex flex-row">
+            <div class="ano mr-2">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                </select>
+            </div>
+            <div class="mes">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>--</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
 
     <div class="row mt-3">
         <div class="col-sm-6 col-md-3 mb-2">
@@ -177,32 +223,32 @@
                 <div class="card-body">
                     <div class="cardTitle"> Distribuição de Vendas de Produtos</div>
                     <table class="table table-bordered table-hover genTable">
-                            <tr>
-                                <th>Rank</th>
-                                <th>Produto</th>
-                                <th>Quantidade</th>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>João G.</td>
-                                <td>1.203€</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>João G.</td>
-                                <td>1.203€</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>João G.</td>
-                                <td>1.203€</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>João G.</td>
-                                <td>1.203€</td>
-                            </tr>
-                        </table>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -210,7 +256,157 @@
 
     <!-- end of vendas -->
 
-    
+
+    <h3 class="mt-4">Compras</h3>
+    <hr>
+
+    <!--period selector-->
+    <div class="row mt-3">
+        <div class="col-12 d-flex flex-row">
+            <div class="ano mr-2">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                </select>
+            </div>
+            <div class="mes">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>--</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-3">
+        <div class="col-sm-6 col-md-3 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total de Capital Gasto</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown red"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">1.200 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Tendência de Compras Mensais</div>
+                    <app-grafico-linear></app-grafico-linear>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="cardTitle"> Comparação de Gastos (Período)</div>
+                        <app-grafico-linear></app-grafico-linear>
+                    </div>
+                </div>
+            </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Tempo médio de Chegada</div>
+                    <app-grafico-barras></app-grafico-barras>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Compras por Categoria</div>
+                    <app-grafico-bolo></app-grafico-bolo>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Vendedores mais Comuns</div>
+                    <table class="table table-bordered table-hover genTable">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Cliente</th>
+                            <th>Quantia</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Produtos mais Comprados</div>
+                    <table class="table table-bordered table-hover genTable">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end of compras -->
+
     <div class="mt-5">
         <table class="table table-bordered table-hover">
             <tr>

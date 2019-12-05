@@ -13,6 +13,7 @@ import { DownloaderComponent } from './downloads/downloads.component';
 import { ConfigComponent } from './config/config.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GraficoBoloComponent } from './grafico-bolo/grafico-bolo.component';
+import { GraficoLinearComponent } from './grafico-linear/grafico-linear.component';
 
 
 
@@ -24,6 +25,7 @@ import { GraficoBoloComponent } from './grafico-bolo/grafico-bolo.component';
     DownloaderComponent,
     ConfigComponent,
     GraficoBoloComponent,
+    GraficoLinearComponent,
   ],
   imports: [
     BrowserModule,

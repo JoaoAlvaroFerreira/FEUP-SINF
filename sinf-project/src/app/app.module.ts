@@ -11,6 +11,9 @@ import { GeneralComponent } from './general/general.component';
 import { GraficoBarrasComponent } from './grafico-barras/grafico-barras.component';
 import { DownloaderComponent } from './downloads/downloads.component';
 import { ConfigComponent } from './config/config.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GraficoBoloComponent } from './grafico-bolo/grafico-bolo.component';
+
 
 
 @NgModule({
@@ -20,12 +23,14 @@ import { ConfigComponent } from './config/config.component';
     GraficoBarrasComponent,
     DownloaderComponent,
     ConfigComponent,
+    GraficoBoloComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ChartsModule
+    ChartsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

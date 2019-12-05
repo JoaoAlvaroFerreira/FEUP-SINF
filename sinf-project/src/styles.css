@@ -45,3 +45,32 @@ h1 {
     padding: 0.8em 2em 0.8em 2em;
     font-weight: 400;
   }
+
+  .value-card {
+    font-size: 1.5em;
+    justify-content: space-between;
+    font-weight: 700;
+  }
+
+  .updown {
+    display: flex;
+    padding: 5px 0 5px 0;
+    justify-content: center;
+    font-size:1em;
+    background-color: #69bb55;
+    color: white;
+    width: 2em;
+  }
+
+  .green {
+    background-color: #69bb55;
+  }
+
+  .red {
+    background-color: #dd4444;
+  }
+
+  .cardTitle {
+    margin: 0 0 0.5em 0;
+
+  }

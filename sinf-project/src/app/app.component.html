@@ -37,29 +37,77 @@
             <button type="button" class="btn btn-secondary">Financeiro</button>
         </div>
     </div>
+
+    <div class="row mt-3">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total de Vendas</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">63.ng254 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total de Compras</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown red"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">1.200 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total Rendimento</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown red"><i class="fas fa-arrow-down"></i></div>
+                        <div class="value">156 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total em Inventário</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">224.557 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-6">
+            <app-grafico-barras></app-grafico-barras>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <app-grafico-bolo></app-grafico-bolo>
+        </div>
+    </div>
+
+
     <div class="mt-3">
-       
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>TaxRegistrationNumber</th>
+                <th>TaxAccountingBasis</th>
+            </tr>
+            <tr *ngFor="let item of xmlItems">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.taxRegistrationNumber}}</td>
+                <td>{{item.taxAccountingBasis}}</td>
+            </tr>
+        </table>
     </div>
-    <div class="row">
-        <div class="col-sm-12 col-md-6"><app-grafico-barras></app-grafico-barras></div>
-        <div class="col-sm-12 col-md-6">Coluna 2</div>
-    </div>
-
-</div>
-
-<div class="container">    
-        <table class="table table-bordered table-hover">    
-          <tr>    
-            <th>Id</th>    
-            <th>Name</th>    
-            <th>TaxRegistrationNumber</th>    
-            <th>TaxAccountingBasis</th>    
-          </tr>    
-          <tr *ngFor="let item of xmlItems">    
-            <td>{{item.id}}</td>    
-            <td>{{item.name}}</td>    
-            <td>{{item.taxRegistrationNumber}}</td>    
-            <td>{{item.taxAccountingBasis}}</td>    
-          </tr>    
-        </table>    
-      </div>   

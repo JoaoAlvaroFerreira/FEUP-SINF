@@ -22,7 +22,7 @@
     <hr>
 
     <div class="row mt-3">
-        <div class="col-3">
+        <div class="col-sm-6 col-md-3 mb-2">
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Total de Vendas</div>
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-sm-6 col-md-3 mb-2">
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Total de Compras</div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-sm-6 col-md-3 mb-2">
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Total Rendimento</div>
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-sm-6 col-md-3 mb-2">
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Total em Inventário</div>
@@ -88,7 +88,127 @@
         </div>
     </div>
 
-<!--end of visao geral-->
+
+    <!--end of visao geral-->
+
+    <h3 class="mt-4">Vendas</h3>
+    <hr>
+
+    <div class="row mt-3">
+        <div class="col-sm-6 col-md-3 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total de Vendas</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">63.254 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Tendência de Vendas</div>
+                    <app-grafico-linear></app-grafico-linear>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Vendas por Região</div>
+                    <app-grafico-barras></app-grafico-barras>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Vendas por Categoria</div>
+                    <app-grafico-bolo></app-grafico-bolo>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Clientes mais Rentáveis</div>
+                    <table class="table table-bordered table-hover genTable">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Cliente</th>
+                            <th>Quantia</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Distribuição de Vendas de Produtos</div>
+                    <table class="table table-bordered table-hover genTable">
+                            <tr>
+                                <th>Rank</th>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>João G.</td>
+                                <td>1.203€</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>João G.</td>
+                                <td>1.203€</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>João G.</td>
+                                <td>1.203€</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>João G.</td>
+                                <td>1.203€</td>
+                            </tr>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end of vendas -->
 
     
     <div class="mt-5">

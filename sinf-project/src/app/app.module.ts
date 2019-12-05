@@ -9,7 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GeneralComponent } from './general/general.component';
 import { GraficoBarrasComponent } from './grafico-barras/grafico-barras.component';
-import { ApiTesterComponent } from './api-tester/api-tester.component';
+import { DownloaderComponent } from './downloads/downloads.component';
+import { ConfigComponent } from './config/config.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ApiTesterComponent } from './api-tester/api-tester.component';
     AppComponent,
     GeneralComponent,
     GraficoBarrasComponent,
-    ApiTesterComponent,
+    DownloaderComponent,
+    ConfigComponent,
   ],
   imports: [
     BrowserModule,

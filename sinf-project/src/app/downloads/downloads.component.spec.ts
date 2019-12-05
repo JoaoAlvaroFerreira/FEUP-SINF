@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ApiTesterComponent } from './api-tester.component';
+import { DownloadsComponent } from './downloads.component';
 
-describe('ApiTesterComponent', () => {
-  let component: ApiTesterComponent;
-  let fixture: ComponentFixture<ApiTesterComponent>;
+describe('DownloadsComponent', () => {
+  let component: DownloadsComponent;
+  let fixture: ComponentFixture<DownloadsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApiTesterComponent ]
+      declarations: [ DownloadsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApiTesterComponent);
+    fixture = TestBed.createComponent(DownloadsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -42,7 +42,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Tendência de Vendas</div>
-                    <app-grafico-linear></app-grafico-linear>
+                    <app-grafico-linear [dataSets]="lineChartData" [labels]="lineChartLabels"  [legend]="legendLine"></app-grafico-linear>
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Vendas por Região</div>
-                    <app-grafico-barras></app-grafico-barras>
+                    <app-grafico-barras [dataSets]="barChartData" [labels]="barChartLabels" [legend]="legendBar"></app-grafico-barras>
                 </div>
             </div>
         </div>

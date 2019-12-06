@@ -1,31 +1,11 @@
 <nav class="navbar navbar-primary nav-style">
     <div class="container">
         <a class="navbar-brand">{{title}}</a>
-        <button type="button" class="btn btn-outline-light"><i class="fas fa-sign-out-alt"></i>Log Out</button>
+        <button type="button" class="btn btn-outline-light"><i class="fas fa-sign-out-alt mr-1"></i> Log Out</button>
     </div>
 </nav>
-<!--
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-            aria-controls="pills-home" aria-selected="true">Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
-            aria-controls="pills-profile" aria-selected="false">Profile</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
-            aria-controls="pills-contact" aria-selected="false">Contact</a>
-    </li>
-</ul>
-<div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
-    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
-</div>
 
--->
+
 
 <div class="container">
     <div class="d-flex justify-content-center mt-4">
@@ -37,30 +17,715 @@
             <button type="button" class="btn btn-secondary">Financeiro</button>
         </div>
     </div>
-    <div class="mt-3">
-        <app-config></app-config>
-       <app-downloads></app-downloads>
-    </div>
-    <div class="row">
-        <div class="col-sm-12 col-md-6"><app-grafico-barras></app-grafico-barras></div>
-        <div class="col-sm-12 col-md-6">Coluna 2</div>
+
+    <h3 class="mt-4">Visão Geral</h3>
+    <hr>
+    <!--period selector-->
+    <div class="row mt-3">
+        <div class="col-12 d-flex flex-row">
+            <div class="ano mr-2">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                </select>
+            </div>
+            <div class="mes">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>--</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                </select>
+            </div>
+        </div>
     </div>
 
-</div>
+    <div class="row mt-3">
+        <div class="col-sm-6 col-md-3 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total de Vendas</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">63.254 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total de Compras</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown red"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">1.200 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total Rendimento</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown red"><i class="fas fa-arrow-down"></i></div>
+                        <div class="value">156 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total em Inventário</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">224.557 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="container">    
-        <table class="table table-bordered table-hover">    
-          <tr>    
-            <th>Id</th>    
-            <th>Name</th>    
-            <th>TaxRegistrationNumber</th>    
-            <th>TaxAccountingBasis</th>    
-          </tr>    
-          <tr *ngFor="let item of xmlItems">    
-            <td>{{item.id}}</td>    
-            <td>{{item.name}}</td>    
-            <td>{{item.taxRegistrationNumber}}</td>    
-            <td>{{item.taxAccountingBasis}}</td>    
-          </tr>    
-        </table>    
-      </div>   
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Tendência de Vendas</div>
+                    <app-grafico-linear></app-grafico-linear>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Distribuição de Vendas de Produtos</div>
+                    <app-grafico-bolo></app-grafico-bolo>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--end of visao geral-->
+
+    <h3 class="mt-4">Vendas</h3>
+    <hr>
+
+    <!--period selector-->
+    <div class="row mt-3">
+        <div class="col-12 d-flex flex-row">
+            <div class="ano mr-2">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                </select>
+            </div>
+            <div class="mes">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>--</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-3">
+        <div class="col-sm-6 col-md-3 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total de Vendas</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">63.254 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Tendência de Vendas</div>
+                    <app-grafico-linear></app-grafico-linear>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Vendas por Região</div>
+                    <app-grafico-barras></app-grafico-barras>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Vendas por Categoria</div>
+                    <app-grafico-bolo></app-grafico-bolo>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Clientes mais Rentáveis</div>
+                    <table class="table table-bordered table-hover genTable">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Cliente</th>
+                            <th>Quantia</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Distribuição de Vendas de Produtos</div>
+                    <table class="table table-bordered table-hover genTable">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end of vendas -->
+
+
+    <h3 class="mt-4">Compras</h3>
+    <hr>
+
+    <!--period selector-->
+    <div class="row mt-3">
+        <div class="col-12 d-flex flex-row">
+            <div class="ano mr-2">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                </select>
+            </div>
+            <div class="mes">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>--</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-3">
+        <div class="col-sm-6 col-md-3 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total de Capital Gasto</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown red"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">1.200 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Tendência de Compras Mensais</div>
+                    <app-grafico-linear></app-grafico-linear>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Comparação de Gastos (Período)</div>
+                    <app-grafico-linear></app-grafico-linear>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Tempo médio de Chegada</div>
+                    <app-grafico-barras></app-grafico-barras>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Compras por Categoria</div>
+                    <app-grafico-bolo></app-grafico-bolo>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Vendedores mais Comuns</div>
+                    <table class="table table-bordered table-hover genTable">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Cliente</th>
+                            <th>Quantia</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Produtos mais Comprados</div>
+                    <table class="table table-bordered table-hover genTable">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end of compras -->
+
+
+    <h3 class="mt-4">Inventário</h3>
+    <hr>
+
+    <!--period selector-->
+    <div class="row mt-3">
+        <div class="col-12 d-flex flex-row">
+            <div class="ano mr-2">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                </select>
+            </div>
+            <div class="mes">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>--</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-3">
+        <div class="col-sm-6 col-md-3 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Total de Inventário</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">10.756 €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Renovação do Inventário</div>
+                    <div class="value-card d-flex flew-row align-items-center">
+                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                        <div class="value">100 dias</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Evolução do Inventário</div>
+                    <app-grafico-linear></app-grafico-linear>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Inventário por Categoria</div>
+                    <app-grafico-bolo></app-grafico-bolo>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Stock mínimo atingido</div>
+                    <table class="table table-bordered table-hover genTable">
+                        <tr>
+                            <th>Item</th>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>João G.</td>
+                            <td>1.203€</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-6">
+            <form class="form-group d-flex flex-row">
+                <input type="text" class="form-control mr-2" id="usr">
+                <button type="button" class="btn btn-info botaogen">Procurar Produto</button>
+            </form>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered table-hover genTable">
+                        <tr>
+                            <th>Item</th>
+                            <th>Produto</th>
+                            <th>Quantidade em Stock</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>João G.</td>
+                            <td>4567</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>João G.</td>
+                            <td>4567</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>João G.</td>
+                            <td>4567</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>João G.</td>
+                            <td>4567</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end of inventario -->
+
+    <h3 class="mt-4">Financeiro</h3>
+    <hr>
+
+    <!--period selector-->
+    <div class="row mt-3">
+        <div class="col-12 d-flex flex-row">
+            <div class="ano mr-2">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                </select>
+            </div>
+            <div class="mes">
+                <label for="sel1">Período:</label>
+                <select class="form-control" id="sel1">
+                    <option>--</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-3">
+            <div class="col-sm-6 col-md-3 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="cardTitle"> Rendimentos Totais</div>
+                            <div class="value-card d-flex flew-row align-items-center">
+                                <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                                <div class="value">63.254 €</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="cardTitle"> Valor Gerado</div>
+                            <div class="value-card d-flex flew-row align-items-center">
+                                <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                                <div class="value">1.200 €</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="cardTitle"> Despesas Totais</div>
+                            <div class="value-card d-flex flew-row align-items-center">
+                                <div class="updown red"><i class="fas fa-arrow-down"></i></div>
+                                <div class="value">156 €</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="cardTitle"> Liquidez</div>
+                            <div class="value-card d-flex flew-row align-items-center">
+                                <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                                <div class="value">32 %</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-3 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="cardTitle"> Ativo</div>
+                                <div class="value-card d-flex flew-row align-items-center">
+                                    <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                                    <div class="value">63.254 €</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="cardTitle"> Passivo</div>
+                                <div class="value-card d-flex flew-row align-items-center">
+                                    <div class="updown red"><i class="fas fa-arrow-down"></i></div>
+                                    <div class="value">50.252 €</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 mb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="cardTitle"> Contas a Receber</div>
+                                    <div class="value-card d-flex flew-row align-items-center">
+                                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                                        <div class="value">224.557 €</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-sm-6 col-md-3 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="cardTitle"> Contas a Pagar</div>
+                                <div class="value-card d-flex flew-row align-items-center">
+                                    <div class="updown red"><i class="fas fa-arrow-down"></i></div>
+                                    <div class="value">156 €</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Evolução do Valor Gerado</div>
+                    <app-grafico-linear></app-grafico-linear>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="cardTitle"> Evolução dos Rendimentos</div>
+                        <app-grafico-linear></app-grafico-linear>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="col-sm-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="cardTitle"> Evolução dos Custos</div>
+                            <app-grafico-linear></app-grafico-linear>
+                        </div>
+                    </div>
+        
+                </div>
+    </div>
+    <!-- end of financeiro -->
+
+
+<!-- tabela Miguel
+    <div class="mt-5">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>TaxRegistrationNumber</th>
+                <th>TaxAccountingBasis</th>
+            </tr>
+            <tr *ngFor="let item of xmlItems">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.taxRegistrationNumber}}</td>
+                <td>{{item.taxAccountingBasis}}</td>
+            </tr>
+        </table>
+    </div>
+
+     -->

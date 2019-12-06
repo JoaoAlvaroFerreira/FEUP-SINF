@@ -7,7 +7,6 @@
     
     <div>
             <app-config></app-config>
-            <app-downloads></app-downloads>
         </div>
     
     <div class="container">
@@ -733,3 +732,46 @@
         </div>
     
          -->
+    <div class="container">
+        <a class="navbar-brand">{{title}}</a>
+        <button type="button" class="btn btn-outline-light"><i class="fas fa-sign-out-alt mr-1"></i> Log Out</button>
+    </div>
+
+
+
+
+<div class="container">
+    <div class="d-flex justify-content-center mt-4">
+        <div class="btn-group flex-wrap main-categ" role="group" aria-label="Basic example">
+            <button routerLink="/visaogeral" type="button" class="btn btn-secondary">Visão Geral</button>
+            <button routerLink="/vendas" type="button" class="btn btn-secondary">Vendas</button>
+            <button routerLink="/compras" type="button" class="btn btn-secondary">Compras</button>
+            <button routerLink="/inventario" type="button" class="btn btn-secondary">Inventário</button>
+            <button routerLink="/financeiro" type="button" class="btn btn-secondary">Financeiro</button>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+
+
+    <div class="mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h3>Tabela que o Miguel precisa:</h3>
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>TaxRegistrationNumber</th>
+                        <th>TaxAccountingBasis</th>
+                    </tr>
+                    <tr *ngFor="let item of xmlItems">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.taxRegistrationNumber}}</td>
+                        <td>{{item.taxAccountingBasis}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>

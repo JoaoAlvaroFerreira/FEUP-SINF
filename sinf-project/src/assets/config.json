@@ -1,4 +1,5 @@
 {
     "url": "http://www.mocky.io/v2/5de79ec23700007b02092aad",
-    "primaveraToken": "INSERT PRIMAVERA TOKEN HERE"
+    "textfile":"assets/saf-t.xml",
+    "primaveraToken": "industria20sinf2019"
 }

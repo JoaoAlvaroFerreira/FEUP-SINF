@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import xml2js from 'xml2js';  
 import { HttpClient, HttpHeaders } from '@angular/common/http';  
 
+//Testing
+import {Costumer, Product, Venda } from './model/client_model';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -37,6 +41,7 @@ export class AppComponent {
             trim: true,  
             explicitArray: true  
           });  
+          /* COmpany info
       parser.parseString(data, function (err, result) {  
         var obj = result.AuditFile;  
         var header = obj.Header[0];        
@@ -48,7 +53,23 @@ export class AppComponent {
           });  
           console.log(arr);
         resolve(arr);  
-      });  
+      });*/  
+      parser.parseString(data, function (err, result) {  
+        var obj = result.AuditFile;  
+        var invoices = obj.SourceDocuments[0].SalesInvoices[0].Invoice.length;  
+        var costumers = obj.MasterFiles[0].Customer;    
+        var costumers_array = new Array<Costumer>();
+
+        costumers.forEach(element => {
+          var temp = new Costumer;
+          temp.id = element.CustomerID;
+          temp.name = element.CompanyName;
+          costumers_array.push(temp);
+        });
+        
+        //Array<Invoices> = [];
+        console.log(costumers_array);  
+      });
     });  
   }  
 }  

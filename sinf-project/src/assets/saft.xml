@@ -16,10 +16,10 @@
       <Country xsi:type="xsd:string">PT</Country>
     </CompanyAddress>
     <FiscalYear>2019</FiscalYear>
-    <StartDate>2019-11-01</StartDate>
-    <EndDate>2019-11-30</EndDate>
+    <StartDate>2019-12-01</StartDate>
+    <EndDate>2019-12-31</EndDate>
     <CurrencyCode xsi:type="xsd:string">EUR</CurrencyCode>
-    <DateCreated>2019-11-28</DateCreated>
+    <DateCreated>2019-12-06</DateCreated>
     <TaxEntity>GLOBAL</TaxEntity>
     <ProductCompanyTaxID>503140600</ProductCompanyTaxID>
     <SoftwareCertificateNumber>2616</SoftwareCertificateNumber>
@@ -28,7 +28,7 @@
   </Header>
   <MasterFiles>
     <Customer>
-      <CustomerID>0001.1</CustomerID>
+      <CustomerID>0001.6</CustomerID>
       <AccountID>Desconhecido</AccountID>
       <CustomerTaxID>999999990</CustomerTaxID>
       <CompanyName>Lucas Vieira</CompanyName>
@@ -47,12 +47,107 @@
       <Website>Desconhecido</Website>
       <SelfBillingIndicator>0</SelfBillingIndicator>
     </Customer>
+    <Customer>
+      <CustomerID>0003.1</CustomerID>
+      <AccountID>Desconhecido</AccountID>
+      <CustomerTaxID>999999990</CustomerTaxID>
+      <CompanyName>Catarina Almeida</CompanyName>
+      <BillingAddress>
+        <BuildingNumber>Desconheci</BuildingNumber>
+        <StreetName>Rua do Carmo</StreetName>
+        <AddressDetail>Catarina Almeida  Rua do Carmo   1234-234</AddressDetail>
+        <City>Desconhecido</City>
+        <PostalCode>1234-234</PostalCode>
+        <Region>Desconhecido</Region>
+        <Country>PT</Country>
+      </BillingAddress>
+      <Telephone>Desconhecido</Telephone>
+      <Fax>Desconhecido</Fax>
+      <Email>Desconhecido</Email>
+      <Website>Desconhecido</Website>
+      <SelfBillingIndicator>0</SelfBillingIndicator>
+    </Customer>
+    <Customer>
+      <CustomerID>0004.1</CustomerID>
+      <AccountID>Desconhecido</AccountID>
+      <CustomerTaxID>999999990</CustomerTaxID>
+      <CompanyName>Miguel Ferreira</CompanyName>
+      <BillingAddress>
+        <BuildingNumber>Desconheci</BuildingNumber>
+        <StreetName>Rua do X</StreetName>
+        <AddressDetail>Miguel Ferreira  Rua do X   2345-345</AddressDetail>
+        <City>Desconhecido</City>
+        <PostalCode>2345-345</PostalCode>
+        <Region>Desconhecido</Region>
+        <Country>PT</Country>
+      </BillingAddress>
+      <Telephone>Desconhecido</Telephone>
+      <Fax>Desconhecido</Fax>
+      <Email>Desconhecido</Email>
+      <Website>Desconhecido</Website>
+      <SelfBillingIndicator>0</SelfBillingIndicator>
+    </Customer>
+    <Customer>
+      <CustomerID>0005.1</CustomerID>
+      <AccountID>Desconhecido</AccountID>
+      <CustomerTaxID>999999990</CustomerTaxID>
+      <CompanyName>Bruno Oliveira</CompanyName>
+      <BillingAddress>
+        <BuildingNumber>Desconheci</BuildingNumber>
+        <StreetName>Rua Y</StreetName>
+        <AddressDetail>Bruno Oliveira  Rua Y   1234-234</AddressDetail>
+        <City>Desconhecido</City>
+        <PostalCode>1234-234</PostalCode>
+        <Region>Desconhecido</Region>
+        <Country>PT</Country>
+      </BillingAddress>
+      <Telephone>Desconhecido</Telephone>
+      <Fax>Desconhecido</Fax>
+      <Email>Desconhecido</Email>
+      <Website>Desconhecido</Website>
+      <SelfBillingIndicator>0</SelfBillingIndicator>
+    </Customer>
     <Product>
       <ProductType>P</ProductType>
-      <ProductCode>CAMARA1</ProductCode>
+      <ProductCode>LIMPEZA_005</ProductCode>
       <ProductGroup>Sem família</ProductGroup>
-      <ProductDescription>camara para fotografar</ProductDescription>
-      <ProductNumberCode>123345</ProductNumberCode>
+      <ProductDescription>Escova para Chão Ref. Perfect Kasa</ProductDescription>
+      <ProductNumberCode>LIMPEZA_005</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>ACETONA</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>emb. 250 ml</ProductDescription>
+      <ProductNumberCode>1223344</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>PAPELHIGIENICO</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Papel Higiénico Sublime 4 Folhas</ProductDescription>
+      <ProductNumberCode>PAPELHIGIENICO</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>LIMPEZA_001</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Creme Limpeza Frescura Limão</ProductDescription>
+      <ProductNumberCode>LIMPEZA_001</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>LIMPEZA_003</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>Luvas Multiusos Tam. S</ProductDescription>
+      <ProductNumberCode>LIMPEZA_003</ProductNumberCode>
+    </Product>
+    <Product>
+      <ProductType>P</ProductType>
+      <ProductCode>ALGODAO_ZIG-ZAG</ProductCode>
+      <ProductGroup>Sem família</ProductGroup>
+      <ProductDescription>emb. 40 gr</ProductDescription>
+      <ProductNumberCode>ALGODAO_ZIG-ZAG</ProductNumberCode>
     </Product>
     <TaxTable>
       <TaxTableEntry>
@@ -143,22 +238,22 @@
   </MasterFiles>
   <SourceDocuments>
     <SalesInvoices>
-      <NumberOfEntries>1</NumberOfEntries>
+      <NumberOfEntries>4</NumberOfEntries>
       <TotalDebit>0</TotalDebit>
-      <TotalCredit>10.000000</TotalCredit>
+      <TotalCredit>46.790000</TotalCredit>
       <Invoice>
-        <InvoiceNo>FA 2019/1</InvoiceNo>
+        <InvoiceNo>FA 2019/3</InvoiceNo>
         <ATCUD>0</ATCUD>
         <DocumentStatus>
           <InvoiceStatus>N</InvoiceStatus>
-          <InvoiceStatusDate>2019-11-28T17:41:57</InvoiceStatusDate>
+          <InvoiceStatusDate>2019-12-04T11:45:52</InvoiceStatusDate>
           <SourceID>up201606334@fe.up.pt</SourceID>
           <SourceBilling>P</SourceBilling>
         </DocumentStatus>
-        <Hash>hdIp0bfJOHrGYDnbjGZ7g8JkYh7de6wcvAF5fFPZo3UJ6pxEKdNvpyZQAlAwXvsAK1/uQN+PuPC455ycHriA1AeSSzsfjCcgWaaXyFux4hkNT0KwSu3ZCNAss7DFzaEKEiSj4WpKSX4SKJ0fhklpxwfOGVBe3xS3vV1ONx9hzNs=</Hash>
+        <Hash>Jf+QgyhLM8J8zx0mL2+BHrKeqgvoCHrptWecsSxnfIK1EoFKCr35m0+nAuTFYMarOnvCk0g14L1xUA6VPIrZLKwlj8LhONEJ2wxgbXAK2kPNx2NMJGrz2MetG97Ji9Iws69OCP5DPf+nzDV68TPKUs1w7hjiSSh2b/APsBMqpZ0=</Hash>
         <HashControl>1</HashControl>
-        <Period>11</Period>
-        <InvoiceDate>2019-11-28</InvoiceDate>
+        <Period>12</Period>
+        <InvoiceDate>2019-12-04</InvoiceDate>
         <InvoiceType>FT</InvoiceType>
         <SpecialRegimes>
           <SelfBillingIndicator>0</SelfBillingIndicator>
@@ -166,14 +261,14 @@
           <ThirdPartiesBillingIndicator>0</ThirdPartiesBillingIndicator>
         </SpecialRegimes>
         <SourceID>up201606334@fe.up.pt</SourceID>
-        <SystemEntryDate>2019-11-28T17:41:57</SystemEntryDate>
-        <CustomerID>0001.1</CustomerID>
+        <SystemEntryDate>2019-12-04T11:45:52</SystemEntryDate>
+        <CustomerID>0003.1</CustomerID>
         <ShipTo>
           <Address>
-            <StreetName>Desconhecido</StreetName>
-            <AddressDetail>Your Address</AddressDetail>
+            <StreetName>Rua do Carmo</StreetName>
+            <AddressDetail>O seu endereço Rua do Carmo   1234-234</AddressDetail>
             <City>Desconhecido</City>
-            <PostalCode>Desconhecido</PostalCode>
+            <PostalCode>1234-234</PostalCode>
             <Region>Desconhecido</Region>
             <Country>PT</Country>
           </Address>
@@ -181,23 +276,95 @@
         <ShipFrom>
           <Address>
             <StreetName>Rua da fábrica do pêlo </StreetName>
-            <AddressDetail>Our Address Rua da fábrica do pêlo    4710-409 Braga</AddressDetail>
+            <AddressDetail>O Nosso Endereço Rua da fábrica do pêlo    4710-409 Braga</AddressDetail>
             <City>Braga</City>
             <PostalCode>4710-409</PostalCode>
             <Region>Desconhecido</Region>
             <Country>PT</Country>
           </Address>
         </ShipFrom>
-        <MovementStartTime>2019-11-28T17:43:00</MovementStartTime>
+        <MovementStartTime>2019-12-04T11:43:38</MovementStartTime>
         <Line>
           <LineNumber>1</LineNumber>
-          <ProductCode>CAMARA1</ProductCode>
-          <ProductDescription>camara para fotografar</ProductDescription>
+          <ProductCode>ACETONA</ProductCode>
+          <ProductDescription>emb. 250 ml</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>3.000000</UnitPrice>
+          <TaxPointDate>2019-12-04</TaxPointDate>
+          <Description>emb. 250 ml</Description>
+          <CreditAmount>3.000000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>2</LineNumber>
+          <ProductCode>ALGODAO_ZIG-ZAG</ProductCode>
+          <ProductDescription>emb. 40 gr</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>2.000000</UnitPrice>
+          <TaxPointDate>2019-12-04</TaxPointDate>
+          <Description>emb. 40 gr</Description>
+          <CreditAmount>2.000000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>3</LineNumber>
+          <ProductCode>LIMPEZA_001</ProductCode>
+          <ProductDescription>Creme Limpeza Frescura Limão</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>4.000000</UnitPrice>
+          <TaxPointDate>2019-12-04</TaxPointDate>
+          <Description>Creme Limpeza Frescura Limão</Description>
+          <CreditAmount>4.000000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>4</LineNumber>
+          <ProductCode>LIMPEZA_003</ProductCode>
+          <ProductDescription>Luvas Multiusos Tam. S</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>4.000000</UnitPrice>
+          <TaxPointDate>2019-12-04</TaxPointDate>
+          <Description>Luvas Multiusos Tam. S</Description>
+          <CreditAmount>4.000000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>5</LineNumber>
+          <ProductCode>LIMPEZA_005</ProductCode>
+          <ProductDescription>Escova para Chão Ref. Perfect Kasa</ProductDescription>
           <Quantity>1.000000</Quantity>
           <UnitOfMeasure>UN</UnitOfMeasure>
           <UnitPrice>10.000000</UnitPrice>
-          <TaxPointDate>2019-11-28</TaxPointDate>
-          <Description>camara para fotografar</Description>
+          <TaxPointDate>2019-12-04</TaxPointDate>
+          <Description>Escova para Chão Ref. Perfect Kasa</Description>
           <CreditAmount>10.000000</CreditAmount>
           <Tax>
             <TaxType>IVA</TaxType>
@@ -207,10 +374,274 @@
           </Tax>
           <SettlementAmount>0.000000</SettlementAmount>
         </Line>
+        <Line>
+          <LineNumber>6</LineNumber>
+          <ProductCode>PAPELHIGIENICO</ProductCode>
+          <ProductDescription>Papel Higiénico Sublime 4 Folhas</ProductDescription>
+          <Quantity>2.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>4.000000</UnitPrice>
+          <TaxPointDate>2019-12-04</TaxPointDate>
+          <Description>Papel Higiénico Sublime 4 Folhas</Description>
+          <CreditAmount>8.000000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
         <DocumentTotals>
-          <TaxPayable>2.30</TaxPayable>
-          <NetTotal>10.00</NetTotal>
-          <GrossTotal>12.30</GrossTotal>
+          <TaxPayable>7.13</TaxPayable>
+          <NetTotal>31.00</NetTotal>
+          <GrossTotal>38.13</GrossTotal>
+        </DocumentTotals>
+        <WithholdingTax>
+          <WithholdingTaxAmount>0.000000</WithholdingTaxAmount>
+        </WithholdingTax>
+      </Invoice>
+      <Invoice>
+        <InvoiceNo>FA 2019/4</InvoiceNo>
+        <ATCUD>0</ATCUD>
+        <DocumentStatus>
+          <InvoiceStatus>N</InvoiceStatus>
+          <InvoiceStatusDate>2019-12-04T11:49:59</InvoiceStatusDate>
+          <SourceID>up201606334@fe.up.pt</SourceID>
+          <SourceBilling>P</SourceBilling>
+        </DocumentStatus>
+        <Hash>hVwhJDJ7I6qVryw1L71CKHxYMtjG43lmkcinsr1seMyg+x5UDZWvE9bxUF3FWf2fCOxI9B46NlQZDO4L6lNKx36ZJ4+twCnOgiOjl5vYsxzE9sjOuQbgVi/kCHffYfGVrhNOjtBhXzXZFoyXz570VIWDyIIk/FSCRKhv+1KkCQU=</Hash>
+        <HashControl>1</HashControl>
+        <Period>12</Period>
+        <InvoiceDate>2019-12-04</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <SpecialRegimes>
+          <SelfBillingIndicator>0</SelfBillingIndicator>
+          <CashVATSchemeIndicator>0</CashVATSchemeIndicator>
+          <ThirdPartiesBillingIndicator>0</ThirdPartiesBillingIndicator>
+        </SpecialRegimes>
+        <SourceID>up201606334@fe.up.pt</SourceID>
+        <SystemEntryDate>2019-12-04T11:49:59</SystemEntryDate>
+        <CustomerID>0004.1</CustomerID>
+        <ShipTo>
+          <Address>
+            <StreetName>Rua do X</StreetName>
+            <AddressDetail>O seu endereço Rua do X   2345-345</AddressDetail>
+            <City>Desconhecido</City>
+            <PostalCode>2345-345</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipTo>
+        <ShipFrom>
+          <Address>
+            <StreetName>Rua da fábrica do pêlo </StreetName>
+            <AddressDetail>O Nosso Endereço Rua da fábrica do pêlo    4710-409 Braga</AddressDetail>
+            <City>Braga</City>
+            <PostalCode>4710-409</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipFrom>
+        <MovementStartTime>2019-12-04T11:50:15</MovementStartTime>
+        <Line>
+          <LineNumber>1</LineNumber>
+          <ProductCode>ACETONA</ProductCode>
+          <ProductDescription>emb. 250 ml</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>1.990000</UnitPrice>
+          <TaxPointDate>2019-12-04</TaxPointDate>
+          <Description>emb. 250 ml</Description>
+          <CreditAmount>1.990000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>2</LineNumber>
+          <ProductCode>ALGODAO_ZIG-ZAG</ProductCode>
+          <ProductDescription>emb. 40 gr</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>0.900000</UnitPrice>
+          <TaxPointDate>2019-12-04</TaxPointDate>
+          <Description>emb. 40 gr</Description>
+          <CreditAmount>0.900000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <DocumentTotals>
+          <TaxPayable>0.66</TaxPayable>
+          <NetTotal>2.89</NetTotal>
+          <GrossTotal>3.55</GrossTotal>
+        </DocumentTotals>
+        <WithholdingTax>
+          <WithholdingTaxAmount>0.000000</WithholdingTaxAmount>
+        </WithholdingTax>
+      </Invoice>
+      <Invoice>
+        <InvoiceNo>FA 2019/5</InvoiceNo>
+        <ATCUD>0</ATCUD>
+        <DocumentStatus>
+          <InvoiceStatus>N</InvoiceStatus>
+          <InvoiceStatusDate>2019-12-06T11:58:15</InvoiceStatusDate>
+          <SourceID>up201606334@fe.up.pt</SourceID>
+          <SourceBilling>P</SourceBilling>
+        </DocumentStatus>
+        <Hash>dqyOrHYsIOnhSWknlictqpSaKRttpEzDaXA2oW9HihQv7pVhr0kwdfyO5UFpHvGxfeVUVVUxB7gbZibnOC2g23EKLoR2N5xfnfpFIdLuYXUx7aWk083J+QqNWfQ+M02KU6g6geIDj88l74VCTuaMdHIxDAOavoUnDUoks1GflZw=</Hash>
+        <HashControl>1</HashControl>
+        <Period>12</Period>
+        <InvoiceDate>2019-12-06</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <SpecialRegimes>
+          <SelfBillingIndicator>0</SelfBillingIndicator>
+          <CashVATSchemeIndicator>0</CashVATSchemeIndicator>
+          <ThirdPartiesBillingIndicator>0</ThirdPartiesBillingIndicator>
+        </SpecialRegimes>
+        <SourceID>up201606334@fe.up.pt</SourceID>
+        <SystemEntryDate>2019-12-06T11:58:15</SystemEntryDate>
+        <CustomerID>0005.1</CustomerID>
+        <ShipTo>
+          <Address>
+            <StreetName>Rua Y</StreetName>
+            <AddressDetail>O seu endereço Rua Y   1234-234</AddressDetail>
+            <City>Desconhecido</City>
+            <PostalCode>1234-234</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipTo>
+        <ShipFrom>
+          <Address>
+            <StreetName>Rua da fábrica do pêlo </StreetName>
+            <AddressDetail>O Nosso Endereço Rua da fábrica do pêlo    4710-409 Braga</AddressDetail>
+            <City>Braga</City>
+            <PostalCode>4710-409</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipFrom>
+        <MovementStartTime>2019-12-06T11:58:19</MovementStartTime>
+        <Line>
+          <LineNumber>1</LineNumber>
+          <ProductCode>ALGODAO_ZIG-ZAG</ProductCode>
+          <ProductDescription>emb. 40 gr</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>0.900000</UnitPrice>
+          <TaxPointDate>2019-12-06</TaxPointDate>
+          <Description>emb. 40 gr</Description>
+          <CreditAmount>0.900000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <Line>
+          <LineNumber>2</LineNumber>
+          <ProductCode>LIMPEZA_003</ProductCode>
+          <ProductDescription>Luvas Multiusos Tam. S</ProductDescription>
+          <Quantity>1.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>3.000000</UnitPrice>
+          <TaxPointDate>2019-12-06</TaxPointDate>
+          <Description>Luvas Multiusos Tam. S</Description>
+          <CreditAmount>3.000000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <DocumentTotals>
+          <TaxPayable>0.90</TaxPayable>
+          <NetTotal>3.90</NetTotal>
+          <GrossTotal>4.80</GrossTotal>
+        </DocumentTotals>
+        <WithholdingTax>
+          <WithholdingTaxAmount>0.000000</WithholdingTaxAmount>
+        </WithholdingTax>
+      </Invoice>
+      <Invoice>
+        <InvoiceNo>FA 2019/6</InvoiceNo>
+        <ATCUD>0</ATCUD>
+        <DocumentStatus>
+          <InvoiceStatus>N</InvoiceStatus>
+          <InvoiceStatusDate>2019-12-06T12:04:28</InvoiceStatusDate>
+          <SourceID>up201606334@fe.up.pt</SourceID>
+          <SourceBilling>P</SourceBilling>
+        </DocumentStatus>
+        <Hash>FKltQ0uKldDpdbbsL3Z+wOTrUXaVECTeARBWjYYKQSuP9wLgL8Vhv3d3Yq9Tob/LPOjWklbmB68fdnnqWIGPcwiTIZ3lWj8rn2CEX54OlVl1MufX/drWC+tR3hUfzL0Aj1/qq0oTp+aMm1nrs8+cSDN2PTaInASuf5sKSe/hxXg=</Hash>
+        <HashControl>1</HashControl>
+        <Period>12</Period>
+        <InvoiceDate>2019-12-06</InvoiceDate>
+        <InvoiceType>FT</InvoiceType>
+        <SpecialRegimes>
+          <SelfBillingIndicator>0</SelfBillingIndicator>
+          <CashVATSchemeIndicator>0</CashVATSchemeIndicator>
+          <ThirdPartiesBillingIndicator>0</ThirdPartiesBillingIndicator>
+        </SpecialRegimes>
+        <SourceID>up201606334@fe.up.pt</SourceID>
+        <SystemEntryDate>2019-12-06T12:04:28</SystemEntryDate>
+        <CustomerID>0001.6</CustomerID>
+        <ShipTo>
+          <Address>
+            <StreetName>Desconhecido</StreetName>
+            <AddressDetail>O seu endereço</AddressDetail>
+            <City>Desconhecido</City>
+            <PostalCode>Desconhecido</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipTo>
+        <ShipFrom>
+          <Address>
+            <StreetName>Rua da fábrica do pêlo </StreetName>
+            <AddressDetail>O Nosso Endereço Rua da fábrica do pêlo    4710-409 Braga</AddressDetail>
+            <City>Braga</City>
+            <PostalCode>4710-409</PostalCode>
+            <Region>Desconhecido</Region>
+            <Country>PT</Country>
+          </Address>
+        </ShipFrom>
+        <MovementStartTime>2019-12-06T12:05:29</MovementStartTime>
+        <Line>
+          <LineNumber>1</LineNumber>
+          <ProductCode>PAPELHIGIENICO</ProductCode>
+          <ProductDescription>Papel Higiénico Sublime 4 Folhas</ProductDescription>
+          <Quantity>3.000000</Quantity>
+          <UnitOfMeasure>UN</UnitOfMeasure>
+          <UnitPrice>3.000000</UnitPrice>
+          <TaxPointDate>2019-12-06</TaxPointDate>
+          <Description>Papel Higiénico Sublime 4 Folhas</Description>
+          <CreditAmount>9.000000</CreditAmount>
+          <Tax>
+            <TaxType>IVA</TaxType>
+            <TaxCountryRegion>PT</TaxCountryRegion>
+            <TaxCode>NOR</TaxCode>
+            <TaxPercentage>23.000000</TaxPercentage>
+          </Tax>
+          <SettlementAmount>0.000000</SettlementAmount>
+        </Line>
+        <DocumentTotals>
+          <TaxPayable>2.07</TaxPayable>
+          <NetTotal>9.00</NetTotal>
+          <GrossTotal>11.07</GrossTotal>
         </DocumentTotals>
         <WithholdingTax>
           <WithholdingTaxAmount>0.000000</WithholdingTaxAmount>

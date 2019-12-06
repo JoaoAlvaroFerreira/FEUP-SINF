@@ -14,6 +14,11 @@ import { ConfigComponent } from './config/config.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GraficoBoloComponent } from './grafico-bolo/grafico-bolo.component';
 import { GraficoLinearComponent } from './grafico-linear/grafico-linear.component';
+import { VisaoGeralComponent } from './visao-geral/visao-geral.component';
+import { VendasComponent } from './vendas/vendas.component';
+import { ComprasComponent } from './compras/compras.component';
+import { InventarioComponent } from './inventario/inventario.component';
+import { FinanceiroComponent } from './financeiro/financeiro.component';
 
 
 
@@ -26,6 +31,11 @@ import { GraficoLinearComponent } from './grafico-linear/grafico-linear.componen
     ConfigComponent,
     GraficoBoloComponent,
     GraficoLinearComponent,
+    VisaoGeralComponent,
+    VendasComponent,
+    ComprasComponent,
+    InventarioComponent,
+    FinanceiroComponent,
   ],
   imports: [
     BrowserModule,

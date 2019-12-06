@@ -14,6 +14,8 @@ import { ConfigComponent } from './config/config.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GraficoBoloComponent } from './grafico-bolo/grafico-bolo.component';
 import { GraficoLinearComponent } from './grafico-linear/grafico-linear.component';
+import { MessagesComponent }    from './messages/messages.component';
+import { MessageService }       from './message.service';
 
 
 
@@ -24,6 +26,7 @@ import { GraficoLinearComponent } from './grafico-linear/grafico-linear.componen
     GraficoBarrasComponent,
     DownloaderComponent,
     ConfigComponent,
+    MessagesComponent,
     GraficoBoloComponent,
     GraficoLinearComponent,
   ],
@@ -34,7 +37,9 @@ import { GraficoLinearComponent } from './grafico-linear/grafico-linear.componen
     ChartsModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

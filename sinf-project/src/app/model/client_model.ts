@@ -1,6 +1,11 @@
 export class Venda {
-    products: Array<Product> = [];
+    products: Product;
     quantity: number;
+    unitprice: number;
+}
+
+export class Invoice {
+    vendas: Array<Venda> = [];
     region: string;
     year: number;
     month: number;
@@ -15,7 +20,7 @@ export class Costumer {
 
 export class Product {
     name: string;
-    price: number;
     category: string;
+    productCode: string;
 }
 

@@ -5,11 +5,11 @@
     <CompanyID>509311032</CompanyID>
     <TaxRegistrationNumber>509311032</TaxRegistrationNumber>
     <TaxAccountingBasis>F</TaxAccountingBasis>
-    <CompanyName>Indústria 20.0</CompanyName>
+    <CompanyName>Indï¿½stria 20.0</CompanyName>
     <CompanyAddress>
       <BuildingNumber>0</BuildingNumber>
-      <StreetName>Rua da fábrica do pêlo </StreetName>
-      <AddressDetail>Rua da fábrica do pêlo    4710-409 Braga</AddressDetail>
+      <StreetName>Rua da fï¿½brica do pï¿½lo </StreetName>
+      <AddressDetail>Rua da fï¿½brica do pï¿½lo    4710-409 Braga</AddressDetail>
       <City>Braga</City>
       <PostalCode>4710-409</PostalCode>
       <Region>Desconhecido</Region>
@@ -110,42 +110,42 @@
     <Product>
       <ProductType>P</ProductType>
       <ProductCode>LIMPEZA_005</ProductCode>
-      <ProductGroup>Sem família</ProductGroup>
-      <ProductDescription>Escova para Chão Ref. Perfect Kasa</ProductDescription>
+      <ProductGroup>Sem famï¿½lia</ProductGroup>
+      <ProductDescription>Escova para Chï¿½o Ref. Perfect Kasa</ProductDescription>
       <ProductNumberCode>LIMPEZA_005</ProductNumberCode>
     </Product>
     <Product>
       <ProductType>P</ProductType>
       <ProductCode>ACETONA</ProductCode>
-      <ProductGroup>Sem família</ProductGroup>
+      <ProductGroup>Sem famï¿½lia</ProductGroup>
       <ProductDescription>emb. 250 ml</ProductDescription>
       <ProductNumberCode>1223344</ProductNumberCode>
     </Product>
     <Product>
       <ProductType>P</ProductType>
       <ProductCode>PAPELHIGIENICO</ProductCode>
-      <ProductGroup>Sem família</ProductGroup>
-      <ProductDescription>Papel Higiénico Sublime 4 Folhas</ProductDescription>
+      <ProductGroup>Sem famï¿½lia</ProductGroup>
+      <ProductDescription>Papel Higiï¿½nico Sublime 4 Folhas</ProductDescription>
       <ProductNumberCode>PAPELHIGIENICO</ProductNumberCode>
     </Product>
     <Product>
       <ProductType>P</ProductType>
       <ProductCode>LIMPEZA_001</ProductCode>
-      <ProductGroup>Sem família</ProductGroup>
-      <ProductDescription>Creme Limpeza Frescura Limão</ProductDescription>
+      <ProductGroup>Sem famï¿½lia</ProductGroup>
+      <ProductDescription>Creme Limpeza Frescura Limï¿½o</ProductDescription>
       <ProductNumberCode>LIMPEZA_001</ProductNumberCode>
     </Product>
     <Product>
       <ProductType>P</ProductType>
       <ProductCode>LIMPEZA_003</ProductCode>
-      <ProductGroup>Sem família</ProductGroup>
+      <ProductGroup>Sem famï¿½lia</ProductGroup>
       <ProductDescription>Luvas Multiusos Tam. S</ProductDescription>
       <ProductNumberCode>LIMPEZA_003</ProductNumberCode>
     </Product>
     <Product>
       <ProductType>P</ProductType>
       <ProductCode>ALGODAO_ZIG-ZAG</ProductCode>
-      <ProductGroup>Sem família</ProductGroup>
+      <ProductGroup>Sem famï¿½lia</ProductGroup>
       <ProductDescription>emb. 40 gr</ProductDescription>
       <ProductNumberCode>ALGODAO_ZIG-ZAG</ProductNumberCode>
     </Product>
@@ -175,7 +175,7 @@
         <TaxType>IVA</TaxType>
         <TaxCountryRegion>PT</TaxCountryRegion>
         <TaxCode>INT</TaxCode>
-        <Description>Taxa Intermédia</Description>
+        <Description>Taxa Intermï¿½dia</Description>
         <TaxPercentage>13.000000</TaxPercentage>
       </TaxTableEntry>
       <TaxTableEntry>
@@ -196,7 +196,7 @@
         <TaxType>IVA</TaxType>
         <TaxCountryRegion>PT-MA</TaxCountryRegion>
         <TaxCode>INT</TaxCode>
-        <Description>Taxa Intermédia</Description>
+        <Description>Taxa Intermï¿½dia</Description>
         <TaxPercentage>12.000000</TaxPercentage>
       </TaxTableEntry>
       <TaxTableEntry>
@@ -224,7 +224,7 @@
         <TaxType>IVA</TaxType>
         <TaxCountryRegion>PT-AC</TaxCountryRegion>
         <TaxCode>INT</TaxCode>
-        <Description>Taxa Intermédia</Description>
+        <Description>Taxa Intermï¿½dia</Description>
         <TaxPercentage>9.000000</TaxPercentage>
       </TaxTableEntry>
       <TaxTableEntry>
@@ -266,7 +266,7 @@
         <ShipTo>
           <Address>
             <StreetName>Rua do Carmo</StreetName>
-            <AddressDetail>O seu endereço Rua do Carmo   1234-234</AddressDetail>
+            <AddressDetail>O seu endereï¿½o Rua do Carmo   1234-234</AddressDetail>
             <City>Desconhecido</City>
             <PostalCode>1234-234</PostalCode>
             <Region>Desconhecido</Region>
@@ -275,8 +275,8 @@
         </ShipTo>
         <ShipFrom>
           <Address>
-            <StreetName>Rua da fábrica do pêlo </StreetName>
-            <AddressDetail>O Nosso Endereço Rua da fábrica do pêlo    4710-409 Braga</AddressDetail>
+            <StreetName>Rua da fï¿½brica do pï¿½lo </StreetName>
+            <AddressDetail>O Nosso Endereï¿½o Rua da fï¿½brica do pï¿½lo    4710-409 Braga</AddressDetail>
             <City>Braga</City>
             <PostalCode>4710-409</PostalCode>
             <Region>Desconhecido</Region>
@@ -323,12 +323,12 @@
         <Line>
           <LineNumber>3</LineNumber>
           <ProductCode>LIMPEZA_001</ProductCode>
-          <ProductDescription>Creme Limpeza Frescura Limão</ProductDescription>
+          <ProductDescription>Creme Limpeza Frescura Limï¿½o</ProductDescription>
           <Quantity>1.000000</Quantity>
           <UnitOfMeasure>UN</UnitOfMeasure>
           <UnitPrice>4.000000</UnitPrice>
           <TaxPointDate>2019-12-04</TaxPointDate>
-          <Description>Creme Limpeza Frescura Limão</Description>
+          <Description>Creme Limpeza Frescura Limï¿½o</Description>
           <CreditAmount>4.000000</CreditAmount>
           <Tax>
             <TaxType>IVA</TaxType>
@@ -359,12 +359,12 @@
         <Line>
           <LineNumber>5</LineNumber>
           <ProductCode>LIMPEZA_005</ProductCode>
-          <ProductDescription>Escova para Chão Ref. Perfect Kasa</ProductDescription>
+          <ProductDescription>Escova para Chï¿½o Ref. Perfect Kasa</ProductDescription>
           <Quantity>1.000000</Quantity>
           <UnitOfMeasure>UN</UnitOfMeasure>
           <UnitPrice>10.000000</UnitPrice>
           <TaxPointDate>2019-12-04</TaxPointDate>
-          <Description>Escova para Chão Ref. Perfect Kasa</Description>
+          <Description>Escova para Chï¿½o Ref. Perfect Kasa</Description>
           <CreditAmount>10.000000</CreditAmount>
           <Tax>
             <TaxType>IVA</TaxType>
@@ -377,12 +377,12 @@
         <Line>
           <LineNumber>6</LineNumber>
           <ProductCode>PAPELHIGIENICO</ProductCode>
-          <ProductDescription>Papel Higiénico Sublime 4 Folhas</ProductDescription>
+          <ProductDescription>Papel Higiï¿½nico Sublime 4 Folhas</ProductDescription>
           <Quantity>2.000000</Quantity>
           <UnitOfMeasure>UN</UnitOfMeasure>
           <UnitPrice>4.000000</UnitPrice>
           <TaxPointDate>2019-12-04</TaxPointDate>
-          <Description>Papel Higiénico Sublime 4 Folhas</Description>
+          <Description>Papel Higiï¿½nico Sublime 4 Folhas</Description>
           <CreditAmount>8.000000</CreditAmount>
           <Tax>
             <TaxType>IVA</TaxType>
@@ -426,7 +426,7 @@
         <ShipTo>
           <Address>
             <StreetName>Rua do X</StreetName>
-            <AddressDetail>O seu endereço Rua do X   2345-345</AddressDetail>
+            <AddressDetail>O seu endereï¿½o Rua do X   2345-345</AddressDetail>
             <City>Desconhecido</City>
             <PostalCode>2345-345</PostalCode>
             <Region>Desconhecido</Region>
@@ -435,8 +435,8 @@
         </ShipTo>
         <ShipFrom>
           <Address>
-            <StreetName>Rua da fábrica do pêlo </StreetName>
-            <AddressDetail>O Nosso Endereço Rua da fábrica do pêlo    4710-409 Braga</AddressDetail>
+            <StreetName>Rua da fï¿½brica do pï¿½lo </StreetName>
+            <AddressDetail>O Nosso Endereï¿½o Rua da fï¿½brica do pï¿½lo    4710-409 Braga</AddressDetail>
             <City>Braga</City>
             <PostalCode>4710-409</PostalCode>
             <Region>Desconhecido</Region>
@@ -514,7 +514,7 @@
         <ShipTo>
           <Address>
             <StreetName>Rua Y</StreetName>
-            <AddressDetail>O seu endereço Rua Y   1234-234</AddressDetail>
+            <AddressDetail>O seu endereï¿½o Rua Y   1234-234</AddressDetail>
             <City>Desconhecido</City>
             <PostalCode>1234-234</PostalCode>
             <Region>Desconhecido</Region>
@@ -523,8 +523,8 @@
         </ShipTo>
         <ShipFrom>
           <Address>
-            <StreetName>Rua da fábrica do pêlo </StreetName>
-            <AddressDetail>O Nosso Endereço Rua da fábrica do pêlo    4710-409 Braga</AddressDetail>
+            <StreetName>Rua da fï¿½brica do pï¿½lo </StreetName>
+            <AddressDetail>O Nosso Endereï¿½o Rua da fï¿½brica do pï¿½lo    4710-409 Braga</AddressDetail>
             <City>Braga</City>
             <PostalCode>4710-409</PostalCode>
             <Region>Desconhecido</Region>
@@ -602,7 +602,7 @@
         <ShipTo>
           <Address>
             <StreetName>Desconhecido</StreetName>
-            <AddressDetail>O seu endereço</AddressDetail>
+            <AddressDetail>O seu endereï¿½o</AddressDetail>
             <City>Desconhecido</City>
             <PostalCode>Desconhecido</PostalCode>
             <Region>Desconhecido</Region>
@@ -611,8 +611,8 @@
         </ShipTo>
         <ShipFrom>
           <Address>
-            <StreetName>Rua da fábrica do pêlo </StreetName>
-            <AddressDetail>O Nosso Endereço Rua da fábrica do pêlo    4710-409 Braga</AddressDetail>
+            <StreetName>Rua da fï¿½brica do pï¿½lo </StreetName>
+            <AddressDetail>O Nosso Endereï¿½o Rua da fï¿½brica do pï¿½lo    4710-409 Braga</AddressDetail>
             <City>Braga</City>
             <PostalCode>4710-409</PostalCode>
             <Region>Desconhecido</Region>
@@ -623,12 +623,12 @@
         <Line>
           <LineNumber>1</LineNumber>
           <ProductCode>PAPELHIGIENICO</ProductCode>
-          <ProductDescription>Papel Higiénico Sublime 4 Folhas</ProductDescription>
+          <ProductDescription>Papel Higiï¿½nico Sublime 4 Folhas</ProductDescription>
           <Quantity>3.000000</Quantity>
           <UnitOfMeasure>UN</UnitOfMeasure>
           <UnitPrice>3.000000</UnitPrice>
           <TaxPointDate>2019-12-06</TaxPointDate>
-          <Description>Papel Higiénico Sublime 4 Folhas</Description>
+          <Description>Papel Higiï¿½nico Sublime 4 Folhas</Description>
           <CreditAmount>9.000000</CreditAmount>
           <Tax>
             <TaxType>IVA</TaxType>

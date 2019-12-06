@@ -22,7 +22,6 @@
         </div>
         <hr>
    
-
     <div class="row mt-3">
         <div class="col-sm-6 col-md-3 mb-2">
             <div class="card">
@@ -42,7 +41,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Tendência de Compras Mensais</div>
-                    <app-grafico-linear></app-grafico-linear>
+                    <app-grafico-linear [dataSets]="lineChartData" [labels]="lineChartLabels"  [legend]="legendLine"></app-grafico-linear>
                 </div>
             </div>
         </div>
@@ -50,7 +49,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Comparação de Gastos (Período)</div>
-                    <app-grafico-linear></app-grafico-linear>
+                    <app-grafico-linear [dataSets]="lineChartData2" [labels]="lineChartLabels2"  [legend]="legendLine2"></app-grafico-linear>
                 </div>
             </div>
         </div>

@@ -12,16 +12,13 @@ export class ApiService {
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
   get(ep) {
-    return this.http.get(`${environment.url}/${environment.account}/${environment.subscription}/${ep}`,
+    console.log(`${environment.url}${environment.account}/${environment.subscription}${ep}`);
+    return this.http.get(`http://www.mocky.io/v2/5deb1782300000cc302b0b5d`);/*
     {
     headers: new HttpHeaders({
       Authorization: localStorage.getItem('primaveraToken')
-    }),
-    responseType: 'text'
-  }).pipe(tap(
-    data =>this.messageService.add(data),
-    error => this.messageService.add(error)
-  ));
+    })
+  })*/
 }
 post(ep) {
   return this.http.post<Object>(`${environment.url}/${ep}`,

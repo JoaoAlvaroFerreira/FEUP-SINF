@@ -20,6 +20,7 @@ import { ComprasComponent } from './compras/compras.component';
 import { InventarioComponent } from './inventario/inventario.component';
 import { FinanceiroComponent } from './financeiro/financeiro.component';
 import { ApiService } from './api/api.service';
+import { ApiInteraction } from './api/apiInteractions.component';
 
 
 
@@ -36,6 +37,7 @@ import { ApiService } from './api/api.service';
     ComprasComponent,
     InventarioComponent,
     FinanceiroComponent,
+    ApiInteraction
   ],
   imports: [
     BrowserModule,

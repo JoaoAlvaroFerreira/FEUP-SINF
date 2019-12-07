@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/api/api.service'
+import { Component, OnInit, Input, DoCheck } from '@angular/core';
+import { ApiInteraction } from 'src/app/api/apiInteractions.component'
+import { ApiService } from '../api/api.service';
+
 
 @Component({
   selector: 'app-general',
@@ -7,19 +9,19 @@ import { ApiService } from 'src/app/api/api.service'
   styleUrls: ['./general.component.css']
 })
 
-export class GeneralComponent implements OnInit {
+export class GeneralComponent extends ApiInteraction implements OnInit, DoCheck{
   
-  
-  constructor(private Api: ApiService) { 
-   
+  @Input() id: string;
+
+  constructor(api: ApiService) {
+    super(api, '/sales/orders');
   }
 
   ngOnInit() {
-   
+    
+    this.fetchData();
   }
 
-  getSales(){
-   this.Api.get("/sales/orders");
-  }
-
+  ngDoCheck() {
+    }
 }

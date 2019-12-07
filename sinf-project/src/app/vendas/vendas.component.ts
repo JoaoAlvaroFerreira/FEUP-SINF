@@ -14,7 +14,7 @@ export class VendasComponent implements OnInit {
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
   ];
   public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public legendLine: boolean = true;
+  public legendLine: boolean = false;
 
 
   // Grafico Barras - Vendas por Região

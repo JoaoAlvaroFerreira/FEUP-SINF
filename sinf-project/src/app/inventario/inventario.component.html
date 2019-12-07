@@ -52,7 +52,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Evolução do Inventário</div>
-                    <app-grafico-linear></app-grafico-linear>
+                    <app-grafico-linear [dataSets]="lineChartData" [labels]="lineChartLabels"  [legend]="legendLine"></app-grafico-linear>
                 </div>
             </div>
         </div>

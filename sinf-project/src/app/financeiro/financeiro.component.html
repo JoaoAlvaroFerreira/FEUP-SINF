@@ -121,7 +121,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="cardTitle"> Evolução do Valor Gerado</div>
-                <app-grafico-linear></app-grafico-linear>
+                <app-grafico-linear [dataSets]="lineChartData" [labels]="lineChartLabels"  [legend]="legendLine"></app-grafico-linear>
             </div>
         </div>
 
@@ -130,7 +130,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="cardTitle"> Evolução dos Rendimentos</div>
-                <app-grafico-linear></app-grafico-linear>
+                <app-grafico-linear [dataSets]="lineChartData2" [labels]="lineChartLabels2"  [legend]="legendLine2"></app-grafico-linear>
             </div>
         </div>
 
@@ -139,7 +139,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="cardTitle"> Evolução dos Custos</div>
-                <app-grafico-linear></app-grafico-linear>
+                <app-grafico-linear [dataSets]="lineChartData3" [labels]="lineChartLabels3"  [legend]="legendLine3"></app-grafico-linear>
             </div>
         </div>
 

@@ -6,10 +6,11 @@ import { ApiService } from 'src/app/api/api.service'
   templateUrl: './general.component.html',
   styleUrls: ['./general.component.css']
 })
+
 export class GeneralComponent implements OnInit {
   
   
-  constructor(public Api: ApiService) { 
+  constructor(private Api: ApiService) { 
    
   }
 
@@ -17,8 +18,8 @@ export class GeneralComponent implements OnInit {
    
   }
 
-  makeRequest(){
-    this.Api.get("a");
+  getSales(){
+   this.Api.get("/sales/orders");
   }
 
 }

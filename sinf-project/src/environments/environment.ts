@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  url: "https://my.jasminsoftware.com/api/",
+  tokenUrl: "https://identity.primaverabss.com/connect/token",
+  account: "224992",
+  subscription: "224992-0001",
+  client_id: "industria200",
+  client_secret: "4a8aa9fc-4b3c-4465-86cd-4ace8671f063",
+  grant_type: 'client_credentials',
+  scope: 'application'
+
 };
 
 /*

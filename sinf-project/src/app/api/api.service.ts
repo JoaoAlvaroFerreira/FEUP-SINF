@@ -1,22 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { environment } from 'src/app/environment';
+import { environment } from 'src/environments/environment';
 import { tap, retry, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { MessageService } from '../message.service';
 
 @Injectable()
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private messageService: MessageService) { }
 
   get(ep) {
-    return this.http.get<Object>(`${environment.url}/${ep}`,
+    return this.http.get(`${environment.url}/${environment.account}/${environment.subscription}/${ep}`,
     {
     headers: new HttpHeaders({
       Authorization: localStorage.getItem('primaveraToken')
-    })
-  });
+    }),
+    responseType: 'text'
+  }).pipe(tap(
+    data =>this.messageService.add(data),
+    error => this.messageService.add(error)
+  ));
+}
+post(ep) {
+  return this.http.post<Object>(`${environment.url}/${ep}`,
+  {
+  headers: new HttpHeaders({
+    Authorization: localStorage.getItem('primaveraToken')
+  })
+});
 }
   
   getTokenFromJasmin(){

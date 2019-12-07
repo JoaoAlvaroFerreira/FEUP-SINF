@@ -19,6 +19,7 @@ import { VendasComponent } from './vendas/vendas.component';
 import { ComprasComponent } from './compras/compras.component';
 import { InventarioComponent } from './inventario/inventario.component';
 import { FinanceiroComponent } from './financeiro/financeiro.component';
+import { ApiService } from './api/api.service';
 
 
 
@@ -44,7 +45,8 @@ import { FinanceiroComponent } from './financeiro/financeiro.component';
     FontAwesomeModule
   ],
   providers: [
-    MessageService
+    MessageService,
+    ApiService
   ],
   bootstrap: [AppComponent]
 })

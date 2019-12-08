@@ -12,16 +12,18 @@ export class ApiService {
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
   get(ep) {
-    console.log(`${environment.url}${environment.account}/${environment.subscription}${ep}`);
-    return this.http.get(`http://www.mocky.io/v2/5deb1782300000cc302b0b5d`);/*
+   
+    console.log(`Token ${localStorage.getItem('primaveraToken')}`);
+    return this.http.get(`${environment.url}/${environment.account}/${environment.subscription}${ep}`,
     {
     headers: new HttpHeaders({
-      Authorization: localStorage.getItem('primaveraToken')
+      Authorization: `${localStorage.getItem('primaveraToken')}`
     })
-  })*/
+  })
 }
-post(ep) {
-  return this.http.post<Object>(`${environment.url}/${ep}`,
+
+post(ep, body) {
+  return this.http.post<Object>(`${environment.url}/${ep}`,body,
   {
   headers: new HttpHeaders({
     Authorization: localStorage.getItem('primaveraToken')
@@ -30,20 +32,17 @@ post(ep) {
 }
   
   getTokenFromJasmin(){
+    var formData: any = new FormData();
+    
+    formData.append("client_id",environment.client_id);
+    formData.append("client_secret",environment.client_secret);
+    formData.append("scope",environment.scope);
+    formData.append("grant_type",environment.grant_type);
+  
     return this.http.post(
-      `${environment.tokenUrl}`,
-      `client_id=${environment.client_id}&
-      client_secret=${environment.client_secret}&
-      scope=${environment.scope}&
-      grant_type=${environment.grant_type}`,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/x-www-form-urlencoded'
-        })
-      }
-    ).pipe(retry(2),tap(
+      environment.tokenUrl, formData).subscribe(
       (response: any) => localStorage.setItem('primaveraToken', `Bearer ${response.access_token}`)
-    ));
+    );    
   }
 
   private handleError(error: HttpErrorResponse) {

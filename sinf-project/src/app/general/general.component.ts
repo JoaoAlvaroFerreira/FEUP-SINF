@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { ApiInteraction } from 'src/app/api/apiInteractions.component'
 import { ApiService } from '../api/api.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -18,8 +19,8 @@ export class GeneralComponent extends ApiInteraction implements OnInit, DoCheck{
   }
 
   ngOnInit() {
-    
-    this.fetchData();
+    this.getRequest();
+
   }
 
   ngDoCheck() {

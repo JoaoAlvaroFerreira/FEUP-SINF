@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from './api.service'
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-apiInteraction',
@@ -9,52 +10,43 @@ import { Observable } from 'rxjs';
 })
 export class ApiInteraction {
 
-  /**
-   * Data that is being fetched from web api
-   */
   protected data: any;
 
-  /**
-   * Component to be extended by graphical components
-   */
+
   constructor(private Api: ApiService, private endpoint: string, protected body: string = "") {
+    this.Api.getTokenFromJasmin();
   }
 
-  /**
-   * Fetch the data using configuration from the WebApi and save it in the Class's data property
-   */
-  fetchData() {
-    this.getRequest().subscribe(
-      (response: any) => this.data = response.body,
+  getRequest() {
+    this.Api.get(this.endpoint).subscribe(
+      (response: any) => this.data = response[0],
       (err: any) => {
-        console.log(this.data);
+        console.log("Data"+this.data);
         console.log("CODE: "+ err.status);
         if (err.status === 401){
-          console.log("token issues");
-          this.Api.getTokenFromJasmin().subscribe(
-            () => this.getRequest().subscribe(
-              (response: any) => this.data = response,
-              
-            )
-          );
+         this.Api.getTokenFromJasmin();
             }
          
       }
     );
-
-  
   }
 
-  /**
-   * Retrieve the adequate request. Either a POST or a GET method.
-   */
-  private getRequest(): Observable<Object> {
-    return this.Api.get(this.endpoint);
-  }
 
-  /**
-   * Reset data to undefined value
-   */
+
+ postRequest() {
+  this.Api.post(this.endpoint,this.body).subscribe(
+    (response: any) => this.data = response[0],
+    (err: any) => {
+      console.log("Data"+this.data);
+      console.log("CODE: "+ err.status);
+      if (err.status === 401){
+       this.Api.getTokenFromJasmin();
+          }
+       
+    }
+  );
+}
+
   protected resetData() {
     this.data = undefined;
   }

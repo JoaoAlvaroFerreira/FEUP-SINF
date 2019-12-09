@@ -33,7 +33,7 @@ post(ep, body) {
 });
 }
   
-  getTokenFromJasmin(){
+  getTokenFromJasmn(){
 
    
     var formData: any = new FormData();
@@ -50,9 +50,9 @@ post(ep, body) {
       (response: any) => localStorage.setItem('primaveraToken', `Bearer ${response.access_token}`)
     ));
   }
-  getTokenFromJasmn() : Observable<Object> {
+  getTokenFromJasmin() {
    // localStorage.setItem('primaveraToken', `Bearer `);
-
+   //localStorage.removeItem('primaveraToken');
    var formData: any = new FormData();
     
    formData.append("client_id",environment.client_id);
@@ -61,17 +61,10 @@ post(ep, body) {
    formData.append("grant_type",environment.grant_type);
 
     return this.http.post(
-      environment.tokenUrl,formData,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Ocp-Apim-Subscription-Key':'7242a6a1448b4260b5dfeedf129f4a2f',
-          'GameKey': '201910621'
-        })
-      }
-    ).pipe(retry(2),tap(
-      (response: any) => localStorage.setItem('primaveraToken', `Bearer ${response.access_token}`)
-    ));
+      environment.proxyurl+environment.tokenUrl,formData
+    ).subscribe(
+     (response: any) => localStorage.setItem('primaveraToken', `Bearer ${response.access_token}`)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

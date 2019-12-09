@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { ApiInteraction } from 'src/app/api/apiInteractions.component'
+import { ApiService } from '../api/api.service';
 
 @Component({
   selector: 'app-vendas',
   templateUrl: './vendas.component.html',
   styleUrls: ['./vendas.component.css']
 })
-export class VendasComponent implements OnInit {
+export class VendasComponent extends ApiInteraction implements OnInit {
 
   // Grafico Linear - Tendência de Vendas
   public lineChartData: ChartDataSets[] = [
@@ -24,7 +26,9 @@ export class VendasComponent implements OnInit {
   public barChartLabels: Label[] = ['Região A', 'Região B', 'Região C', 'Região D'];
   public legendBar: boolean = false;
 
-  constructor() { }
+  constructor(api: ApiService) {
+    super(api, '/sales/orders');
+   }
 
   ngOnInit() {
   }

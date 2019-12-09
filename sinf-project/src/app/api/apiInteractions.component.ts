@@ -19,7 +19,7 @@ export class ApiInteraction {
 
   getRequest() {
     this.Api.get(this.endpoint).subscribe(
-      (response: any) => this.data = response,
+      (response: any) => this.data = response[5].buyerCustomerPartyName,
       (err: any) => {
         console.log("Data"+this.data);
         console.log("CODE: "+ err.status);

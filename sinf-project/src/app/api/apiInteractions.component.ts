@@ -19,7 +19,7 @@ export class ApiInteraction {
 
   getRequest() {
     this.Api.get(this.endpoint).subscribe(
-      (response: any) => this.data = response[0],
+      (response: any) => this.data = response,
       (err: any) => {
         console.log("Data"+this.data);
         console.log("CODE: "+ err.status);
@@ -30,7 +30,6 @@ export class ApiInteraction {
       }
     );
   }
-
 
 
  postRequest() {

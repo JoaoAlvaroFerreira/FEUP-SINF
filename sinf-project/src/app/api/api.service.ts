@@ -14,6 +14,8 @@ export class ApiService {
   get(ep) {
    
     console.log(`Token ${localStorage.getItem('primaveraToken')}`);
+    console.log(`url: ${environment.url}/${environment.account}/${environment.subscription}${ep}`);
+
     return this.http.get(`${environment.url}/${environment.account}/${environment.subscription}${ep}`,
     {
     headers: new HttpHeaders({
@@ -32,6 +34,8 @@ post(ep, body) {
 }
   
   getTokenFromJasmin(){
+
+   
     var formData: any = new FormData();
     
     formData.append("client_id",environment.client_id);
@@ -39,10 +43,35 @@ post(ep, body) {
     formData.append("scope",environment.scope);
     formData.append("grant_type",environment.grant_type);
   
+    
     return this.http.post(
-      environment.tokenUrl, formData).subscribe(
+      environment.proxyurl+environment.tokenUrl,formData
+    ).pipe(retry(2),tap(
       (response: any) => localStorage.setItem('primaveraToken', `Bearer ${response.access_token}`)
-    );    
+    ));
+  }
+  getTokenFromJasmn() : Observable<Object> {
+   // localStorage.setItem('primaveraToken', `Bearer `);
+
+   var formData: any = new FormData();
+    
+   formData.append("client_id",environment.client_id);
+   formData.append("client_secret",environment.client_secret);
+   formData.append("scope",environment.scope);
+   formData.append("grant_type",environment.grant_type);
+
+    return this.http.post(
+      environment.tokenUrl,formData,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Ocp-Apim-Subscription-Key':'7242a6a1448b4260b5dfeedf129f4a2f',
+          'GameKey': '201910621'
+        })
+      }
+    ).pipe(retry(2),tap(
+      (response: any) => localStorage.setItem('primaveraToken', `Bearer ${response.access_token}`)
+    ));
   }
 
   private handleError(error: HttpErrorResponse) {

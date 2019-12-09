@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-
+  proxyurl: "https://cors-anywhere.herokuapp.com/",
   url: "https://my.jasminsoftware.com/api",
   tokenUrl: "https://identity.primaverabss.com/connect/token",
   account: "224992",

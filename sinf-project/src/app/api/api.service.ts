@@ -13,9 +13,6 @@ export class ApiService {
 
   get(ep) {
    
-    console.log(`Token ${localStorage.getItem('primaveraToken')}`);
-    console.log(`url: ${environment.url}/${environment.account}/${environment.subscription}${ep}`);
-
     return this.http.get(`${environment.url}/${environment.account}/${environment.subscription}${ep}`,
     {
     headers: new HttpHeaders({

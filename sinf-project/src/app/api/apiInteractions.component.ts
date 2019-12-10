@@ -19,16 +19,17 @@ export class ApiInteraction {
 
   getRequest() {
     this.Api.get(this.endpoint).subscribe(
-      (response: any) => this.data = response[5].buyerCustomerPartyName,
+      (response: any) => this.data = response,
       (err: any) => {
         console.log("Data"+this.data);
         console.log("CODE: "+ err.status);
         if (err.status === 401){
          this.Api.getTokenFromJasmin();
             }
-         
+         return -1;
       }
     );
+    return 0;
   }
 
 
@@ -45,6 +46,10 @@ export class ApiInteraction {
     }
   );
 }
+
+  protected getData(){
+    return this.data;
+  }
 
   protected resetData() {
     this.data = undefined;

@@ -3,6 +3,7 @@ import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { ApiInteraction } from 'src/app/api/apiInteractions.component'
 import { ApiService } from '../api/api.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-vendas',
@@ -31,6 +32,20 @@ export class VendasComponent extends ApiInteraction implements OnInit {
    }
 
   ngOnInit() {
+    
+    this.getRequest();
+    
+    
+  
+    //this.lineChartLabels = [this.data[0].buyerCustomerPartyName,this.data[0].buyerCustomerPartyName,this.data[0].buyerCustomerPartyName,this.data[0].buyerCustomerPartyName,this.data[0].buyerCustomerPartyName,this.data[0].buyerCustomerPartyName
+  }
+
+  ngDoCheck() {
+
+    if(this.data != null){
+      this.lineChartLabels = [this.data[0].buyerCustomerPartyName,this.data[1].buyerCustomerPartyName,this.data[2].buyerCustomerPartyName,this.data[3].buyerCustomerPartyName,this.data[4].buyerCustomerPartyName,this.data[5].buyerCustomerPartyName];
+  
+    }
   }
 
 }

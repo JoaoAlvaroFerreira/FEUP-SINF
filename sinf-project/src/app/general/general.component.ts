@@ -17,9 +17,9 @@ export class GeneralComponent extends ApiInteraction implements OnInit, DoCheck{
     super(api, '/sales/orders');
   }
 
-  ngOnInit() {
+   ngOnInit() {
     this.getRequest();
-
+  
   }
 
   ngDoCheck() {

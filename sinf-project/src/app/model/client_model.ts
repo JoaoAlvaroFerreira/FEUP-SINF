@@ -17,6 +17,7 @@ export class Customer {
     name: string;
     id: string;
     total_spent: number;
+    purchases_made: number;
 }
 
 export class Product {

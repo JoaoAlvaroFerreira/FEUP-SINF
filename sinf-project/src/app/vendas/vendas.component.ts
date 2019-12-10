@@ -15,6 +15,9 @@ export class VendasComponent extends ApiInteraction implements OnInit {
   private sales: Array<Sale> = [];
   private customers: Array<Customer> = [];
   private totalSaleValue: number = 0;
+  private customerDistribution: Array<Customer> = [];
+
+  
   public processingDone: boolean = false;
   // Grafico Linear - Tendência de Vendas
   public lineChartData: ChartDataSets[] = [
@@ -65,18 +68,21 @@ export class VendasComponent extends ApiInteraction implements OnInit {
         sale.date = element.documentDate;
         this.sales.push(sale);
       });
-
+      this.rentableClients();
       this.calcTotal();
       this.categorySales();
       this.salesPerRegion();
       this.salesTendency();
-      this.rentableClients();
       this.salesDistribution();
         
       
   }
   salesDistribution() {
    
+    if(this.customers != null){
+      this.customerDistribution = this.customers;
+      this.customerDistribution.sort((a,b)=>{if(a.purchases_made<b.purchases_made) return 1; else return -1;});
+    }
   }
 
   rentableClients() {
@@ -88,6 +94,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
         if(element.client_name == elementCustomer.name)
        { customerExist = true;
         elementCustomer.total_spent += element.amount;
+        elementCustomer.purchases_made++;
         }
       })
      
@@ -95,6 +102,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
         var c = new Customer();
         c.name = element.client_name;
         c.total_spent = element.amount;
+        c.purchases_made = 1;
         this.customers.push(c);
       }
   

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -23,8 +23,8 @@ export class GraficoBoloComponent implements OnInit {
       },
     }
   };
-  public pieChartLabels: Label[] = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
-  public pieChartData: number[] = [300, 500, 100];
+ // public pieChartLabels: Label[] = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
+  //public pieChartData: number[] = [300, 500, 100];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartColors = [
@@ -33,6 +33,10 @@ export class GraficoBoloComponent implements OnInit {
     },
   ];
 
+  
+  @Input() pieChartLabels: Label[];
+  @Input() pieChartData: number[];
+  @Input() legend: boolean;
   constructor() { }
 
   ngOnInit() {

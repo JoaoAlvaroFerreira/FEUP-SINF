@@ -18,7 +18,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
   public processingDone: boolean = false;
   // Grafico Linear - Tendência de Vendas
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+    { data: [], label: 'Series A' }
   ];
   public lineChartLabels: Label[] = [];
   public legendLine: boolean = false;
@@ -26,16 +26,14 @@ export class VendasComponent extends ApiInteraction implements OnInit {
 
   // Grafico Barras - Vendas por Região
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+    { data: [], label: 'Series A' }
   ]; 
-  public barChartLabels: Label[] = ['Região A', 'Região B', 'Região C', 'Região D'];
+  public barChartLabels: Label[] = [];
   public legendBar: boolean = false;
 
   // Grafico Pie - Vendas por Categoria - NOT IMPLEMENTED
-  public pieChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
-  ]; 
-  public pieChartLabels: Label[] = ['Região A', 'Região B', 'Região C', 'Região D'];
+  public pieChartData: number[] = []; 
+  public pieChartLabels: Label[] = [];
   public legendPie: boolean = false;
 
   constructor(api: ApiService) {
@@ -86,6 +84,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
     var customerExist = false;
     this.sales.forEach(element=>{
       this.customers.forEach(elementCustomer=>{
+        
         if(element.client_name == elementCustomer.name)
        { customerExist = true;
         elementCustomer.total_spent += element.amount;
@@ -99,29 +98,46 @@ export class VendasComponent extends ApiInteraction implements OnInit {
         this.customers.push(c);
       }
   
-
+      customerExist = false;
     })
+    
+    this.customers.sort((a,b)=>{if(a.total_spent<b.total_spent) return 1; else return -1;});
   }
     
   salesTendency() {
     var i;
-   
+    
+    this.sales.sort((a,b)=>{if(a.date>b.date) return 1; else return -1;});
     this.sales.forEach(element=>{
-      if(this.pieChartLabels.includes(element.category))
+      if(this.lineChartLabels.includes(element.date.toString()))
       {
-        i = this.pieChartLabels.indexOf(element.category);
-        this.pieChartData[0][i]+=element.amount;
+        i = this.lineChartLabels.indexOf(element.date.toString());
+        this.lineChartData[0][i]+=element.amount;
       }
       else{
-        this.pieChartLabels.push(element.category);
-        this.pieChartData[0].data.push(element.amount);
+        this.lineChartLabels.push(element.date.toString());
+        this.lineChartData[0].data.push(element.amount);
       }
   
 
     })
   }
   salesPerRegion() {
-   
+    var i;
+    
+    this.sales.forEach(element=>{
+      if(this.barChartLabels.includes(element.area))
+      {
+        i = this.barChartLabels.indexOf(element.area);
+        this.barChartData[0][i]+=element.amount;
+      }
+      else{
+        this.barChartLabels.push(element.area);
+        this.barChartData[0].data.push(element.amount);
+      }
+  
+
+    })
   }
 
   calcTotal(){
@@ -138,11 +154,11 @@ export class VendasComponent extends ApiInteraction implements OnInit {
       if(this.pieChartLabels.includes(element.category))
       {
         i = this.pieChartLabels.indexOf(element.category);
-        this.pieChartData[0][i]+=element.amount;
+        this.pieChartData[i]+=element.amount;
       }
       else{
         this.pieChartLabels.push(element.category);
-        this.pieChartData[0].data.push(element.amount);
+        this.pieChartData.push(element.amount);
       }
   
 

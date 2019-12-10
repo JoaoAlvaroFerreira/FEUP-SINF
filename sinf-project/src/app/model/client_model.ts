@@ -30,5 +30,5 @@ export class Sale{
     amount: number;
     area: string;
     category: string;
-    date: Array<Number> = [];
+    date: number;
 }

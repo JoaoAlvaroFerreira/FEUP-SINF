@@ -1,13 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { ApiInteraction } from 'src/app/api/apiInteractions.component'
+import { ApiService } from '../api/api.service';
+import { Customer,Sale,Purchase, Supplier } from './../model/client_model'; // necessario?
 
 @Component({
   selector: 'app-compras',
   templateUrl: './compras.component.html',
   styleUrls: ['./compras.component.css']
 })
-export class ComprasComponent implements OnInit {
+export class ComprasComponent extends ApiInteraction implements OnInit {
+
+  private valorTotalCompras=0;
+  public processingDone: boolean=false;
+  private purchases: Array<Purchase>=[];
+  private suppliers: Array<Supplier> =[];
+  private supplierDistribution: Array<Supplier>=[];
 
 //tendencia compras mensais (linear)
 public lineChartData: ChartDataSets[] = [
@@ -24,9 +33,38 @@ public legendLine: boolean = false;
   public legendLine2: boolean = false;
 
 
-  constructor() { }
+  constructor(api: ApiService) {
+    super(api,'/purchases/orders');
+   }
 
   ngOnInit() {
+    this.getRequest();
+  }
+  ngDoCheck(){
+    if(this.data != null && !this.processingDone){
+      this.processData();
+      this.processingDone=true;
+    }
+  }
+
+  processData(){
+    this.data.forEach(element => {
+      var purchase= new Purchase();
+      purchase.supplier_name= element.sellerSupplierPartyName;
+      purchase.amount= element.payableAmount.amount;
+      purchase.area = element.loadingCityName;
+      purchase.date= element.loadingDateTime;
+      this.purchases.push(purchase);
+      this.calcTotal();
+      
+    });
+    
+
+  }
+  calcTotal(){
+      this.purchases.forEach(element=>{
+        this.valorTotalCompras += element.amount;
+      })
   }
 
 }

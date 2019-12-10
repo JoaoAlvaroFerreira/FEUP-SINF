@@ -20,6 +20,13 @@ export class Customer {
     purchases_made: number;
 }
 
+export class Supplier{
+    name: string;
+    id: string;
+    total_gain: number;
+    sells_made: number;
+}
+
 export class Product {
     name: string;
     category: string;
@@ -32,4 +39,11 @@ export class Sale{
     area: string;
     category: string;
     date: number;
+}
+
+export class Purchase{
+    supplier_name: string;
+    amount: number;
+    date: number;
+    area: string;
 }

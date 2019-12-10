@@ -3,7 +3,7 @@ import xml2js from 'xml2js';
 import { HttpClient, HttpHeaders } from '@angular/common/http';  
 
 //Testing
-import {Costumer, Product, Venda, Invoice } from './model/client_model';
+import {Customer, Product, Venda, Invoice } from './model/client_model';
 import { find } from 'rxjs/operators';
 
 
@@ -59,8 +59,8 @@ export class AppComponent {
         var obj = result.AuditFile;  
         var invoices = obj.SourceDocuments[0].SalesInvoices[0].Invoice;
         let products_xml = obj.MasterFiles[0].Product; 
-        var costumers = obj.MasterFiles[0].Customer;    
-        var costumers_array = new Array<Costumer>();
+        var customers = obj.MasterFiles[0].Customer;    
+        var customers_array = new Array<Customer>();
         var invoices_array = new Array<Invoice>();
         var products_array = new Array<Product>();
 
@@ -72,11 +72,11 @@ export class AppComponent {
           products_array.push(temp_product);
         });
 
-        costumers.forEach(element => {
-          var temp = new Costumer;
+        customers.forEach(element => {
+          var temp = new Customer;
           temp.id = element.CustomerID[0];
           temp.name = element.CompanyName[0];
-          costumers_array.push(temp);
+          customers_array.push(temp);
         });
 
         invoices.forEach(elemento => {
@@ -87,9 +87,9 @@ export class AppComponent {
           invoice.month = date_array[1];
           invoice.day = date_array[2];
           
-          const found = costumers_array.find(element => element.id == elemento.CustomerID[0]);
+          const found = customers_array.find(element => element.id == elemento.CustomerID[0]);
 
-          invoice.costumer = found;
+          invoice.customer = found;
           
           invoice.region = elemento.ShipTo[0].Address[0].Region[0];
           let productsxml = elemento.Line;

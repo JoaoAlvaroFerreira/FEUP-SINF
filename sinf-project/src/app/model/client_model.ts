@@ -10,12 +10,13 @@ export class Invoice {
     year: number;
     month: number;
     day: number; 
-    costumer: Costumer;
+    customer: Customer;
 }
 
-export class Costumer {
+export class Customer {
     name: string;
     id: string;
+    total_spent: number;
 }
 
 export class Product {
@@ -24,3 +25,10 @@ export class Product {
     productCode: string;
 }
 
+export class Sale{
+    client_name: string;
+    amount: number;
+    area: string;
+    category: string;
+    date: Array<Number> = [];
+}

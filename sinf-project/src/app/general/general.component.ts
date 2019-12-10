@@ -18,7 +18,7 @@ export class GeneralComponent extends ApiInteraction implements OnInit, DoCheck{
   }
 
    ngOnInit() {
-    this.getRequest();
+   // this.getRequest();
   
   }
 

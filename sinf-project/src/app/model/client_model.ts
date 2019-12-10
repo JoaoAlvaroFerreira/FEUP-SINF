@@ -13,6 +13,13 @@ export class Invoice {
     customer: Customer;
 }
 
+export class Compra{
+    product: Product;
+    name: string;
+    quantity: number;
+    unitprice: number;
+
+}
 export class Customer {
     name: string;
     id: string;
@@ -44,6 +51,13 @@ export class Sale{
 export class Purchase{
     supplier_name: string;
     amount: number;
+    itens: Array <Compra>;
     date: number;
     area: string;
+}
+
+export class ProdutosComprados{
+    product: Product;
+    total: number;
+    quantity: number;
 }

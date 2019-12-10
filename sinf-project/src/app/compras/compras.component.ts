@@ -3,7 +3,7 @@ import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { ApiInteraction } from 'src/app/api/apiInteractions.component'
 import { ApiService } from '../api/api.service';
-import { Customer,Sale,Purchase, Supplier } from './../model/client_model'; // necessario?
+import { Customer,Sale,Purchase, Supplier ,Compra, Product, ProdutosComprados} from './../model/client_model'; // necessario?
 
 @Component({
   selector: 'app-compras',
@@ -16,6 +16,7 @@ export class ComprasComponent extends ApiInteraction implements OnInit {
   public processingDone: boolean=false;
   private purchases: Array<Purchase>=[];
   private suppliers: Array<Supplier> =[];
+  private produtosComprados: Array<ProdutosComprados> =[];
   private supplierDistribution: Array<Supplier>=[];
 
 //tendencia compras mensais (linear)
@@ -54,17 +55,101 @@ public legendLine: boolean = false;
       purchase.amount= element.payableAmount.amount;
       purchase.area = element.loadingCityName;
       purchase.date= element.loadingDateTime;
+      purchase.itens= new Array<Compra>();
+     
+      element.documentLines.forEach(elementItem=>{
+        
+        var compra= new Compra();
+       // var product = new Product();
+        compra.product= new Product();
+
+        compra.product.name=elementItem.purchasesItem;
+          //compra.name=elementItem.purchasesItem;
+          compra.product.category="none";
+          //compra.product=product;
+          compra.quantity=elementItem.quantity;
+          compra.unitprice=elementItem.unitPrice.amount;
+          console.log(compra);
+          purchase.itens.push(compra);
+    
+      });
       this.purchases.push(purchase);
-      this.calcTotal();
+    
       
     });
-    
-
+    console.log(this.purchases);
+    this.calcTotal();
+    this.rentableSuppliers();
+    this.povoarProdutos();
   }
+
+  povoarProdutos(){
+    //console.log(this.purchases);
+    this.purchases.forEach(element=>{
+      var exist=false;
+      //console.log(element.itens);
+
+      element.itens.forEach(el=>{
+
+        this.produtosComprados.forEach(ele=>{
+
+           if (el.product.name= ele.product.name) {
+            ele.total += el.unitprice*el.quantity;
+            ele.quantity+=el.quantity;
+            exist=true;
+        }
+        });
+        if (!exist) {
+
+          var p= new ProdutosComprados();
+          p.product=el.product;
+          p.quantity= el.quantity;
+          p.total= el.quantity*el.unitprice;
+          this.produtosComprados.push(p);
+          
+        }
+        exist=false;
+
+
+       
+
+      });
+      
+
+    });
+    this.produtosComprados.sort((a,b)=>{if(a.quantity<b.quantity)return 1; else return -1;});
+  }
+
   calcTotal(){
       this.purchases.forEach(element=>{
         this.valorTotalCompras += element.amount;
       })
+  }
+
+  rentableSuppliers(){
+    var supplierExist=false;
+    this.purchases.forEach(element => {
+      this.suppliers.forEach(elementSupplier=>{
+        if(element.supplier_name == elementSupplier.name)
+        { 
+          supplierExist = true;
+          elementSupplier.total_gain += element.amount;
+          elementSupplier.sells_made++;
+         }
+      })
+
+      if(!supplierExist){
+        var s= new Supplier();
+        s.name= element.supplier_name;
+        s.sells_made=1;
+        s.total_gain= element.amount;
+        this.suppliers.push(s);
+      }
+      supplierExist=false;
+
+    });
+    this.suppliers.sort((a,b)=>{if(a.total_gain<b.total_gain)return 1; else return -1;});
+
   }
 
 }

@@ -56,28 +56,28 @@ public legendLine: boolean = false;
       purchase.area = element.loadingCityName;
       purchase.date= element.loadingDateTime;
       purchase.itens= new Array<Compra>();
-     
+      var product = new Product();
       element.documentLines.forEach(elementItem=>{
         
         var compra= new Compra();
-       // var product = new Product();
         compra.product= new Product();
-
+        product.name=elementItem.purchasesItem;
         compra.product.name=elementItem.purchasesItem;
-          //compra.name=elementItem.purchasesItem;
-          compra.product.category="none";
-          //compra.product=product;
-          compra.quantity=elementItem.quantity;
-          compra.unitprice=elementItem.unitPrice.amount;
-          console.log(compra);
-          purchase.itens.push(compra);
+        compra.name=elementItem.purchasesItem;
+        //console.log(compra.name);
+        compra.product.category="none";
+        //compra.product=product;
+        compra.quantity=elementItem.quantity;
+        compra.unitprice=elementItem.unitPrice.amount;
+        //console.log(compra);
+        purchase.itens.push(compra);
     
       });
       this.purchases.push(purchase);
     
       
     });
-    console.log(this.purchases);
+    //console.log(this.purchases);
     this.calcTotal();
     this.rentableSuppliers();
     this.povoarProdutos();
@@ -92,21 +92,22 @@ public legendLine: boolean = false;
       element.itens.forEach(el=>{
 
         this.produtosComprados.forEach(ele=>{
-
-           if (el.product.name= ele.product.name) {
+          //console.log(el.product.name);
+          //console.log(el)
+           if (el.product.name== ele.product.name) {
             ele.total += el.unitprice*el.quantity;
             ele.quantity+=el.quantity;
             exist=true;
         }
         });
+        var p= new ProdutosComprados();
         if (!exist) {
-
-          var p= new ProdutosComprados();
+          p.product= new Product();
           p.product=el.product;
           p.quantity= el.quantity;
           p.total= el.quantity*el.unitprice;
           this.produtosComprados.push(p);
-          
+          //console.log(this.produtosComprados);
         }
         exist=false;
 

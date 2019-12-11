@@ -58,6 +58,14 @@ export class Purchase{
 
 export class ProdutosComprados{
     product: Product;
+    category: string;
     total: number;
     quantity: number;
+}
+
+
+export class Category{
+    name: string;
+    quantity: number;
+    total: number;
 }

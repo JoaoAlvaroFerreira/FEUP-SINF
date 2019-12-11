@@ -3,7 +3,9 @@ import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { ApiInteraction } from 'src/app/api/apiInteractions.component'
 import { ApiService } from '../api/api.service';
-import { Customer,Sale,Purchase, Supplier ,Compra, Product, ProdutosComprados} from './../model/client_model'; // necessario?
+import { Customer,Sale,Purchase, Supplier ,Compra, Product, ProdutosComprados,Category} from './../model/client_model'; // necessario?
+import { VendasComponent } from '../vendas/vendas.component';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-compras',
@@ -14,10 +16,13 @@ export class ComprasComponent extends ApiInteraction implements OnInit {
 
   private valorTotalCompras=0;
   public processingDone: boolean=false;
+  public processingItens: boolean=false;
   private purchases: Array<Purchase>=[];
   private suppliers: Array<Supplier> =[];
+  private categories: Array<Category> =[];
   private produtosComprados: Array<ProdutosComprados> =[];
   private supplierDistribution: Array<Supplier>=[];
+
 
 //tendencia compras mensais (linear)
 public lineChartData: ChartDataSets[] = [
@@ -35,19 +40,80 @@ public legendLine: boolean = false;
 
 
   constructor(api: ApiService) {
-    super(api,'/purchases/orders');
+  super(api,'/purchases/orders');
+ 
+    
    }
 
   ngOnInit() {
+   // this.setbody('/purchases/orders')
     this.getRequest();
   }
   ngDoCheck(){
     if(this.data != null && !this.processingDone){
       this.processData();
+      this.resetData();
+      this.setbody('/purchasesCore/purchasesItems')
+      this.getRequest();
       this.processingDone=true;
+    } 
+    if(this.data!=null && !this.processingItens && this.processingDone){
+      this.processItens();
+      this.povoarCategories();
+      this.processingItens=true;
     }
-  }
+      
+    /*this.processingDone=false;
+    this.setbody('/purchasesCore/purchasesItems')
+    this.getRequest();
+    if(this.data != null && !this.processingDone){
+     // this.processData();
+     this.processItens();
+     //console.log(this.data);
+      this.processingDone=true;
+    }*/
 
+    
+  }
+  processItens(){
+    this.produtosComprados.forEach(element=>{
+        this.data.forEach(el=>{
+        if(element.product.name == el.itemKey){
+          element.category=el.assortment;
+          element.product.category=el.assortment;
+        }
+    });
+    });
+    
+    
+  }
+  povoarCategories(){
+    console.log(this.produtosComprados);
+    this.data.forEach(ele=>{
+        var exists=false;
+         this.categories.forEach(el=>{
+          if(ele.assortment== el.name){
+            exists=true;
+          }
+    });
+    if(!exists){
+      var c= new Category();
+      c.name=ele.assortment;
+      c.quantity=0;
+      c.total=0;
+      this.categories.push(c);
+    }
+  });
+  console.log(this.categories);
+
+  this.purchases.forEach(element=>{
+    element.itens.forEach(ele=>{
+      var category= ele.product.category;
+      
+    });
+  });
+
+  }
   processData(){
     this.data.forEach(element => {
       var purchase= new Purchase();

@@ -22,22 +22,28 @@ export class ComprasComponent extends ApiInteraction implements OnInit {
   private categories: Array<Category> =[];
   private produtosComprados: Array<ProdutosComprados> =[];
   private supplierDistribution: Array<Supplier>=[];
+  private comprasPorMes: Array<number>=[0,0,0,0,0,0,0,0,0,0,0,0];
 
 
 //tendencia compras mensais (linear)
+// Grafico Linear - Tendência de compras mensais
 public lineChartData: ChartDataSets[] = [
-  { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+  { data: [], label: 'Series A' }
 ];
-public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+public lineChartLabels: Label[] = [];
 public legendLine: boolean = false;
 
   //comparacao de gastos (linear)
   public lineChartData2: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+    { data: [], label: 'Series A' }
   ];
-  public lineChartLabels2: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels2: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'agost', 'set','out', 'nov', 'de'];
   public legendLine2: boolean = false;
 
+ // Grafico Pie - Compras por Categoria - 
+ public pieChartData: number[] = []; 
+ public pieChartLabels: Label[] = [];
+ public legendPie: boolean = false;
 
   constructor(api: ApiService) {
   super(api,'/purchases/orders');
@@ -56,24 +62,55 @@ public legendLine: boolean = false;
       this.setbody('/purchasesCore/purchasesItems')
       this.getRequest();
       this.processingDone=true;
+      console.log(this.purchases);
+      console.log(this.comprasPorMes);
     } 
     if(this.data!=null && !this.processingItens && this.processingDone){
       this.processItens();
       this.povoarCategories();
       this.processingItens=true;
     }
-      
-    /*this.processingDone=false;
-    this.setbody('/purchasesCore/purchasesItems')
-    this.getRequest();
-    if(this.data != null && !this.processingDone){
-     // this.processData();
-     this.processItens();
-     //console.log(this.data);
-      this.processingDone=true;
-    }*/
 
     
+  }
+  purchasesTendency() {
+    var i;
+    
+    this.purchases.sort((a,b)=>{if(a.date>b.date) return 1; else return -1;});
+
+    this.purchases.forEach(element=>{
+      if(this.lineChartLabels.includes(element.date.toString()))
+      {
+        i = this.lineChartLabels.indexOf(element.date.toString());
+        this.lineChartData[0][i]+=element.amount;
+      }
+      else{
+        this.lineChartLabels.push(element.day.toString());
+        this.lineChartData[0].data.push(element.amount);
+      }
+  
+
+    })
+  }
+  annualPurchaseTendency(){
+    var i;
+    
+    this.purchases.sort((a,b)=>{if(a.date>b.date) return 1; else return -1;});
+
+    this.comprasPorMes.forEach(element=>{
+      if(this.lineChartLabels2.includes(element.toString()))
+      {
+        i = this.lineChartLabels2.indexOf(element.toString());
+        this.lineChartData2[0][i]+=element;
+      }
+      else{
+        //this.lineChartLabels2.push(element.day.toString());
+        this.lineChartData2[0].data.push(element);
+      }
+  
+
+    })
+
   }
   processItens(){
     this.produtosComprados.forEach(element=>{
@@ -88,7 +125,7 @@ public legendLine: boolean = false;
     
   }
   povoarCategories(){
-    console.log(this.produtosComprados);
+    //console.log(this.produtosComprados);
     this.data.forEach(ele=>{
         var exists=false;
          this.categories.forEach(el=>{
@@ -104,23 +141,55 @@ public legendLine: boolean = false;
       this.categories.push(c);
     }
   });
-  console.log(this.categories);
+  //console.log(this.categories);
 
   this.purchases.forEach(element=>{
     element.itens.forEach(ele=>{
-      var category= ele.product.category;
+      
+      this.categories.forEach(cat=>{
+        if(ele.product.category==cat.name){
+          cat.quantity+= ele.quantity;
+          cat.total+=ele.unitprice*ele.quantity;
+        }
+      });
       
     });
   });
+  //console.log(this.categories);
+  this.categories.sort((a,b)=>{if(a.quantity<b.quantity)return 1; else return -1;});
+  
+    var i;
+   
+    this.categories.forEach(element=>{
+      if(this.pieChartLabels.includes(element.name))
+      {
+        i = this.pieChartLabels.indexOf(element.name);
+        this.pieChartData[i]+=element.quantity;
+      }
+      else{
+        this.pieChartLabels.push(element.name);
+        this.pieChartData.push(element.quantity);
+      }
+  
 
-  }
+    })
+  
+
+}
   processData(){
     this.data.forEach(element => {
       var purchase= new Purchase();
+      //console.log(element);
       purchase.supplier_name= element.sellerSupplierPartyName;
       purchase.amount= element.payableAmount.amount;
-      purchase.area = element.loadingCityName;
-      purchase.date= element.loadingDateTime;
+      purchase.region = element.loadingCityName;
+      var date=element.documentDate; //"2019-12-10T00:00:00"
+      purchase.date=date;
+      var date_array = date.split('-');
+      purchase.year = date_array[0];
+      purchase.month = date_array[1];
+      var day= date_array[2].split('T');
+      purchase.day = day[0];
       purchase.itens= new Array<Compra>();
       var product = new Product();
       element.documentLines.forEach(elementItem=>{
@@ -135,6 +204,7 @@ public legendLine: boolean = false;
         //compra.product=product;
         compra.quantity=elementItem.quantity;
         compra.unitprice=elementItem.unitPrice.amount;
+        this.comprasPorMes[purchase.month-1]+= compra.quantity*compra.unitprice;
         //console.log(compra);
         purchase.itens.push(compra);
     
@@ -147,6 +217,8 @@ public legendLine: boolean = false;
     this.calcTotal();
     this.rentableSuppliers();
     this.povoarProdutos();
+    this.purchasesTendency();
+    this.annualPurchaseTendency();
   }
 
   povoarProdutos(){

@@ -53,14 +53,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4">
+      <!--  <div class="col-sm-12 col-md-4">
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Tempo médio de Chegada</div>
                     <app-grafico-barras></app-grafico-barras>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 
     <div class="row mt-3">
@@ -68,7 +68,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Compras por Categoria</div>
-                    <app-grafico-bolo></app-grafico-bolo>
+                    <app-grafico-bolo [pieChartData]="pieChartData" [pieChartLabels]="pieChartLabels" [legend]="legendBar"></app-grafico-bolo>
                 </div>
             </div>
         </div>

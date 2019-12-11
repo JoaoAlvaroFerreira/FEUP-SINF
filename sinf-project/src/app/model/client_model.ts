@@ -13,6 +13,18 @@ export class Invoice {
     customer: Customer;
 }
 
+export class Purchase{
+    supplier_name: string;
+    supplier: Supplier;
+    amount: number;
+    itens: Array <Compra>=[];
+    date:  number;
+    year: number;
+    month:number;
+    day: number;
+    region: string;
+}
+
 export class Compra{
     product: Product;
     name: string;
@@ -48,13 +60,7 @@ export class Sale{
     date: number;
 }
 
-export class Purchase{
-    supplier_name: string;
-    amount: number;
-    itens: Array <Compra>;
-    date: number;
-    area: string;
-}
+
 
 export class ProdutosComprados{
     product: Product;

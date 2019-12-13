@@ -2,21 +2,31 @@
         <div class="row d-flex flex-row justify-content-between align-items-end">
                 <h3 class="mt-4">Compras</h3>
                 <div class="d-flex flex-row">
-                    <div class="ano mr-2">
-                        <select class="form-control" id="sel1">
-                            <option>2019</option>
-                            <option>2018</option>
-                            <option>2017</option>
-                        </select>
-                    </div>
-                    <div class="mes">
-                        <select class="form-control" id="sel1">
-                            <option>--</option>
-                            <option>Janeiro</option>
-                            <option>Fevereiro</option>
-                            <option>Março</option>
-                        </select>
-                    </div>
+                        <div class="ano mr-2">
+                                <select class="form-control" id="sel1" [(ngModel)]="selectedYear" (change)="onChange()">
+                                    <option value="all">--</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                  </select>
+                            </div>
+                            <div class="mes">
+                                <select class="form-control" id="sel2" [(ngModel)]="selectedMonth" (change)="onChange()">
+                                    <option value="all">--</option>
+                                    <option value="01">Janeiro</option>
+                                    <option value="02">Fevereiro</option>
+                                    <option value="03">Março</option>
+                                    <option value="04">Abril</option>
+                                    <option value="05">Maio</option>
+                                    <option value="06">Junho</option>
+                                    <option value="07">Julho</option>
+                                    <option value="08">Agosto</option>
+                                    <option value="09">Setembro</option>
+                                    <option value="10">Outubro</option>
+                                    <option value="11">Novembro</option>
+                                    <option value="12">Dezembro</option>
+                                  </select>
+                            </div>
                 </div>
             </div>
         </div>

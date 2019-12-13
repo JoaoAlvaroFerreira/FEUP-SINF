@@ -26,8 +26,7 @@ export class ApiInteraction {
     this.Api.get(this.endpoint).subscribe(
       (response: any) => this.data = response,
       (err: any) => {
-        console.log("Data"+this.data);
-        console.log("CODE: "+ err.status);
+       
         if (err.status === 401){
          this.Api.getTokenFromJasmin();
             }
@@ -42,8 +41,6 @@ export class ApiInteraction {
   this.Api.post(this.endpoint,this.body).subscribe(
     (response: any) => this.data = response[0],
     (err: any) => {
-      console.log("Data"+this.data);
-      console.log("CODE: "+ err.status);
       if (err.status === 401){
        this.Api.getTokenFromJasmin();
           }

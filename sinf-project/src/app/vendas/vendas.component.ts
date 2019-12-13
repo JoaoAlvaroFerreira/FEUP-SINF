@@ -170,7 +170,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
       customerExist = false;
     })
     
-    this.customers.sort((a,b)=>{if(a.total_spent<b.total_spent) return 1; else return -1;});
+    this.customers.sort((a,b)=>{if(a.total_spent < b.total_spent) return 1; else return -1;});
   }
     
   salesTendency() {

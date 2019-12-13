@@ -29,7 +29,7 @@
                     <div class="cardTitle"> Total de Capital Gasto</div>
                     <div class="value-card d-flex flew-row align-items-center">
                         <div class="updown red"><i class="fas fa-arrow-up"></i></div>
-                        <div class="value">1.200 €</div>
+                        <div class="value">{{valorTotalCompras}} €</div>
                     </div>
                 </div>
             </div>
@@ -53,14 +53,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4">
+      <!--  <div class="col-sm-12 col-md-4">
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Tempo médio de Chegada</div>
                     <app-grafico-barras></app-grafico-barras>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 
     <div class="row mt-3">
@@ -68,7 +68,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Compras por Categoria</div>
-                    <app-grafico-bolo></app-grafico-bolo>
+                    <app-grafico-bolo [pieChartData]="pieChartData" [pieChartLabels]="pieChartLabels" [legend]="legendBar"></app-grafico-bolo>
                 </div>
             </div>
         </div>
@@ -77,30 +77,30 @@
                 <div class="card-body">
                     <div class="cardTitle"> Vendedores mais Comuns</div>
                     <table class="table table-bordered table-hover genTable">
-                        <tr>
+                        <tr *ngIf="suppliers != null">
                             <th>Rank</th>
                             <th>Cliente</th>
                             <th>Quantia</th>
                         </tr>
-                        <tr>
+                        <tr *ngIf="suppliers[0] != null">
                             <td>1</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{suppliers[0].name}}</td>
+                            <td>{{suppliers[0].total_gain}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="suppliers[1] != null">
                             <td>2</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{suppliers[1].name}}</td>
+                            <td>{{suppliers[1].total_gain}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="suppliers[2] != null">
                             <td>3</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{suppliers[2].name}}</td>
+                            <td>{{suppliers[2].total_gain}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="suppliers[3] != null">
                             <td>4</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{suppliers[3].name}}</td>
+                            <td>{{suppliers[3].total_gain}}</td>
                         </tr>
                     </table>
                 </div>
@@ -112,30 +112,30 @@
                 <div class="card-body">
                     <div class="cardTitle"> Produtos mais Comprados</div>
                     <table class="table table-bordered table-hover genTable">
-                        <tr>
+                        <tr *ngIf="produtosComprados != null">
                             <th>Rank</th>
                             <th>Produto</th>
                             <th>Quantidade</th>
                         </tr>
-                        <tr>
+                        <tr *ngIf="produtosComprados[0] != null">
                             <td>1</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{produtosComprados[0].product.name}}</td>
+                            <td>{{produtosComprados[0].quantity}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="produtosComprados[1] != null">
                             <td>2</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{produtosComprados[1].product.name}}</td>
+                            <td>{{produtosComprados[1].quantity}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="produtosComprados[2] != null">
                             <td>3</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{produtosComprados[2].product.name}}</td>
+                            <td>{{produtosComprados[2].quantity}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="produtosComprados[3] != null">
                             <td>4</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{produtosComprados[3].product.name}}</td>
+                            <td>{{produtosComprados[3].quantity}}</td>
                         </tr>
                     </table>
                 </div>

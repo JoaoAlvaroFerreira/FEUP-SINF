@@ -17,6 +17,11 @@ export class ApiInteraction {
     this.Api.getTokenFromJasmin();
   }
 
+  setbody(body: string){
+    this.body=body;
+    this.endpoint=body;
+    this.Api.getTokenFromJasmin();
+  }
   getRequest() {
     this.Api.get(this.endpoint).subscribe(
       (response: any) => this.data = response,

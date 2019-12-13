@@ -40,6 +40,7 @@ import { ApiInteraction } from './api/apiInteractions.component';
     ApiInteraction
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

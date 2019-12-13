@@ -13,9 +13,13 @@ import { Customer,Sale } from './../model/client_model';
 export class VendasComponent extends ApiInteraction implements OnInit {
 
   private sales: Array<Sale> = [];
+  private allSales: Array<Sale> = [];
   private customers: Array<Customer> = [];
   private totalSaleValue: number = 0;
   private customerDistribution: Array<Customer> = [];
+
+  private selectedYear;
+  private selectedMonth;
 
   
   public processingDone: boolean = false;
@@ -41,6 +45,8 @@ export class VendasComponent extends ApiInteraction implements OnInit {
 
   constructor(api: ApiService) {
     super(api, '/sales/orders');
+    this.selectedYear = "2019";
+    this.selectedMonth = "12";
    }
 
   ngOnInit() {
@@ -55,6 +61,59 @@ export class VendasComponent extends ApiInteraction implements OnInit {
       this.processData();
       this.processingDone = true;
     }
+   
+  }
+
+  onChange(){
+    console.log("a");
+    if(this.data != null && this.processingDone){
+      console.log("b");
+      this.clearCache();
+      this.dateFiltering();
+      
+      this.rentableClients();
+      this.calcTotal();
+      this.categorySales();
+      this.salesPerRegion();
+      this.salesTendency();
+      this.salesDistribution();
+    }
+  }
+  clearCache(){
+    this.totalSaleValue = 0;
+    this.lineChartData = [
+      { data: [], label: 'Series A' }
+    ];
+    this.lineChartLabels = [];
+  
+  
+    // Grafico Barras - Vendas por Região
+    this.barChartData = [
+      { data: [], label: 'Series A' }
+    ]; 
+    this.barChartLabels = [];
+  
+    // Grafico Pie - Vendas por Categoria - NOT IMPLEMENTED
+    this.pieChartData = []; 
+    this.pieChartLabels = [];
+  }
+
+  dateFiltering(){
+    var aux: Array<Sale> = new Array<Sale>();
+    console.log("Month: "+this.selectedMonth);
+    for(var i = 0; i < this.allSales.length; i++){
+      //2019-11-28T00:00:00
+      var year = this.allSales[i].date.toString().substr(0, 4);
+      var month = this.allSales[i].date.toString().substr(5,2);
+      
+      if((year == this.selectedYear || this.selectedYear == "all") && (month == this.selectedMonth || this.selectedMonth == "all")){
+        aux.push(this.allSales[i]);
+        console.log("in");
+      }
+      console.log(this.allSales[i].date);
+    }
+
+    this.sales = aux;
   }
 
   processData(){
@@ -67,6 +126,8 @@ export class VendasComponent extends ApiInteraction implements OnInit {
         sale.area = element.loadingCityName;
         sale.date = element.documentDate;
         this.sales.push(sale);
+        this.allSales = this.sales;
+        
       });
       this.rentableClients();
       this.calcTotal();
@@ -86,7 +147,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
   }
 
   rentableClients() {
-
+    this.customers = [];
     var customerExist = false;
     this.sales.forEach(element=>{
       this.customers.forEach(elementCustomer=>{

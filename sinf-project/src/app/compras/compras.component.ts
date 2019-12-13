@@ -18,11 +18,16 @@ export class ComprasComponent extends ApiInteraction implements OnInit {
   public processingDone: boolean=false;
   public processingItens: boolean=false;
   private purchases: Array<Purchase>=[];
+  private allPurchases: Array<Purchase> = [];
   private suppliers: Array<Supplier> =[];
   private categories: Array<Category> =[];
   private produtosComprados: Array<ProdutosComprados> =[];
   private supplierDistribution: Array<Supplier>=[];
   private comprasPorMes: Array<number>=[0,0,0,0,0,0,0,0,0,0,0,0];
+
+  
+  private selectedYear;
+  private selectedMonth;
 
 
 //tendencia compras mensais (linear)
@@ -47,7 +52,8 @@ public legendLine: boolean = false;
 
   constructor(api: ApiService) {
   super(api,'/purchases/orders');
- 
+  this.selectedYear = "all";
+    this.selectedMonth = "all";
     
    }
 
@@ -73,6 +79,58 @@ public legendLine: boolean = false;
 
     
   }
+
+  onChange(){
+
+    if(this.data != null && this.processingDone){
+    
+      this.clearCache();
+      this.dateFiltering();
+      
+     
+      this.calcTotal();
+      this.rentableSuppliers();
+      this.povoarProdutos();
+      this.purchasesTendency();
+      this.annualPurchaseTendency();
+    }
+  }
+  clearCache(){
+    this.valorTotalCompras = 0;
+    this.lineChartData = [
+      { data: [], label: 'Series A' }
+    ];
+    this.lineChartLabels = [];
+  
+  
+    // Grafico Barras - Vendas por Região
+    this.lineChartData2 = [
+      { data: [], label: 'Series A' }
+    ]; 
+    this.lineChartLabels2 = [];
+  
+    // Grafico Pie - Vendas por Categoria - NOT IMPLEMENTED
+    this.pieChartData = []; 
+    this.pieChartLabels = [];
+  }
+
+  dateFiltering(){
+    var aux: Array<Purchase> = new Array<Purchase>();
+
+    for(var i = 0; i < this.allPurchases.length; i++){
+      //2019-11-28T00:00:00
+      var year = this.allPurchases[i].date.toString().substr(0, 4);
+      var month = this.allPurchases[i].date.toString().substr(5,2);
+      
+      if((year == this.selectedYear || this.selectedYear == "all") && (month == this.selectedMonth || this.selectedMonth == "all")){
+        aux.push(this.allPurchases[i]);
+
+      }
+    }
+
+    this.purchases = aux;
+  }
+
   purchasesTendency() {
     var i;
     
@@ -213,6 +271,7 @@ public legendLine: boolean = false;
     
       
     });
+    this.allPurchases = this.purchases;
     //console.log(this.purchases);
     this.calcTotal();
     this.rentableSuppliers();

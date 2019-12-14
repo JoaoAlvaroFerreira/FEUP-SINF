@@ -29,7 +29,7 @@
                     <div class="cardTitle"> Total de Inventário</div>
                     <div class="value-card d-flex flew-row align-items-center">
                         <div class="updown green"><i class="fas fa-arrow-up"></i></div>
-                        <div class="value">10.756 €</div>
+                        <div class="value">{{totalInventaryValue}} €</div>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
     </div>
 
     <div class="row mt-3">
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-6">
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Evolução do Inventário</div>
@@ -56,45 +56,52 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="cardTitle"> Inventário por Categoria</div>
-                    <app-grafico-bolo></app-grafico-bolo>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-6">
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Stock mínimo atingido</div>
                     <table class="table table-bordered table-hover genTable">
-                        <tr>
+                        <tr *ngIf="lowStockItems != null">
                             <th>Item</th>
                             <th>Produto</th>
                             <th>Quantidade</th>
+                            <th>Stock Minimo</th>
                         </tr>
-                        <tr>
+                        <tr *ngIf="lowStockItems[0] != null">
                             <td>1</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{lowStockItems[0].name}}</td>
+                            <td>{{lowStockItems[0].totalUnits}}</td>
+                            <td>{{lowStockItems[0].minStock}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="lowStockItems[1] != null">
                             <td>2</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{lowStockItems[1].name}}</td>
+                            <td>{{lowStockItems[1].totalUnits}}</td>
+                            <td>{{lowStockItems[1].minStock}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="lowStockItems[2] != null">
                             <td>3</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{lowStockItems[2].name}}</td>
+                            <td>{{lowStockItems[2].totalUnits}}</td>
+                            <td>{{lowStockItems[2].minStock}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="lowStockItems[3] != null">
                             <td>4</td>
-                            <td>João G.</td>
-                            <td>1.203€</td>
+                            <td>{{lowStockItems[3].name}}</td>
+                            <td>{{lowStockItems[3].totalUnits}}</td>
+                            <td>{{lowStockItems[3].minStock}}</td>
                         </tr>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Inventário por Categoria</div>
+                    <app-grafico-bolo [pieChartData]="pieChartData" [pieChartLabels]="pieChartLabels" [legend]="legendBar"></app-grafico-bolo>
                 </div>
             </div>
         </div>
@@ -112,30 +119,104 @@
             <div class="card">
                 <div class="card-body">
                     <table class="table table-bordered table-hover genTable">
-                        <tr>
+                        <tr *ngIf="stockItems != null">
                             <th>Item</th>
                             <th>Produto</th>
+                            <th>Categoria</th>
+                            <th>Marca</th>
+                            <th>Custo Unitário</th>
                             <th>Quantidade em Stock</th>
+                            <th>Stock Minimo</th>
                         </tr>
-                        <tr>
+                        <tr *ngIf="stockItems[0] != null">
                             <td>1</td>
-                            <td>João G.</td>
-                            <td>4567</td>
+                            <td>{{stockItems[0].name}}</td>
+                            <td>{{stockItems[0].category}}</td>
+                            <td>{{stockItems[0].brand}}</td>
+                            <td>{{stockItems[0].unitCost}} €</td>
+                            <td>{{stockItems[0].totalUnits}}</td>
+                            <td>{{stockItems[0].minStock}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="stockItems[1] != null">
                             <td>2</td>
-                            <td>João G.</td>
-                            <td>4567</td>
+                            <td>{{stockItems[1].name}}</td>
+                            <td>{{stockItems[1].category}}</td>
+                            <td>{{stockItems[1].brand}}</td>
+                            <td>{{stockItems[1].unitCost}} €</td>
+                            <td>{{stockItems[1].totalUnits}}</td>
+                            <td>{{stockItems[1].minStock}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="stockItems[2] != null">
                             <td>3</td>
-                            <td>João G.</td>
-                            <td>4567</td>
+                            <td>{{stockItems[2].name}}</td>
+                            <td>{{stockItems[2].category}}</td>
+                            <td>{{stockItems[2].brand}}</td>
+                            <td>{{stockItems[2].unitCost}} €</td>
+                            <td>{{stockItems[2].totalUnits}}</td>
+                            <td>{{stockItems[2].minStock}}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="stockItems[3] != null">
                             <td>4</td>
-                            <td>João G.</td>
-                            <td>4567</td>
+                            <td>{{stockItems[3].name}}</td>
+                            <td>{{stockItems[3].category}}</td>
+                            <td>{{stockItems[3].brand}}</td>
+                            <td>{{stockItems[3].unitCost}} €</td>
+                            <td>{{stockItems[3].totalUnits}}</td>
+                            <td>{{stockItems[3].minStock}}</td>
+                        </tr>
+                        <tr *ngIf="stockItems[4] != null">
+                            <td>5</td>
+                            <td>{{stockItems[4].name}}</td>
+                            <td>{{stockItems[4].category}}</td>
+                            <td>{{stockItems[4].brand}}</td>
+                            <td>{{stockItems[4].unitCost}} €</td>
+                            <td>{{stockItems[4].totalUnits}}</td>
+                            <td>{{stockItems[4].minStock}}</td>
+                        </tr>
+                        <tr *ngIf="stockItems[5] != null">
+                            <td>6</td>
+                            <td>{{stockItems[5].name}}</td>
+                            <td>{{stockItems[5].category}}</td>
+                            <td>{{stockItems[5].brand}}</td>
+                            <td>{{stockItems[5].unitCost}} €</td>
+                            <td>{{stockItems[5].totalUnits}}</td>
+                            <td>{{stockItems[5].minStock}}</td>
+                        </tr>
+                        <tr *ngIf="stockItems[6] != null">
+                            <td>7</td>
+                            <td>{{stockItems[6].name}}</td>
+                            <td>{{stockItems[6].category}}</td>
+                            <td>{{stockItems[6].brand}}</td>
+                            <td>{{stockItems[6].unitCost}} €</td>
+                            <td>{{stockItems[6].totalUnits}}</td>
+                            <td>{{stockItems[6].minStock}}</td>
+                        </tr>
+                        <tr *ngIf="stockItems[7] != null">
+                            <td>8</td>
+                            <td>{{stockItems[7].name}}</td>
+                            <td>{{stockItems[7].category}}</td>
+                            <td>{{stockItems[7].brand}}</td>
+                            <td>{{stockItems[7].unitCost}} €</td>
+                            <td>{{stockItems[7].totalUnits}}</td>
+                            <td>{{stockItems[7].minStock}}</td>
+                        </tr>
+                        <tr *ngIf="stockItems[8] != null">
+                            <td>9</td>
+                            <td>{{stockItems[8].name}}</td>
+                            <td>{{stockItems[8].category}}</td>
+                            <td>{{stockItems[8].brand}}</td>
+                            <td>{{stockItems[8].unitCost}} €</td>
+                            <td>{{stockItems[8].totalUnits}}</td>
+                            <td>{{stockItems[8].minStock}}</td>
+                        </tr>
+                        <tr *ngIf="stockItems[9] != null">
+                            <td>10</td>
+                            <td>{{stockItems[9].name}}</td>
+                            <td>{{stockItems[9].category}}</td>
+                            <td>{{stockItems[9].brand}}</td>
+                            <td>{{stockItems[9].unitCost}} €</td>
+                            <td>{{stockItems[9].totalUnits}}</td>
+                            <td>{{stockItems[9].minStock}}</td>
                         </tr>
                     </table>
                 </div>

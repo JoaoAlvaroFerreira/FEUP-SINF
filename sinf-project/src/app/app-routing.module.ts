@@ -5,6 +5,7 @@ import { VendasComponent } from './vendas/vendas.component';
 import { ComprasComponent } from './compras/compras.component';
 import { InventarioComponent } from './inventario/inventario.component';
 import { FinanceiroComponent } from './financeiro/financeiro.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,9 @@ const routes: Routes = [
   { path: 'vendas', component: VendasComponent },
   { path: 'compras', component: ComprasComponent },
   { path: 'inventario', component: InventarioComponent },
-  { path: 'financeiro', component: FinanceiroComponent }
+  { path: 'financeiro', component: FinanceiroComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent }
 
 ];
 

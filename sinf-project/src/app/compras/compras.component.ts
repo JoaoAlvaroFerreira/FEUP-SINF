@@ -74,6 +74,7 @@ public legendLine: boolean = false;
     if(this.data!=null && !this.processingItens && this.processingDone){
       this.processItens();
       this.povoarCategories();
+      this.putcategories();
       this.processingItens=true;
     }
 
@@ -86,14 +87,21 @@ public legendLine: boolean = false;
     
       this.clearCache();
       this.dateFiltering();
-      
-     
+
       this.calcTotal();
       this.rentableSuppliers();
       this.povoarProdutos();
       this.purchasesTendency();
       this.annualPurchaseTendency();
+      this.putcategories();
+      console.log(this.allPurchases);
+      console.log(this.purchases);
+      console.log(this.categories);
+      console.log(this.comprasPorMes);
+      
+
     }
+   
   }
   clearCache(){
     this.valorTotalCompras = 0;
@@ -107,7 +115,7 @@ public legendLine: boolean = false;
     this.lineChartData2 = [
       { data: [], label: 'Series A' }
     ]; 
-    this.lineChartLabels2 = [];
+    this.lineChartLabels2 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'agost', 'Set','Out', 'Nov', 'Dec'];
   
     // Grafico Pie - Vendas por Categoria - NOT IMPLEMENTED
     this.pieChartData = []; 
@@ -153,7 +161,7 @@ public legendLine: boolean = false;
   annualPurchaseTendency(){
     var i;
     
-    this.purchases.sort((a,b)=>{if(a.date>b.date) return 1; else return -1;});
+    this.allPurchases.sort((a,b)=>{if(a.date>b.date) return 1; else return -1;});
 
     this.comprasPorMes.forEach(element=>{
       if(this.lineChartLabels2.includes(element.toString()))
@@ -213,26 +221,29 @@ public legendLine: boolean = false;
       
     });
   });
-  //console.log(this.categories);
-  this.categories.sort((a,b)=>{if(a.quantity<b.quantity)return 1; else return -1;});
-  
-    var i;
-   
-    this.categories.forEach(element=>{
-      if(this.pieChartLabels.includes(element.name))
-      {
-        i = this.pieChartLabels.indexOf(element.name);
-        this.pieChartData[i]+=element.quantity;
-      }
-      else{
-        this.pieChartLabels.push(element.name);
-        this.pieChartData.push(element.quantity);
-      }
+ 
   
 
-    })
+}
+putcategories(){
+   console.log(this.categories);
+   this.categories.sort((a,b)=>{if(a.quantity<b.quantity)return 1; else return -1;});
   
+   var i;
+  
+   this.categories.forEach(element=>{
+     if(this.pieChartLabels.includes(element.name))
+     {
+       i = this.pieChartLabels.indexOf(element.name);
+       this.pieChartData[i]+=element.quantity;
+     }
+     else{
+       this.pieChartLabels.push(element.name);
+       this.pieChartData.push(element.quantity);
+     }
+ 
 
+   })
 }
   processData(){
     this.data.forEach(element => {
@@ -268,7 +279,7 @@ public legendLine: boolean = false;
     
       });
       this.purchases.push(purchase);
-    
+    console.log(this.purchases);
       
     });
     this.allPurchases = this.purchases;
@@ -315,6 +326,7 @@ public legendLine: boolean = false;
       
 
     });
+    console.log(this.produtosComprados);
     this.produtosComprados.sort((a,b)=>{if(a.quantity<b.quantity)return 1; else return -1;});
   }
 

@@ -21,6 +21,8 @@ import { InventarioComponent } from './inventario/inventario.component';
 import { FinanceiroComponent } from './financeiro/financeiro.component';
 import { ApiService } from './api/api.service';
 import { ApiInteraction } from './api/apiInteractions.component';
+import { LoginComponent } from './login/login.component';
+import { NavegacaoComponent } from './navegacao/navegacao.component';
 
 
 
@@ -37,7 +39,9 @@ import { ApiInteraction } from './api/apiInteractions.component';
     ComprasComponent,
     InventarioComponent,
     FinanceiroComponent,
-    ApiInteraction
+    ApiInteraction,
+    LoginComponent,
+    NavegacaoComponent
   ],
   imports: [
     FormsModule,

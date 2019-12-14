@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 //Testing
 import {Customer, Product, Venda, Invoice } from './model/client_model';
+import {Account, Customer2} from './model/financial_model';
 import { find } from 'rxjs/operators';
 
 
@@ -15,7 +16,10 @@ import { find } from 'rxjs/operators';
 export class AppComponent {  
   title = '360º Company Dashboard';
   public xmlItems: any;  
-  constructor(private _http: HttpClient) { this.loadXML(); }  
+  constructor(private _http: HttpClient) { 
+    this.loadXML(); 
+    this.loadXMLfinancial();
+  }  
   loadXML() {  
     this._http.get('/assets/saft.xml',  
       {  
@@ -33,6 +37,82 @@ export class AppComponent {
           });  
       });  
   }  
+
+  loadXMLfinancial() {  
+    this._http.get('/assets/accountingsaft.xml',  
+      {  
+        headers: new HttpHeaders()  
+          .set('Content-Type', 'text/xml')  
+          .append('Access-Control-Allow-Methods', 'GET')  
+          .append('Access-Control-Allow-Origin', '*')  
+          .append('Access-Control-Allow-Headers', "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method"),  
+        responseType: 'text'  
+      })  
+      .subscribe((data) => {  
+        this.parseXML2(data)  
+          .then((data) => {  
+            this.xmlItems = data;  
+          });  
+      });  
+  }  
+  parseXML2(data) {  
+    return new Promise(resolve => {  
+      var k: string | number,  
+        arr = [],  
+        parser = new xml2js.Parser(  
+          {  
+            trim: true,  
+            explicitArray: true  
+          });  
+      parser.parseString(data, function (err, result) {  
+
+        var accounts_array = new Array<Account>();
+
+        var obj = result.AuditFile;  
+        var accountsxml = obj.MasterFiles[0].GeneralLedgerAccounts[0].Account;
+        console.log(accountsxml);
+        //PARSE ACCOUNTS
+
+        accountsxml.forEach(element => {
+          let temp = new Account();
+          temp.accountID = element.AccountID;
+          temp.accountDescription = element.AccountDescription[0];
+          temp.openingDebitBalance = element.OpeningDebitBalance[0];
+          temp.openingCreditBalance = element.OpeningCreditBalance[0];
+          temp.closingDebitBalance = element.ClosingDebitBalance[0];
+          temp.closingCreditBalance = element.ClosingCreditBalance[0];
+          temp.groupingCategory = element.GroupingCategory[0];
+          accounts_array.push(temp);
+        });
+        console.log(accounts_array);
+
+        //Parse Customers
+        var customersxml = obj.MasterFiles[0].Custumer;
+
+        /*
+        export class Customer{
+          customerID: number;
+          accountID: string;
+          customerTaxID: number;
+          companyName: string;
+          ClosingDebitBalance: number;
+          billingAddress: Address;
+          shipToAddress: Address
+          telephone: number;
+          selfBillingIndicator: number;
+      }
+      export class Address{
+          addressDetail: string;
+          city: string;
+          postalCode: string;
+          region: string;
+          country: string;
+      }*/
+
+      })
+    });
+  }
+
   parseXML(data) {  
     return new Promise(resolve => {  
       var k: string | number,  

@@ -1,24 +1,191 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { ApiInteraction } from 'src/app/api/apiInteractions.component'
+import { ApiService } from '../api/api.service';
+import { Customer,Sale,Purchase, Supplier ,Compra,StockItem, InvEvolution,Product, ProdutosComprados,Category} from './../model/client_model'; // necessario?
 
 @Component({
   selector: 'app-visao-geral',
   templateUrl: './visao-geral.component.html',
   styleUrls: ['./visao-geral.component.css']
 })
-export class VisaoGeralComponent implements OnInit {
+export class VisaoGeralComponent extends ApiInteraction implements OnInit {
 
+    private processingSales: boolean=false;
+    private processingPurchases: boolean=false;
+    private processingInventory: boolean=false;
+    
     //tendencia de vendas (linear) igual ao painel de vendas
     public lineChartData: ChartDataSets[] = [
-      { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+      { data: [], label: 'Series A' }
     ];
-    public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    public lineChartLabels: Label[] = [];
     public legendLine: boolean = false;
+    private sales: Array<Sale>=[];
+    private purchases: Array<Purchase>=[];
+    private stockItems: Array<StockItem>=[];
+    private totalSaleValue: number=0;
+    private valorTotalCompras: number=0;
+    private totalInventaryValue: number=0;
+    
   
-  constructor() { }
-
+  constructor(api: ApiService) { 
+    super(api,'/sales/orders');
+  }
   ngOnInit() {
+    this.getRequest();
+  }
+  ngDoCheck(){
+    if(this.data != null && !this.processingSales){
+      this.processSales();
+      this.calcTotal();
+      this.salesTendency();
+      this.resetData();
+      this.setbody('/purchases/orders')
+      this.getRequest();
+      this.processingSales=true;
+    } 
+    if(this.data != null && this.processingSales && !this.processingPurchases){
+        this.processPurchases();
+        this.calcTotalPurchases();
+        this.resetData();
+        this.setbody('/materialscore/materialsitems')
+        this.getRequest();
+        this.processingPurchases=true;
+
+    }
+    if(this.data != null && this.processingSales && this.processingPurchases && !this.processingInventory){
+      this.processInventory();
+      this.calcTotalInventory();
+      //this.resetData();
+     // this.setbody('/purchases/orders')
+      //this.getRequest();
+      this.processingInventory=true;
+
+  }
+   
+
+  }
+  calcTotalInventory(){
+    this.stockItems.forEach(element=>{
+      this.totalInventaryValue += element.totalCost;
+    })
   }
 
+  processSales(){
+    this.data.forEach(element => {
+      var sale = new Sale();
+      sale.amount = element.payableAmount.amount;
+      sale.client_name = element.buyerCustomerPartyName
+      sale.category = element.documentTypeDescription;
+      sale.area = element.loadingCityName;
+      sale.date = element.documentDate;
+      this.sales.push(sale);
+      
+      
+    });
+    
+
+  }
+
+  processPurchases(){
+    this.data.forEach(element => {
+      var purchase= new Purchase();
+      //console.log(element);
+      purchase.supplier_name= element.sellerSupplierPartyName;
+      purchase.amount= element.payableAmount.amount;
+      purchase.region = element.loadingCityName;
+      var date=element.documentDate; //"2019-12-10T00:00:00"
+      purchase.date=date;
+      var date_array = date.split('-');
+      purchase.year = date_array[0];
+      purchase.month = date_array[1];
+      var day= date_array[2].split('T');
+      purchase.day = day[0];
+      purchase.itens= new Array<Compra>();
+      var product = new Product();
+      element.documentLines.forEach(elementItem=>{
+        
+        var compra= new Compra();
+        compra.product= new Product();
+        product.name=elementItem.purchasesItem;
+        compra.product.name=elementItem.purchasesItem;
+        compra.name=elementItem.purchasesItem;
+        //console.log(compra.name);
+        compra.product.category="none";
+        //compra.product=product;
+        compra.quantity=elementItem.quantity;
+        compra.unitprice=elementItem.unitPrice.amount;
+       // this.comprasPorMes[purchase.month-1]+= compra.quantity*compra.unitprice;
+        //console.log(compra);
+        purchase.itens.push(compra);
+    
+      });
+      this.purchases.push(purchase);
+   // console.log(this.purchases);
+      
+    });
+    //this.allPurchases = this.purchases;
+  }
+
+  processInventory(){
+    this.data.forEach(item => {
+      var stockItem = new StockItem();
+      stockItem.name= item.itemKey;
+      if(item.assortment == null){
+        stockItem.category= "indiferenciado";
+      }else{
+        stockItem.category= item.assortment;
+      }
+      
+      stockItem.brand=item.brand;
+      item.materialsItemWarehouses.forEach(el => {
+        stockItem.unitCost= el.calculatedUnitCost.amount;
+        stockItem.totalCost= el.inventoryBalance.amount;
+        stockItem.totalUnits=el.stockBalance;
+      });
+    
+      stockItem.minStock=item.minStock;
+      stockItem.maxStock= item.maxStock;
+      this.stockItems.push(stockItem);
+      //var inv= new InvEvolution();
+      //inv.item=stockItem;
+     // this.inventarioEvolution.push(inv);
+    });
+  }
+
+  calcTotal(){
+    
+    this.sales.forEach(element=>{
+      this.totalSaleValue += element.amount;
+    })
+  }
+
+  calcTotalPurchases(){
+    this.purchases.forEach(element=>{
+      this.valorTotalCompras += element.amount;
+    })
+
+  }
+  salesTendency() {
+    var i;
+    
+    this.sales.sort((a,b)=>{if(a.date>b.date) return 1; else return -1;});
+    this.sales.forEach(element=>{
+      if(this.lineChartLabels.includes(element.date.toString()))
+      {
+        i = this.lineChartLabels.indexOf(element.date.toString());
+        this.lineChartData[0][i]+=element.amount;
+      }
+      else{
+        this.lineChartLabels.push(element.date.toString());
+        this.lineChartData[0].data.push(element.amount);
+      }
+  
+
+    })
+  }
+
+ 
 }

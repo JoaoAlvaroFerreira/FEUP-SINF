@@ -3,7 +3,7 @@ import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { ApiInteraction } from 'src/app/api/apiInteractions.component'
 import { ApiService } from '../api/api.service';
-import { Customer,Sale } from './../model/client_model';
+import { Customer,Sale,Category } from './../model/client_model';
 
 @Component({
   selector: 'app-vendas',
@@ -16,6 +16,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
   private allSales: Array<Sale> = [];
   private customers: Array<Customer> = [];
   private totalSaleValue: number = 0;
+  private categories: Array<Category> =[];
   private customerDistribution: Array<Customer> = [];
 
   private selectedYear;
@@ -23,6 +24,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
 
   
   public processingDone: boolean = false;
+  public processingItens: boolean = false;
   // Grafico Linear - Tendência de Vendas
   public lineChartData: ChartDataSets[] = [
     { data: [], label: 'Series A' }
@@ -59,7 +61,16 @@ export class VendasComponent extends ApiInteraction implements OnInit {
 
     if(this.data != null && !this.processingDone){
       this.processData();
+      this.resetData();
+      this.setbody('/purchasesCore/purchasesItems')
+      this.getRequest();
       this.processingDone = true;
+    }
+    if(this.data!=null && !this.processingItens && this.processingDone){
+      //this.processItens();
+      //this.povoarCategories();
+      //this.putcategories();
+      this.processingItens=true;
     }
    
   }

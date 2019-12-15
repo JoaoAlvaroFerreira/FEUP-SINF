@@ -17,12 +17,14 @@ export class ComprasComponent extends ApiInteraction implements OnInit {
   private valorTotalCompras=0;
   public processingDone: boolean=false;
   public processingItens: boolean=false;
-  private purchases: Array<Purchase>=[];
+  private purchases: Array<Purchase>=[]; 
+  private anualPurchases: Array<Purchase>=[];
   private allPurchases: Array<Purchase> = [];
   private suppliers: Array<Supplier> =[];
   private categories: Array<Category> =[];
   private produtosComprados: Array<ProdutosComprados> =[];
   private supplierDistribution: Array<Supplier>=[];
+  private allSupplierDistribution: Array<Supplier>=[];
   private comprasPorMes: Array<number>=[0,0,0,0,0,0,0,0,0,0,0,0];
 
   
@@ -87,7 +89,20 @@ public legendLine: boolean = false;
     
       this.clearCache();
       this.dateFiltering();
-
+      this.produtosComprados.forEach(el=>{
+        el.quantity=0;
+        el.total=0;
+      });
+      this.categories.forEach(cat=>{
+        cat.quantity=0;
+        cat.total=0;
+      });
+      this.suppliers.forEach(sup=>{
+        sup.sells_made=0;
+        sup.total_gain=0;
+      });
+      this.putInCategory();
+      this.povoarCompraMes();
       this.calcTotal();
       this.rentableSuppliers();
       this.povoarProdutos();
@@ -124,7 +139,7 @@ public legendLine: boolean = false;
 
   dateFiltering(){
     var aux: Array<Purchase> = new Array<Purchase>();
-
+    var auxAnual: Array<Purchase> = new Array<Purchase>();
     for(var i = 0; i < this.allPurchases.length; i++){
       //2019-11-28T00:00:00
       var year = this.allPurchases[i].date.toString().substr(0, 4);
@@ -134,8 +149,11 @@ public legendLine: boolean = false;
         aux.push(this.allPurchases[i]);
 
       }
+      if(year == this.selectedYear || this.selectedYear == "all"){
+        auxAnual.push(this.allPurchases[i]);
+      }
     }
-
+    this.anualPurchases=auxAnual;
     this.purchases = aux;
   }
 
@@ -161,7 +179,7 @@ public legendLine: boolean = false;
   annualPurchaseTendency(){
     var i;
     
-    this.allPurchases.sort((a,b)=>{if(a.date>b.date) return 1; else return -1;});
+    this.anualPurchases.sort((a,b)=>{if(a.date>b.date) return 1; else return -1;});
 
     this.comprasPorMes.forEach(element=>{
       if(this.lineChartLabels2.includes(element.toString()))
@@ -209,6 +227,12 @@ public legendLine: boolean = false;
   });
   //console.log(this.categories);
 
+  this.putInCategory();
+ 
+  
+
+}
+putInCategory(){
   this.purchases.forEach(element=>{
     element.itens.forEach(ele=>{
       
@@ -221,9 +245,6 @@ public legendLine: boolean = false;
       
     });
   });
- 
-  
-
 }
 putcategories(){
    console.log(this.categories);
@@ -289,6 +310,17 @@ putcategories(){
     this.povoarProdutos();
     this.purchasesTendency();
     this.annualPurchaseTendency();
+  }
+  povoarCompraMes(){
+    this.comprasPorMes.forEach(el=>{
+      el=0;
+    });
+    this.anualPurchases.forEach(purch=>{
+      purch.itens.forEach(iten=>{
+        this.comprasPorMes[purch.month-1]+= iten.quantity*iten.unitprice;
+       
+      });
+    });
   }
 
   povoarProdutos(){

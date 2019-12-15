@@ -24,7 +24,14 @@ export class Purchase{
     day: number;
     region: string;
 }
-
+export class Sale{
+    client_name: string;
+    amount: number;
+    area: string;
+    itens: Array <Compra>=[];
+    category: string;
+    date: number;
+}
 export class Compra{
     product: Product;
     name: string;
@@ -67,14 +74,7 @@ export class InvEvolution{
     inventarioPorMes: Array<number>=[0,0,0,0,0,0,0,0,0,0,0,0];
 }
 
-export class Sale{
-    client_name: string;
-    amount: number;
-    area: string;
-    itens: Array <Compra>=[];
-    category: string;
-    date: number;
-}
+
 
 
 

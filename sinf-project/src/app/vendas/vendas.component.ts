@@ -3,7 +3,7 @@ import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { ApiInteraction } from 'src/app/api/apiInteractions.component'
 import { ApiService } from '../api/api.service';
-import { Customer,Sale,Category } from './../model/client_model';
+import { Customer,Sale,Category,Product, Compra,ProdutosComprados } from './../model/client_model';
 
 @Component({
   selector: 'app-vendas',
@@ -17,6 +17,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
   private customers: Array<Customer> = [];
   private totalSaleValue: number = 0;
   private categories: Array<Category> =[];
+  private produtosComprados: Array<ProdutosComprados> =[];
   private customerDistribution: Array<Customer> = [];
 
   private selectedYear;
@@ -61,37 +62,141 @@ export class VendasComponent extends ApiInteraction implements OnInit {
 
     if(this.data != null && !this.processingDone){
       this.processData();
+      this.povoarProdutos();
       this.resetData();
       this.setbody('/purchasesCore/purchasesItems')
       this.getRequest();
       this.processingDone = true;
     }
     if(this.data!=null && !this.processingItens && this.processingDone){
-      //this.processItens();
-      //this.povoarCategories();
-      //this.putcategories();
+      this.processItens();
+      this.povoarCategories();
+      this.categorySales();
       this.processingItens=true;
     }
    
   }
+  processItens(){
+      this.produtosComprados.forEach(element=>{
+        this.data.forEach(el=>{
+        if(element.product.name == el.itemKey){
+          element.category=el.assortment;
+          element.product.category=el.assortment;
+        }
+    });
+    });
+  }
+  povoarProdutos(){
+    this.sales.forEach(element=>{
+      var exist=false;
+      element.itens.forEach(el=>{
 
+        this.produtosComprados.forEach(ele=>{
+           if (el.product.name== ele.product.name) {
+            ele.total += el.unitprice*el.quantity;
+            ele.quantity+=el.quantity;
+            exist=true;
+        }
+        });
+        var p= new ProdutosComprados();
+        if (!exist) {
+          p.product= new Product();
+          p.product=el.product;
+          p.quantity= el.quantity;
+          p.total= el.quantity*el.unitprice;
+          this.produtosComprados.push(p);
+        }
+        exist=false;
+      });
+      
+
+    });
+
+    this.produtosComprados.sort((a,b)=>{if(a.quantity<b.quantity)return 1; else return -1;});
+  }
+  povoarCategories(){
+    this.data.forEach(ele=>{
+        var exists=false;
+         this.categories.forEach(el=>{
+          if(ele.assortment== el.name){
+            exists=true;
+          }
+    });
+    if(!exists){
+      var c= new Category();
+      c.name=ele.assortment;
+      c.quantity=0;
+      c.total=0;
+      this.categories.push(c);
+    }
+  });
+
+
+   this.putInCategory();
+    
+  
+  }
+  putInCategory(){
+    this.sales.forEach(element=>{
+      element.itens.forEach(ele=>{
+        
+        this.categories.forEach(cat=>{
+          if(ele.product.category==cat.name){
+            cat.quantity+= ele.quantity;
+            cat.total+=ele.unitprice*ele.quantity;
+          }
+        });
+        
+      });
+    });
+  }
+  categorySales(){
+    console.log(this.categories);
+    this.categories.sort((a,b)=>{if(a.quantity<b.quantity)return 1; else return -1;});
+   
+    var i;
+   
+    this.categories.forEach(element=>{
+      if(this.pieChartLabels.includes(element.name))
+      {
+        i = this.pieChartLabels.indexOf(element.name);
+        this.pieChartData[i]+=element.quantity;
+      }
+      else{
+        this.pieChartLabels.push(element.name);
+        this.pieChartData.push(element.quantity);
+      }
+  
+ 
+    })
+ }
   onChange(){
 
     if(this.data != null && this.processingDone){
     
       this.clearCache();
       this.dateFiltering();
-      
+      this.produtosComprados.forEach(el=>{
+        el.quantity=0;
+        el.total=0;
+      });
+      this.categories.forEach(cat=>{
+        cat.quantity=0;
+        cat.total=0;
+      });
+      this.povoarProdutos();
       this.rentableClients();
       this.calcTotal();
-      this.categorySales();
       this.salesPerRegion();
       this.salesTendency();
       this.salesDistribution();
+      this.putInCategory();
+      this.categorySales();
     }
   }
   clearCache(){
     this.totalSaleValue = 0;
+    this.produtosComprados=[];
     this.lineChartData = [
       { data: [], label: 'Series A' }
     ];
@@ -135,14 +240,25 @@ export class VendasComponent extends ApiInteraction implements OnInit {
         sale.category = element.documentTypeDescription;
         sale.area = element.loadingCityName;
         sale.date = element.documentDate;
+        var product = new Product();
+        element.documentLines.forEach(item=>{
+          var compra = new Compra();
+          compra.product= new Product();
+          compra.product.category="none";
+          compra.product.name=item.salesItem;
+          compra.quantity=item.quantity;
+          compra.unitprice= item.unitPrice.amount;
+          sale.itens.push(compra);
+
+        });
         this.sales.push(sale);
         
         
       });
+      console.log(this.sales);
       this.allSales = this.sales;
       this.rentableClients();
       this.calcTotal();
-      this.categorySales();
       this.salesPerRegion();
       this.salesTendency();
       this.salesDistribution();
@@ -227,7 +343,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
     })
   }
 
-  categorySales(){
+  categoryType(){
     var i;
    
     this.sales.forEach(element=>{

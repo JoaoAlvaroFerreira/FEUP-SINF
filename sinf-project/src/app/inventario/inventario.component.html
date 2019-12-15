@@ -1,3 +1,4 @@
+<app-navegacao></app-navegacao>
 <div class="col-12">
         <div class="row d-flex flex-row justify-content-between align-items-end">
                 <h3 class="mt-4">Inventário</h3>
@@ -34,17 +35,17 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-3 mb-2">
+        <!--<div class="col-sm-6 col-md-3 mb-2">
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Renovação do Inventário</div>
                     <div class="value-card d-flex flew-row align-items-center">
                         <div class="updown green"><i class="fas fa-arrow-up"></i></div>
-                        <div class="value">100 dias</div>
+                        <div class="value">tirar? dias</div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 
     <div class="row mt-3">
@@ -56,7 +57,18 @@
                 </div>
             </div>
         </div>
+     
         <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="cardTitle"> Inventário por Categoria</div>
+                    <app-grafico-bolo [pieChartData]="pieChartData" [pieChartLabels]="pieChartLabels" [legend]="legendBar"></app-grafico-bolo>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+          <div class="col-sm-12 col-md-12">
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle"> Stock mínimo atingido</div>
@@ -92,16 +104,6 @@
                             <td>{{lowStockItems[3].minStock}}</td>
                         </tr>
                     </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-sm-12 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="cardTitle"> Inventário por Categoria</div>
-                    <app-grafico-bolo [pieChartData]="pieChartData" [pieChartLabels]="pieChartLabels" [legend]="legendBar"></app-grafico-bolo>
                 </div>
             </div>
         </div>

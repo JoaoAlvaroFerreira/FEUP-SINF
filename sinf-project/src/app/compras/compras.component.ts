@@ -279,7 +279,7 @@ putcategories(){
     
       });
       this.purchases.push(purchase);
-    console.log(this.purchases);
+   // console.log(this.purchases);
       
     });
     this.allPurchases = this.purchases;

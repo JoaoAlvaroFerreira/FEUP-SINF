@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 //Testing
 import {Customer, Product, Venda, Invoice } from './model/client_model';
 import {Account, Customer2, Address, Supplier, Tax, Ledger, CreditLine, DebitLine, Journal, Transaction} from './model/financial_model';
+import {Demonstracao} from './model/demonstracao_model';
 import { find } from 'rxjs/operators';
 
 
@@ -64,13 +65,14 @@ export class AppComponent {
             trim: true,  
             explicitArray: true  
           });  
-      parser.parseString(data, function (err, result) {  
-
+          
         var accounts_array = new Array<Account>();
         var customers_array = new Array<Customer2>();
         var supplier_array = new Array<Supplier>();
         var taxes_array = new Array<Tax>();
         var ledger = new Ledger();
+
+      parser.parseString(data, function (err, result) {  
 
         var obj = result.AuditFile;  
         var accountsxml = obj.MasterFiles[0].GeneralLedgerAccounts[0].Account;
@@ -85,6 +87,8 @@ export class AppComponent {
           temp.closingDebitBalance = element.ClosingDebitBalance[0];
           temp.closingCreditBalance = element.ClosingCreditBalance[0];
           temp.groupingCategory = element.GroupingCategory[0];
+          if(element.TaxonomyCode != null)
+            temp.taxonomyCode = element.TaxonomyCode[0];
           accounts_array.push(temp);
         });
         console.log(accounts_array);
@@ -238,6 +242,7 @@ export class AppComponent {
           ledger.journals = journals_array;
           console.log(ledger);
       })
+      this.calculateFinancial_AKA_Allthework(accounts_array, customers_array, supplier_array, taxes_array, ledger);
     });
   }
 
@@ -320,4 +325,204 @@ export class AppComponent {
       });
     });  
   }  
+
+  calculateFinancial_AKA_Allthework(accounts: Array<Account>,  customers_array:Array<Customer2> , suppliers:Array<Supplier>, taxes_array:Array<Tax>,
+ledger:Ledger){
+      let portantos = new Map<number, number>();
+      ledger.journals.forEach(journal => { //journals
+        journal.transactions.forEach(transaction => { //transactions
+          transaction.creditLines.forEach(creditLine => {
+            var temp = creditLine.accountID;
+            accounts.forEach(account => {//para todas as contas
+              if(account.accountID == temp){
+                if(portantos.get(account.taxonomyCode) != null){
+                  portantos.set(account.taxonomyCode, Number(portantos.get(account.taxonomyCode) + Number(creditLine.creditAmount)));
+                }
+                  else{
+                    portantos.set(account.taxonomyCode, Number(creditLine.creditAmount));
+                  } 
+            }
+            });
+          });
+
+          transaction.debitLines.forEach(debitLine => {
+            var temp = debitLine.accountID;
+            accounts.forEach(account => {//para todas as contas
+              if(account.accountID == temp){
+              if(portantos.get(account.taxonomyCode) != null){
+                portantos.set(account.taxonomyCode, Number(portantos.get(account.taxonomyCode) - Number(debitLine.debitAmount)));
+              }
+                else{
+                  portantos.set(account.taxonomyCode, -Number(debitLine.debitAmount));
+                }
+            }
+            });
+          });
+
+        });
+      });
+      console.log(portantos);
+      this.doDemonstracao(portantos);
+  }
+
+  doDemonstracao(portantos: Map<number, number>){
+    let demonstracao = new Demonstracao();
+    
+    //ATIVO CORRENTE
+    demonstracao.ativos_ﬁxos_tangiveis = 
+    + Number(portantos.get(268))    
+    + Number(portantos.get(269))
+    + Number(portantos.get(270))
+    + Number(portantos.get(271))
+    + Number(portantos.get(272))
+    + Number(portantos.get(273))
+    + Number(portantos.get(274))
+    - Number(portantos.get(275))
+    - Number(portantos.get(276))
+    - Number(portantos.get(277))
+    - Number(portantos.get(278))
+    - Number(portantos.get(279))
+    - Number(portantos.get(280))
+    - Number(portantos.get(281))
+    - Number(portantos.get(282))
+    - Number(portantos.get(283))
+    - Number(portantos.get(284))
+    - Number(portantos.get(285))
+    - Number(portantos.get(286))
+    - Number(portantos.get(287))
+    - Number(portantos.get(288))
+    + Number(portantos.get(306))
+    + Number(portantos.get(310))
+    - Number(portantos.get(314))
+    - Number(portantos.get(318));
+
+
+    demonstracao.propriedades_de_investimento = 
+    + Number(portantos.get(259))    
+    + Number(portantos.get(260))
+    + Number(portantos.get(261))
+    - Number(portantos.get(262))
+    - Number(portantos.get(263))
+    - Number(portantos.get(264))
+    - Number(portantos.get(265))
+    - Number(portantos.get(266))
+    - Number(portantos.get(267))
+    + Number(portantos.get(305))
+    + Number(portantos.get(309))
+    - Number(portantos.get(313))
+    - Number(portantos.get(317));
+
+    demonstracao.goodwill = 
+    + Number(portantos.get(217))    
+    + Number(portantos.get(222))
+    + Number(portantos.get(227))
+    - Number(portantos.get(236))
+    - Number(portantos.get(237))
+    - Number(portantos.get(238))
+    - Number(portantos.get(240))
+    - Number(portantos.get(245))
+    - Number(portantos.get(250))
+    + Number(portantos.get(289))
+    - Number(portantos.get(294))
+    - Number(portantos.get(299));
+
+
+    demonstracao.ativos_intangiveis = 
+    + Number(portantos.get(290))    
+    + Number(portantos.get(291))
+    + Number(portantos.get(292))
+    + Number(portantos.get(293))
+    - Number(portantos.get(295))
+    - Number(portantos.get(296))
+    - Number(portantos.get(297))
+    - Number(portantos.get(298))
+    - Number(portantos.get(300))
+    - Number(portantos.get(301))
+    - Number(portantos.get(302))
+    - Number(portantos.get(303))
+    + Number(portantos.get(307))
+    + Number(portantos.get(311))
+    - Number(portantos.get(315))
+    - Number(portantos.get(319));
+
+    demonstracao.ativos_biologicos = 
+    + Number(portantos.get(197))    
+    + Number(portantos.get(198))
+    - Number(portantos.get(200))
+    - Number(portantos.get(202))
+    + Number(portantos.get(215));
+
+    demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial = 
+    + Number(portantos.get(216))    
+    + Number(portantos.get(221))
+    + Number(portantos.get(226))
+    - Number(portantos.get(239))
+    - Number(portantos.get(244))
+    - Number(portantos.get(249));
+
+    demonstracao.outros_investimentos_ﬁnanceiros = 
+    + Number(portantos.get(218))    
+    + Number(portantos.get(219))
+    + Number(portantos.get(220))
+    + Number(portantos.get(223))
+    + Number(portantos.get(224))
+    + Number(portantos.get(225))
+    + Number(portantos.get(228))
+    + Number(portantos.get(229))
+    + Number(portantos.get(230))
+    + Number(portantos.get(231))
+    + Number(portantos.get(232))
+    + Number(portantos.get(233))
+    + Number(portantos.get(234))
+    + Number(portantos.get(235))
+    - Number(portantos.get(241))
+    - Number(portantos.get(242))
+    - Number(portantos.get(243))
+    - Number(portantos.get(246))
+    - Number(portantos.get(247))
+    - Number(portantos.get(248))
+    - Number(portantos.get(251))
+    - Number(portantos.get(252))
+    - Number(portantos.get(253))
+    - Number(portantos.get(254))
+    - Number(portantos.get(255))
+    - Number(portantos.get(257))
+    - Number(portantos.get(258))
+    + Number(portantos.get(304))
+    + Number(portantos.get(308))
+    - Number(portantos.get(312))
+    - Number(portantos.get(316));
+
+
+    demonstracao.creditos_a_receber = 
+    + Number(portantos.get(62))    
+    + Number(portantos.get(64))
+    - Number(portantos.get(68))
+    - Number(portantos.get(70))
+    + Number(portantos.get(112))
+    + Number(portantos.get(114))
+    - Number(portantos.get(121))
+    - Number(portantos.get(123))
+    + Number(portantos.get(125))
+    + Number(portantos.get(127))
+    + Number(portantos.get(129))
+    + Number(portantos.get(139))
+    - Number(portantos.get(141))
+    - Number(portantos.get(145));
+
+    /*
+    ativos_ﬁxos_tangiveis: number;
+    propriedades_de_investimento: number;
+    goodwill : number;
+    ativos_intangiveis : number;
+    ativos_biologicos : number;
+    participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial: number;
+    outros_investimentos_ﬁnanceiros: number;
+    creditos_a_receber : number;
+    ativos_por_impostos_diferidos : number;
+    investimentos_ﬁnanceiros: number;
+    creditos_e_outros_ativos_nao_correntes : number;
+    */
+  }
+
 }  

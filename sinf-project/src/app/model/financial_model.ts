@@ -7,6 +7,7 @@ export class Account{
     closingDebitBalance: number;
     closingCreditBalance: number;
     groupingCategory: string;
+    taxonomyCode: number;
 }
 
 export class Customer2{

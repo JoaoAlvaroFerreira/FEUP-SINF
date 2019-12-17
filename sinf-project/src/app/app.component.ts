@@ -18,8 +18,8 @@ export class AppComponent {
   title = '360º Company Dashboard';
   public xmlItems: any;
   constructor(private _http: HttpClient) {
-    //this.loadXML();
-    //this.loadXMLfinancial();
+    this.loadXML();
+    this.loadXMLfinancial();
   }
   loadXML() {
     this._http.get('/assets/saft.xml',
@@ -71,6 +71,7 @@ export class AppComponent {
       var supplier_array = new Array<Supplier>();
       var taxes_array = new Array<Tax>();
       var ledger = new Ledger();
+      var accountmap = new Map<number, Account>();
 
       parser.parseString(data, function (err, result) {
 
@@ -89,6 +90,7 @@ export class AppComponent {
           temp.groupingCategory = element.GroupingCategory[0];
           if (element.TaxonomyCode != null)
             temp.taxonomyCode = element.TaxonomyCode[0];
+          accountmap.set(Number(temp.accountID), temp);
           accounts_array.push(temp);
         });
         console.log(accounts_array);
@@ -242,7 +244,7 @@ export class AppComponent {
         ledger.journals = journals_array;
         console.log(ledger);
       })
-      this.calculateFinancial_AKA_Allthework(accounts_array, customers_array, supplier_array, taxes_array, ledger);
+      this.calculateFinancial_AKA_Allthework(accounts_array, customers_array, supplier_array, taxes_array, ledger, accountmap);
     });
   }
 
@@ -327,36 +329,30 @@ export class AppComponent {
   }
 
   calculateFinancial_AKA_Allthework(accounts: Array<Account>, customers_array: Array<Customer2>, suppliers: Array<Supplier>, taxes_array: Array<Tax>,
-    ledger: Ledger) {
+    ledger: Ledger, accountmap: Map<number, Account>)  {
     let portantos = new Map<number, number>();
     ledger.journals.forEach(journal => { //journals
       journal.transactions.forEach(transaction => { //transactions
         transaction.creditLines.forEach(creditLine => {
           var temp = creditLine.accountID;
-          accounts.forEach(account => {//para todas as contas
-            if (account.accountID == temp) {
+          var account = accountmap.get(Number(temp));
               if (portantos.get(account.taxonomyCode) != null) {
                 portantos.set(Number(account.taxonomyCode), Number(portantos.get(account.taxonomyCode)) + Number(creditLine.creditAmount));
               }
               else {
                 portantos.set(Number(account.taxonomyCode), Number(creditLine.creditAmount));
               }
-            }
-          });
         });
 
         transaction.debitLines.forEach(debitLine => {
-          var temp = debitLine.accountID;
-          accounts.forEach(account => {//para todas as contas
-            if (account.accountID == temp) {
+          var temp = debitLine.accountID
+          var account = accountmap.get(Number(temp));
               if (portantos.get(account.taxonomyCode) != null) {
                 portantos.set(Number(account.taxonomyCode), Number(portantos.get(account.taxonomyCode)) - Number(debitLine.debitAmount));
               }
               else {
                 portantos.set(Number(account.taxonomyCode), -Number(debitLine.debitAmount));
               }
-            }
-          });
         });
 
       });
@@ -366,7 +362,7 @@ export class AppComponent {
   }
 
   doDemonstracao(portantos: Map<number, number>) {
-    console.log("ENTROU");
+    console.log("ENTROUput");
     let demonstracao = new Demonstracao();
     for (let index = 0; index < 648; index++) {
       if(portantos.get(index) == null){
@@ -823,19 +819,30 @@ export class AppComponent {
 
       var ativoNaoCorrente = 
       Number(demonstracao.ativos_ﬁxos_tangiveis) +
-      Number(demonstracao.propriedades_de_investimento);
-      Number(demonstracao.goodwill);
-      /*Number(demonstracao.ativos_intangiveis) +
-      Number(demonstracao.ativos_biologicos);
+      Number(demonstracao.propriedades_de_investimento)+
+      Number(demonstracao.goodwill)+
+      Number(demonstracao.ativos_intangiveis) +
+      Number(demonstracao.ativos_biologicos)+
       Number(demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial) +
       //demonstracao.outros_investimentos_ﬁnanceiros +
       Number(demonstracao.creditos_a_receber) +
       Number(demonstracao.ativos_por_impostos_diferidos) +
       Number(demonstracao.investimentos_ﬁnanceiros) +
-      Number(demonstracao.creditos_e_outros_ativos_nao_correntes);*/
+      Number(demonstracao.creditos_e_outros_ativos_nao_correntes);
 
       var ativo = Number(ativoNaoCorrente) + Number(ativoNaoCorrente);
-
+      console.log("JAS");
+      console.log(demonstracao.ativos_ﬁxos_tangiveis);
+      console.log(demonstracao.propriedades_de_investimento);
+      console.log(demonstracao.goodwill);
+      console.log(demonstracao.ativos_intangiveis);
+      console.log(demonstracao.ativos_biologicos);
+      console.log(demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial);
+      //demonstracao.outros_investimentos_ﬁnanceiros +
+      console.log(demonstracao.creditos_a_receber);
+      console.log(demonstracao.ativos_por_impostos_diferidos);
+      console.log(demonstracao.investimentos_ﬁnanceiros);
+      console.log(demonstracao.creditos_e_outros_ativos_nao_correntes);
       console.log(ativoNaoCorrente);
 
   }

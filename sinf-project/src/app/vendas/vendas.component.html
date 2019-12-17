@@ -58,10 +58,10 @@
             </div>
 
         </div>
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-6" *ngIf="username == 'Manager'">
             <div class="card">
                 <div class="card-body">
-                    <div class="cardTitle"> Vendas por Região</div>
+                    <div class="cardTitle" > Vendas por Região</div>
                     <app-grafico-barras [dataSets]="barChartData" [labels]="barChartLabels" [legend]="legendBar"></app-grafico-barras>
                 </div>
             </div>
@@ -77,10 +77,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-4" *ngIf="username == 'CEO'">
             <div class="card">
                 <div class="card-body">
-                    <div class="cardTitle"> Clientes mais Rentáveis</div>
+                    <div class="cardTitle" > Clientes mais Rentáveis</div>
                     <table class="table table-bordered table-hover genTable">
                         <tr *ngIf="costumers != null">
                             <th>Rank</th>
@@ -119,20 +119,20 @@
                             <th>Cliente</th>
                             <th>Quantidade</th>
                         </tr>
-                        <tr *ngIf="customerDistribution[0] != null">
+                        <tr *ngIf="produtosCompradosDist[0] != null">
                             <td>1</td>
-                            <td>{{customerDistribution[0].name}}</td>
-                            <td>{{customerDistribution[0].purchases_made}}</td>
+                            <td>{{produtosCompradosDist[0].product.name}}</td>
+                            <td>{{produtosCompradosDist[0].quantity}}</td>
                         </tr>
-                        <tr *ngIf="customerDistribution[1] != null">
+                        <tr *ngIf="produtosCompradosDist[1] != null">
                             <td>2</td>
-                            <td>{{customerDistribution[1].name}}</td>
-                            <td>{{customerDistribution[1].purchases_made}}</td>
+                            <td>{{produtosCompradosDist[1].product.name}}</td>
+                            <td>{{produtosCompradosDist[2].quantity}}</td>
                         </tr>
-                        <tr *ngIf="customerDistribution[2] != null">
+                        <tr *ngIf="produtosCompradosDist[2] != null">
                             <td>3</td>
-                            <td>{{customerDistribution[2].name}}</td>
-                            <td>{{customerDistribution[2].purchases_made}}</td>
+                            <td>{{produtosCompradosDist[2].product.name}}</td>
+                            <td>{{produtosCompradosDist[2].quantity}}</td>
                         </tr>
                     </table>
                 </div>

@@ -12,7 +12,9 @@ export const environment = {
   client_id: "industria200",
   client_secret: "4a8aa9fc-4b3c-4465-86cd-4ace8671f063",
   grant_type: 'client_credentials',
-  scope: 'application'
+  scope: 'application',
+  username: '',
+  password: '',
 
 };
 

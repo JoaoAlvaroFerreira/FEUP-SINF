@@ -4,6 +4,7 @@ import { Label } from 'ng2-charts';
 import { ApiInteraction } from 'src/app/api/apiInteractions.component'
 import { ApiService } from '../api/api.service';
 import { Customer,Sale,Category,Product, Compra,ProdutosComprados } from './../model/client_model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-vendas',
@@ -18,11 +19,13 @@ export class VendasComponent extends ApiInteraction implements OnInit {
   private totalSaleValue: number = 0;
   private categories: Array<Category> =[];
   private produtosComprados: Array<ProdutosComprados> =[];
+  private produtosCompradosDist: Array<ProdutosComprados> = [];
   private customerDistribution: Array<Customer> = [];
 
   private selectedYear;
   private selectedMonth;
 
+  private username;
   
   public processingDone: boolean = false;
   public processingItens: boolean = false;
@@ -55,7 +58,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
   ngOnInit() {
     
     this.getRequest();
-    
+    this.username = environment.username;
   }
 
   ngDoCheck() {
@@ -267,11 +270,24 @@ export class VendasComponent extends ApiInteraction implements OnInit {
       
   }
   salesDistribution() {
-   
+    this.produtosCompradosDist = this.produtosComprados;
+    this.produtosCompradosDist.sort((a,b)=>{if(a.quantity < b.quantity) return 1; else return 0;});
+    this.produtosComprados.forEach(element => {
+      console.log("NAME"+element.product.name);
+      console.log("QUANTITY"+element.quantity);
+    });
+   /* var found = false;
+    for(var i = 0; i < this.produtosComprados.length; i++){
+      for(var j = 0; j < this.produtosCompradosDist.length; j++){
+        if(this.produtosComprados[i].product.name)
+      }
+      found = false;
+    }
+    
     if(this.customers != null){
       this.customerDistribution = this.customers;
       this.customerDistribution.sort((a,b)=>{if(a.purchases_made<b.purchases_made) return 1; else return -1;});
-    }
+    }*/
   }
 
   rentableClients() {
@@ -342,6 +358,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
     this.sales.forEach(element=>{
       this.totalSaleValue += element.amount;
     })
+    Math.trunc(this.totalSaleValue);
   }
 
   categoryType(){

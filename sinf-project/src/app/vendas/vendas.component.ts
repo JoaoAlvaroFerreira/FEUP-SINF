@@ -234,6 +234,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
   processData(){
 
       this.data.forEach(element => {
+        console.log(element);
         var sale = new Sale();
         sale.amount = element.payableAmount.amount;
         sale.client_name = element.buyerCustomerPartyName

@@ -160,6 +160,7 @@ export class VisaoGeralComponent extends ApiInteraction implements OnInit {
     this.sales.forEach(element=>{
       this.totalSaleValue += element.amount;
     })
+   
   }
 
   calcTotalPurchases(){

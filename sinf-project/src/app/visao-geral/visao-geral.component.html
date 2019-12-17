@@ -86,7 +86,29 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="cardTitle"> Distribuição de Vendas de Produtos</div>
-                    <app-grafico-bolo></app-grafico-bolo>
+                    <table class="table table-bordered table-hover genTable">
+                       
+                        <tr *ngIf="produtosCompradosDist.empty">
+                            <th>Rank</th>
+                            <th>Cliente</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tr *ngIf="produtosCompradosDist[0] != null">
+                            <td>1</td>
+                            <td>{{produtosCompradosDist[0].product.name}}</td>
+                            <td>{{produtosCompradosDist[0].quantity}}</td>
+                        </tr>
+                        <tr *ngIf="produtosCompradosDist[1] != null">
+                            <td>2</td>
+                            <td>{{produtosCompradosDist[1].product.name}}</td>
+                            <td>{{produtosCompradosDist[2].quantity}}</td>
+                        </tr>
+                        <tr *ngIf="produtosCompradosDist[2] != null">
+                            <td>3</td>
+                            <td>{{produtosCompradosDist[2].product.name}}</td>
+                            <td>{{produtosCompradosDist[2].quantity}}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

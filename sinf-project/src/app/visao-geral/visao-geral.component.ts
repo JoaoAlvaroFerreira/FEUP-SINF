@@ -30,6 +30,9 @@ export class VisaoGeralComponent extends ApiInteraction implements OnInit {
     private totalSaleValue: number=0;
     private valorTotalCompras: number=0;
     private totalInventaryValue: number=0;
+    
+    private produtosComprados: Array<ProdutosComprados> =[];
+    private produtosCompradosDist: Array<ProdutosComprados> = [];
     private username;
     private password;
     
@@ -45,6 +48,7 @@ export class VisaoGeralComponent extends ApiInteraction implements OnInit {
   ngDoCheck(){
     if(this.data != null && !this.processingSales){
       this.processSales();
+      this.povoarProdutos();
       this.calcTotal();
       this.salesTendency();
       this.resetData();
@@ -54,6 +58,7 @@ export class VisaoGeralComponent extends ApiInteraction implements OnInit {
     } 
     if(this.data != null && this.processingSales && !this.processingPurchases){
         this.processPurchases();
+        this.processItens();
         this.calcTotalPurchases();
         this.resetData();
         this.setbody('/materialscore/materialsitems')
@@ -64,6 +69,8 @@ export class VisaoGeralComponent extends ApiInteraction implements OnInit {
     if(this.data != null && this.processingSales && this.processingPurchases && !this.processingInventory){
       this.processInventory();
       this.calcTotalInventory();
+    
+      this.salesDistribution();
       //this.resetData();
      // this.setbody('/purchases/orders')
       //this.getRequest();
@@ -80,19 +87,80 @@ export class VisaoGeralComponent extends ApiInteraction implements OnInit {
   }
 
   processSales(){
-    this.data.forEach(element => {
-      var sale = new Sale();
-      sale.amount = element.payableAmount.amount;
-      sale.client_name = element.buyerCustomerPartyName
-      sale.category = element.documentTypeDescription;
-      sale.area = element.loadingCityName;
-      sale.date = element.documentDate;
-      this.sales.push(sale);
-      
-      
-    });
     
 
+      this.data.forEach(element => {
+        console.log(element);
+        var sale = new Sale();
+        sale.amount = element.payableAmount.amount;
+        sale.client_name = element.buyerCustomerPartyName
+        sale.category = element.documentTypeDescription;
+        sale.area = element.loadingCityName;
+        sale.date = element.documentDate;
+        var product = new Product();
+        element.documentLines.forEach(item=>{
+          var compra = new Compra();
+          compra.product= new Product();
+          compra.product.category="none";
+          compra.product.name=item.salesItem;
+          compra.quantity=item.quantity;
+          compra.unitprice= item.unitPrice.amount;
+          sale.itens.push(compra);
+
+        });
+        this.sales.push(sale);
+        
+        
+      });
+       }
+
+  povoarProdutos(){
+    console.log("THIS SALES"+this.sales);
+    this.sales.forEach(element=>{
+      var exist=false;
+      element.itens.forEach(el=>{
+
+        this.produtosComprados.forEach(ele=>{
+           if (el.product.name== ele.product.name) {
+            ele.total += el.unitprice*el.quantity;
+            ele.quantity+=el.quantity;
+            exist=true;
+        }
+        });
+        var p= new ProdutosComprados();
+        if (!exist) {
+          p.product= new Product();
+          p.product=el.product;
+          p.quantity= el.quantity;
+          p.total= el.quantity*el.unitprice;
+          this.produtosComprados.push(p);
+        }
+        exist=false;
+      });
+      
+
+    });
+
+    this.produtosComprados.sort((a,b)=>{if(a.quantity<b.quantity)return 1; else return -1;});
+    
+    console.log("THIS PRODUTO COMPRADO"+this.produtosComprados[0].product.name);
+  }
+  processItens(){
+    this.produtosComprados.forEach(element=>{
+      this.data.forEach(el=>{
+      if(element.product.name == el.itemKey){
+        element.category=el.assortment;
+        element.product.category=el.assortment;
+      }
+  });
+  });
+}
+
+  salesDistribution() {
+    console.log("NOME DO GAJO"+this.produtosComprados[0].product.name);
+    this.produtosCompradosDist = this.produtosComprados;
+    this.produtosCompradosDist.sort((a,b)=>{if(a.quantity < b.quantity) return 1; else return 0;});
+    console.log("NOME DO GAJO DOIS"+this.produtosCompradosDist[0].product.name);
   }
 
   processPurchases(){

@@ -98,6 +98,7 @@ export class FinanceiroComponent implements OnInit {
       var supplier_array = new Array<Supplier>();
       var taxes_array = new Array<Tax>();
       var ledger = new Ledger();
+      var accountmap = new Map<number, Account>();
 
       parser.parseString(data, function (err, result) {
 
@@ -116,6 +117,7 @@ export class FinanceiroComponent implements OnInit {
           temp.groupingCategory = element.GroupingCategory[0];
           if (element.TaxonomyCode != null)
             temp.taxonomyCode = element.TaxonomyCode[0];
+          accountmap.set(Number(temp.accountID), temp);
           accounts_array.push(temp);
         });
         console.log(accounts_array);
@@ -269,7 +271,7 @@ export class FinanceiroComponent implements OnInit {
         ledger.journals = journals_array;
         console.log(ledger);
       })
-      this.calculateFinancial_AKA_Allthework(accounts_array, customers_array, supplier_array, taxes_array, ledger);
+      this.calculateFinancial_AKA_Allthework(accounts_array, customers_array, supplier_array, taxes_array, ledger, accountmap);
     });
   }
 
@@ -354,36 +356,30 @@ export class FinanceiroComponent implements OnInit {
   }
 
   calculateFinancial_AKA_Allthework(accounts: Array<Account>, customers_array: Array<Customer2>, suppliers: Array<Supplier>, taxes_array: Array<Tax>,
-    ledger: Ledger) {
+    ledger: Ledger, accountmap: Map<number, Account>)  {
     let portantos = new Map<number, number>();
     ledger.journals.forEach(journal => { //journals
       journal.transactions.forEach(transaction => { //transactions
         transaction.creditLines.forEach(creditLine => {
           var temp = creditLine.accountID;
-          accounts.forEach(account => {//para todas as contas
-            if (account.accountID == temp) {
+          var account = accountmap.get(Number(temp));
               if (portantos.get(account.taxonomyCode) != null) {
                 portantos.set(Number(account.taxonomyCode), Number(portantos.get(account.taxonomyCode)) + Number(creditLine.creditAmount));
               }
               else {
                 portantos.set(Number(account.taxonomyCode), Number(creditLine.creditAmount));
               }
-            }
-          });
         });
 
         transaction.debitLines.forEach(debitLine => {
-          var temp = debitLine.accountID;
-          accounts.forEach(account => {//para todas as contas
-            if (account.accountID == temp) {
+          var temp = debitLine.accountID
+          var account = accountmap.get(Number(temp));
               if (portantos.get(account.taxonomyCode) != null) {
                 portantos.set(Number(account.taxonomyCode), Number(portantos.get(account.taxonomyCode)) - Number(debitLine.debitAmount));
               }
               else {
                 portantos.set(Number(account.taxonomyCode), -Number(debitLine.debitAmount));
               }
-            }
-          });
         });
 
       });
@@ -393,8 +389,7 @@ export class FinanceiroComponent implements OnInit {
   }
 
   doDemonstracao(portantos: Map<number, number>) {
-    console.log("ENTROU");
-  
+    let demonstracao = new Demonstracao();
     for (let index = 0; index < 648; index++) {
       if(portantos.get(index) == null){
         portantos.set(index, 0);
@@ -402,8 +397,8 @@ export class FinanceiroComponent implements OnInit {
     }
     console.log(portantos);
 
-    //ATIVO CORRENTE
-    this.demonstracao.ativos_ﬁxos_tangiveis =
+    //ATIVO NAO CORRENTE
+    demonstracao.ativos_ﬁxos_tangiveis =
       + Number(portantos.get(268))
       + Number(portantos.get(269))
       + Number(portantos.get(270))
@@ -429,11 +424,37 @@ export class FinanceiroComponent implements OnInit {
       + Number(portantos.get(310))
       - Number(portantos.get(314))
       - Number(portantos.get(318));
+/*
+      console.log(Number(portantos.get(268)));
+      console.log( Number(portantos.get(269)));
+      console.log( Number(portantos.get(270)));
+      console.log( Number(portantos.get(271)));
+      console.log( Number(portantos.get(272)));
+      console.log( Number(portantos.get(273)));
+      console.log( Number(portantos.get(274)));
+      console.log( Number(portantos.get(275)));
+      console.log( Number(portantos.get(276)));
+      console.log( Number(portantos.get(277)));
+      console.log( Number(portantos.get(278)));
+      console.log( Number(portantos.get(279)));
+      console.log( Number(portantos.get(280)));
+      console.log( Number(portantos.get(281)));
+      console.log( Number(portantos.get(282)));
+      console.log( Number(portantos.get(283)));
+      console.log( Number(portantos.get(284)));
+      console.log( Number(portantos.get(285)));
+      console.log( Number(portantos.get(286)));
+      console.log( Number(portantos.get(287)));
+      console.log( Number(portantos.get(288)));
+      console.log( Number(portantos.get(306)));
+      console.log( Number(portantos.get(310)));
+      console.log( Number(portantos.get(314)));
+      console.log( Number(portantos.get(318)));
 
-      console.log(this.demonstracao.ativos_ﬁxos_tangiveis);
+      console.log(demonstracao.ativos_ﬁxos_tangiveis);*/
 
 
-    this.demonstracao.propriedades_de_investimento =
+    demonstracao.propriedades_de_investimento =
       + Number(portantos.get(259))
       + Number(portantos.get(260))
       + Number(portantos.get(261))
@@ -448,7 +469,7 @@ export class FinanceiroComponent implements OnInit {
       - Number(portantos.get(313))
       - Number(portantos.get(317));
 
-    this.demonstracao.goodwill =
+    demonstracao.goodwill =
       + Number(portantos.get(217))
       + Number(portantos.get(222))
       + Number(portantos.get(227))
@@ -463,7 +484,7 @@ export class FinanceiroComponent implements OnInit {
       - Number(portantos.get(299));
 
 
-    this.demonstracao.ativos_intangiveis =
+    demonstracao.ativos_intangiveis =
       + Number(portantos.get(290))
       + Number(portantos.get(291))
       + Number(portantos.get(292))
@@ -481,14 +502,14 @@ export class FinanceiroComponent implements OnInit {
       - Number(portantos.get(315))
       - Number(portantos.get(319));
 
-    this.demonstracao.ativos_biologicos =
+    demonstracao.ativos_biologicos =
       + Number(portantos.get(197))
       + Number(portantos.get(198))
       - Number(portantos.get(200))
       - Number(portantos.get(202))
       + Number(portantos.get(215));
 
-    this.demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial =
+    demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial =
       + Number(portantos.get(216))
       + Number(portantos.get(221))
       + Number(portantos.get(226))
@@ -496,7 +517,7 @@ export class FinanceiroComponent implements OnInit {
       - Number(portantos.get(244))
       - Number(portantos.get(249));
 
-    this.demonstracao.outros_investimentos_ﬁnanceiros =
+    demonstracao.outros_investimentos_ﬁnanceiros =
       + Number(portantos.get(218))
       + Number(portantos.get(219))
       + Number(portantos.get(220))
@@ -530,7 +551,7 @@ export class FinanceiroComponent implements OnInit {
       - Number(portantos.get(316));
 
 
-    this.demonstracao.creditos_a_receber =
+    demonstracao.creditos_a_receber =
       + Number(portantos.get(62))
       + Number(portantos.get(64))
       - Number(portantos.get(68))
@@ -546,12 +567,12 @@ export class FinanceiroComponent implements OnInit {
       - Number(portantos.get(141))
       - Number(portantos.get(145));
 
-    this.demonstracao.ativos_por_impostos_diferidos =
+    demonstracao.ativos_por_impostos_diferidos =
       + Number(portantos.get(133))
       - Number(portantos.get(143));
 
-    //ATIVOS NAO CORRENTES
-    this.demonstracao.inventarios =
+    //ATIVOS CORRENTES
+    demonstracao.inventarios =
       + Number(portantos.get(165))
       + Number(portantos.get(166))
       - Number(portantos.get(167))
@@ -588,14 +609,14 @@ export class FinanceiroComponent implements OnInit {
       + Number(portantos.get(212))
       + Number(portantos.get(213));
 
-    this.demonstracao.ativos_biologicos =
+    demonstracao.ativos_biologicos_ativo_corrente =
       + Number(portantos.get(195))
       + Number(portantos.get(196))
       - Number(portantos.get(199))
       - Number(portantos.get(201))
       + Number(portantos.get(214));
 
-    this.demonstracao.clientes =
+    demonstracao.clientes =
       + Number(portantos.get(10))
       + Number(portantos.get(11))
       + Number(portantos.get(12))
@@ -623,7 +644,7 @@ export class FinanceiroComponent implements OnInit {
       - Number(portantos.get(35))
       - Number(portantos.get(36));
     
-      this.demonstracao.estado_e_outros_entes_publicos =
+      demonstracao.estado_e_outros_entes_publicos =
       + Number(portantos.get(71))
       + Number(portantos.get(73))
       + Number(portantos.get(74))
@@ -637,13 +658,13 @@ export class FinanceiroComponent implements OnInit {
       + Number(portantos.get(84))
       + Number(portantos.get(85));
 
-    this.demonstracao.capital_subscrito_e_nao_realizado =
+    demonstracao.capital_subscrito_e_nao_realizado =
       + Number(portantos.get(106))
       + Number(portantos.get(107))
       - Number(portantos.get(115))
       - Number(portantos.get(116));
 
-    this.demonstracao.outros_creditos_a_receber =
+    demonstracao.outros_creditos_a_receber =
       + Number(portantos.get(37))
       + Number(portantos.get(38))
       + Number(portantos.get(39))
@@ -687,17 +708,17 @@ export class FinanceiroComponent implements OnInit {
       - Number(portantos.get(142))
       - Number(portantos.get(144));
     
-      this.demonstracao.diferimentos =
+      demonstracao.diferimentos =
       + Number(portantos.get(146));
     
-      this.demonstracao.ativos_financeiros_detidos_para_negociacao =
+      demonstracao.ativos_financeiros_detidos_para_negociacao =
       + Number(portantos.get(4))
       + Number(portantos.get(6));
     
-      this.demonstracao.outros_ativos_financeiros =
+      demonstracao.outros_ativos_financeiros =
       + Number(portantos.get(8));
     
-      this.demonstracao.ativos_nao_correntes_detidos_para_venda =
+      demonstracao.ativos_nao_correntes_detidos_para_venda =
       + Number(portantos.get(320))
       + Number(portantos.get(321))
       + Number(portantos.get(322))
@@ -708,16 +729,16 @@ export class FinanceiroComponent implements OnInit {
       - Number(portantos.get(328))
       - Number(portantos.get(330));
    
-      this.demonstracao.caixa_e_depositos_bancarios =
+      demonstracao.caixa_e_depositos_bancarios =
       + Number(portantos.get(1))
       + Number(portantos.get(2))
       + Number(portantos.get(3));
 
 
 
-    //PASSIVO NAO CORRENTE
+    //PASSIVO CORRENTE
 
-    this.demonstracao.provisoes =
+    demonstracao.provisoes =
       + Number(portantos.get(148))
       + Number(portantos.get(149))
       + Number(portantos.get(150))
@@ -727,7 +748,7 @@ export class FinanceiroComponent implements OnInit {
       + Number(portantos.get(154))
       + Number(portantos.get(155));
 
-    this.demonstracao.financiamentos_obtidos =
+    demonstracao.financiamentos_obtidos =
       + Number(portantos.get(87))
       + Number(portantos.get(89))
       + Number(portantos.get(91))
@@ -738,13 +759,13 @@ export class FinanceiroComponent implements OnInit {
       + Number(portantos.get(103))
       + Number(portantos.get(105));
 
-    this.demonstracao.responsabilidades_por_beneficios_pos_emprego =
+    demonstracao.responsabilidades_por_beneficios_pos_emprego =
       + Number(portantos.get(132));
 
-    this.demonstracao.passivos_por_impostos_diferidos =
+    demonstracao.passivos_por_impostos_diferidos =
       + Number(portantos.get(134));
 
-    this.demonstracao.outras_dividas_a_pagar =
+    demonstracao.outras_dividas_a_pagar =
       + Number(portantos.get(58))
       + Number(portantos.get(60))
       + Number(portantos.get(64))
@@ -757,7 +778,7 @@ export class FinanceiroComponent implements OnInit {
 
     //PASSIVO CORRENTE
 
-    this.demonstracao.fornecedores =
+    demonstracao.fornecedores =
       + Number(portantos.get(37))
       + Number(portantos.get(38))
       + Number(portantos.get(39))
@@ -773,7 +794,7 @@ export class FinanceiroComponent implements OnInit {
       + Number(portantos.get(49))
       + Number(portantos.get(50));
 
-    this.demonstracao.adiantamentos_de_clientes =
+    demonstracao.adiantamentos_de_clientes =
       + Number(portantos.get(10))
       + Number(portantos.get(11))
       + Number(portantos.get(12))
@@ -791,7 +812,7 @@ export class FinanceiroComponent implements OnInit {
       + Number(portantos.get(137));
 
 
-    this.demonstracao.estado_e_outros_entes_publicos_passivo_corrente =
+    demonstracao.estado_e_outros_entes_publicos_passivo_corrente =
       + Number(portantos.get(71))
       + Number(portantos.get(72))
       + Number(portantos.get(75))
@@ -804,7 +825,7 @@ export class FinanceiroComponent implements OnInit {
       + Number(portantos.get(84))
       + Number(portantos.get(85));
 
-    this.demonstracao.financiamentos_obtidos_passivo_corrente =
+    demonstracao.financiamentos_obtidos_passivo_corrente =
       + Number(portantos.get(2))
       + Number(portantos.get(3))
       + Number(portantos.get(86))
@@ -818,7 +839,7 @@ export class FinanceiroComponent implements OnInit {
       + Number(portantos.get(102))
       + Number(portantos.get(104));
 
-    this.demonstracao.outras_dividas_a_pagar_passivo_corrente =
+    demonstracao.outras_dividas_a_pagar_passivo_corrente =
       + Number(portantos.get(53))
       + Number(portantos.get(54))
       + Number(portantos.get(57))
@@ -834,36 +855,73 @@ export class FinanceiroComponent implements OnInit {
       + Number(portantos.get(135))
       + Number(portantos.get(138));
 
-    this.demonstracao.diferimentos_passivo_corrente =
+    demonstracao.diferimentos_passivo_corrente =
       + Number(portantos.get(147));
 
 
-    this.demonstracao.passivos_financeiros_detidos_para_negociacao =
+    demonstracao.passivos_financeiros_detidos_para_negociacao =
       + Number(portantos.get(5))
       + Number(portantos.get(7));
 
-    this.demonstracao.outros_passivos_financeiros =
+    demonstracao.outros_passivos_financeiros =
       + Number(portantos.get(9));
 
-    this.demonstracao.passivos_nao_correntes_detidos_para_venda =
+    demonstracao.passivos_nao_correntes_detidos_para_venda =
       + Number(portantos.get(325));
 
       var ativoNaoCorrente = 
-      Number(this.demonstracao.ativos_ﬁxos_tangiveis) +
-      Number(this.demonstracao.propriedades_de_investimento);
-      Number(this.demonstracao.goodwill);
-      /*Number(this.demonstracao.ativos_intangiveis) +
-      Number(this.demonstracao.ativos_biologicos);
-      Number(this.demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial) +
-      //this.demonstracao.outros_investimentos_ﬁnanceiros +
-      Number(this.demonstracao.creditos_a_receber) +
-      Number(this.demonstracao.ativos_por_impostos_diferidos) +
-      Number(this.demonstracao.investimentos_ﬁnanceiros) +
-      Number(this.demonstracao.creditos_e_outros_ativos_nao_correntes);*/
+      Number(demonstracao.ativos_ﬁxos_tangiveis) +
+      Number(demonstracao.propriedades_de_investimento)+
+      Number(demonstracao.goodwill)+
+      Number(demonstracao.ativos_intangiveis) +
+      Number(demonstracao.ativos_biologicos)+
+      Number(demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial) +
+      Number(demonstracao.outros_investimentos_ﬁnanceiros) +
+      Number(demonstracao.creditos_a_receber) +
+      Number(demonstracao.ativos_por_impostos_diferidos);
+      //Number(demonstracao.investimentos_ﬁnanceiros) +
+      //Number(demonstracao.creditos_e_outros_ativos_nao_correntes);
 
-      var ativo = Number(ativoNaoCorrente) + Number(ativoNaoCorrente);
+      /*
+      console.log(Number(demonstracao.ativos_ﬁxos_tangiveis));
+      console.log(Number(demonstracao.propriedades_de_investimento));
+      console.log(Number(demonstracao.goodwill));
+      console.log(Number(demonstracao.ativos_intangiveis));
+      console.log(Number(demonstracao.ativos_biologicos));
+      console.log(Number(demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial));
+      console.log(Number(demonstracao.outros_investimentos_ﬁnanceiros));
+      console.log(Number(demonstracao.creditos_a_receber));
+      console.log(Number(demonstracao.ativos_por_impostos_diferidos));*/
 
-      console.log(ativoNaoCorrente);
+      var ativoCorrente = 
+      Number(demonstracao.inventarios) +
+      Number(demonstracao.ativos_biologicos_ativo_corrente)+
+      Number(demonstracao.clientes)+
+      Number(demonstracao.estado_e_outros_entes_publicos) +
+      Number(demonstracao.capital_subscrito_e_nao_realizado)+
+      Number(demonstracao.outros_creditos_a_receber) +
+      Number(demonstracao.diferimentos) +
+      Number(demonstracao.ativos_financeiros_detidos_para_negociacao) +
+      Number(demonstracao.outros_ativos_financeiros) +
+      Number(demonstracao.ativos_nao_correntes_detidos_para_venda) +
+      //Number(demonstracao.outros_ativos_correntes);
+      Number(demonstracao.caixa_e_depositos_bancarios);
+
+      var ativo = Number(ativoNaoCorrente) + Number(ativoCorrente);
+      /*
+      console.log("JAS");
+      console.log(demonstracao.ativos_ﬁxos_tangiveis);
+      console.log(demonstracao.propriedades_de_investimento);
+      console.log(demonstracao.goodwill);
+      console.log(demonstracao.ativos_intangiveis);
+      console.log(demonstracao.ativos_biologicos);
+      console.log(demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial);
+      console.log(demonstracao.outros_investimentos_ﬁnanceiros);
+      console.log(demonstracao.creditos_a_receber);
+      console.log(demonstracao.ativos_por_impostos_diferidos);*/
+      //console.log(demonstracao.investimentos_ﬁnanceiros);
+      //console.log(demonstracao.creditos_e_outros_ativos_nao_correntes);
+      console.log(ativo);
 
   }
 

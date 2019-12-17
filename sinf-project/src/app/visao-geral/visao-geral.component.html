@@ -4,23 +4,7 @@
 <div class="col-12">
         <div class="row d-flex flex-row justify-content-between align-items-end">
                 <h3 class="mt-4">Visão Geral</h3>
-                <div class="d-flex flex-row">
-                    <div class="ano mr-2">
-                        <select class="form-control" id="sel1">
-                            <option>2019</option>
-                            <option>2018</option>
-                            <option>2017</option>
-                        </select>
-                    </div>
-                    <div class="mes">
-                        <select class="form-control" id="sel1">
-                            <option>--</option>
-                            <option>Janeiro</option>
-                            <option>Fevereiro</option>
-                            <option>Março</option>
-                        </select>
-                    </div>
-                </div>
+                
             </div>
         </div>
         <hr>
@@ -31,7 +15,7 @@
                 <div class="card-body">
                     <div class="cardTitle"> Total de Vendas</div>
                     <div class="value-card d-flex flew-row align-items-center">
-                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                        <div class="updown green"></div>
                         <div class="value">{{totalSaleValue.toFixed(2)}} €</div>
                     </div>
                 </div>
@@ -42,7 +26,7 @@
                 <div class="card-body">
                     <div class="cardTitle"> Total de Compras</div>
                     <div class="value-card d-flex flew-row align-items-center">
-                        <div class="updown red"><i class="fas fa-arrow-up"></i></div>
+                        <div class="updown red"></div>
                         <div class="value">{{valorTotalCompras}}€</div>
                     </div>
                 </div>
@@ -53,7 +37,7 @@
                 <div class="card-body">
                     <div class="cardTitle"> Total Rendimento</div>
                     <div class="value-card d-flex flew-row align-items-center">
-                        <div class="updown red"><i class="fas fa-arrow-down"></i></div>
+                        <div class="updown green"></div>
                         <div class="value">63.254 €</div>
                     </div>
                 </div>
@@ -64,7 +48,7 @@
                 <div class="card-body">
                     <div class="cardTitle"> Total em Inventário</div>
                     <div class="value-card d-flex flew-row align-items-center">
-                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
+                        <div class="updown green"></div>
                         <div class="value">{{totalInventaryValue}} €</div>
                     </div>
                 </div>
@@ -86,7 +70,29 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="cardTitle"> Distribuição de Vendas de Produtos</div>
-                    <app-grafico-bolo></app-grafico-bolo>
+                    <table class="table table-bordered table-hover genTable">
+                       
+                        <tr *ngIf="produtosCompradosDist.empty">
+                            <th>Rank</th>
+                            <th>Cliente</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        <tr *ngIf="produtosCompradosDist[0] != null">
+                            <td>1</td>
+                            <td>{{produtosCompradosDist[0].product.name}}</td>
+                            <td>{{produtosCompradosDist[0].quantity}}</td>
+                        </tr>
+                        <tr *ngIf="produtosCompradosDist[1] != null">
+                            <td>2</td>
+                            <td>{{produtosCompradosDist[1].product.name}}</td>
+                            <td>{{produtosCompradosDist[2].quantity}}</td>
+                        </tr>
+                        <tr *ngIf="produtosCompradosDist[2] != null">
+                            <td>3</td>
+                            <td>{{produtosCompradosDist[2].product.name}}</td>
+                            <td>{{produtosCompradosDist[2].quantity}}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

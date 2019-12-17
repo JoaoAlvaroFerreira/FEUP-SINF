@@ -272,10 +272,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
   salesDistribution() {
     this.produtosCompradosDist = this.produtosComprados;
     this.produtosCompradosDist.sort((a,b)=>{if(a.quantity < b.quantity) return 1; else return 0;});
-    this.produtosComprados.forEach(element => {
-      console.log("NAME"+element.product.name);
-      console.log("QUANTITY"+element.quantity);
-    });
+   
    /* var found = false;
     for(var i = 0; i < this.produtosComprados.length; i++){
       for(var j = 0; j < this.produtosCompradosDist.length; j++){

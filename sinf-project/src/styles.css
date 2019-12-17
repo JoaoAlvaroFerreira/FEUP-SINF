@@ -121,3 +121,7 @@ h1 {
   .login-label{
     font-size: 0.8em;
   }
+
+  .marginCard {
+    margin-bottom: 2.0em !important;
+  }

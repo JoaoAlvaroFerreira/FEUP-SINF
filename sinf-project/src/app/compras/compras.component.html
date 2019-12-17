@@ -76,7 +76,7 @@
 
     <div class="row mt-3">
         <div class="col-sm-12 col-md-4" *ngIf="username == 'Manager'">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
                     <div class="cardTitle"> Compras por Categoria</div>
                     <app-grafico-bolo [pieChartData]="pieChartData" [pieChartLabels]="pieChartLabels" [legend]="legendBar"></app-grafico-bolo>
@@ -84,7 +84,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-4"  *ngIf="username == 'CEO'">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
                     <div class="cardTitle"> Vendedores mais Comuns</div>
                     <table class="table table-bordered table-hover genTable">
@@ -119,7 +119,7 @@
 
         </div>
         <div class="col-sm-12 col-md-4">
-            <div class="card">
+            <div class="card marginCard">
                 <div class="card-body">
                     <div class="cardTitle"> Produtos mais Comprados</div>
                     <table class="table table-bordered table-hover genTable">

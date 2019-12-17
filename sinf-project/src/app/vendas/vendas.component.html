@@ -70,7 +70,7 @@
 
     <div class="row mt-3">
         <div class="col-sm-12 col-md-4">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
                     <div class="cardTitle"> Vendas por Categoria</div>
                     <app-grafico-bolo [pieChartData]="pieChartData" [pieChartLabels]="pieChartLabels" [legend]="legendBar"></app-grafico-bolo>
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-4" *ngIf="username == 'CEO'">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
                     <div class="cardTitle" > Clientes mais Rentáveis</div>
                     <table class="table table-bordered table-hover genTable">
@@ -109,7 +109,7 @@
 
         </div>
         <div class="col-sm-12 col-md-4">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-body">
                     <div class="cardTitle"> Distribuição de Vendas de Produtos</div>
                     <table class="table table-bordered table-hover genTable">

@@ -362,7 +362,6 @@ export class AppComponent {
   }
 
   doDemonstracao(portantos: Map<number, number>) {
-    console.log("ENTROUput");
     let demonstracao = new Demonstracao();
     for (let index = 0; index < 648; index++) {
       if(portantos.get(index) == null){
@@ -371,7 +370,7 @@ export class AppComponent {
     }
     console.log(portantos);
 
-    //ATIVO CORRENTE
+    //ATIVO NAO CORRENTE
     demonstracao.ativos_ﬁxos_tangiveis =
       + Number(portantos.get(268))
       + Number(portantos.get(269))
@@ -398,8 +397,34 @@ export class AppComponent {
       + Number(portantos.get(310))
       - Number(portantos.get(314))
       - Number(portantos.get(318));
+/*
+      console.log(Number(portantos.get(268)));
+      console.log( Number(portantos.get(269)));
+      console.log( Number(portantos.get(270)));
+      console.log( Number(portantos.get(271)));
+      console.log( Number(portantos.get(272)));
+      console.log( Number(portantos.get(273)));
+      console.log( Number(portantos.get(274)));
+      console.log( Number(portantos.get(275)));
+      console.log( Number(portantos.get(276)));
+      console.log( Number(portantos.get(277)));
+      console.log( Number(portantos.get(278)));
+      console.log( Number(portantos.get(279)));
+      console.log( Number(portantos.get(280)));
+      console.log( Number(portantos.get(281)));
+      console.log( Number(portantos.get(282)));
+      console.log( Number(portantos.get(283)));
+      console.log( Number(portantos.get(284)));
+      console.log( Number(portantos.get(285)));
+      console.log( Number(portantos.get(286)));
+      console.log( Number(portantos.get(287)));
+      console.log( Number(portantos.get(288)));
+      console.log( Number(portantos.get(306)));
+      console.log( Number(portantos.get(310)));
+      console.log( Number(portantos.get(314)));
+      console.log( Number(portantos.get(318)));
 
-      console.log(demonstracao.ativos_ﬁxos_tangiveis);
+      console.log(demonstracao.ativos_ﬁxos_tangiveis);*/
 
 
     demonstracao.propriedades_de_investimento =
@@ -519,7 +544,7 @@ export class AppComponent {
       + Number(portantos.get(133))
       - Number(portantos.get(143));
 
-    //ATIVOS NAO CORRENTES
+    //ATIVOS CORRENTES
     demonstracao.inventarios =
       + Number(portantos.get(165))
       + Number(portantos.get(166))
@@ -557,7 +582,7 @@ export class AppComponent {
       + Number(portantos.get(212))
       + Number(portantos.get(213));
 
-    demonstracao.ativos_biologicos =
+    demonstracao.ativos_biologicos_ativo_corrente =
       + Number(portantos.get(195))
       + Number(portantos.get(196))
       - Number(portantos.get(199))
@@ -684,7 +709,7 @@ export class AppComponent {
 
 
 
-    //PASSIVO NAO CORRENTE
+    //PASSIVO CORRENTE
 
     demonstracao.provisoes =
       + Number(portantos.get(148))
@@ -824,13 +849,39 @@ export class AppComponent {
       Number(demonstracao.ativos_intangiveis) +
       Number(demonstracao.ativos_biologicos)+
       Number(demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial) +
-      //demonstracao.outros_investimentos_ﬁnanceiros +
+      Number(demonstracao.outros_investimentos_ﬁnanceiros) +
       Number(demonstracao.creditos_a_receber) +
-      Number(demonstracao.ativos_por_impostos_diferidos) +
-      Number(demonstracao.investimentos_ﬁnanceiros) +
-      Number(demonstracao.creditos_e_outros_ativos_nao_correntes);
+      Number(demonstracao.ativos_por_impostos_diferidos);
+      //Number(demonstracao.investimentos_ﬁnanceiros) +
+      //Number(demonstracao.creditos_e_outros_ativos_nao_correntes);
 
-      var ativo = Number(ativoNaoCorrente) + Number(ativoNaoCorrente);
+      /*
+      console.log(Number(demonstracao.ativos_ﬁxos_tangiveis));
+      console.log(Number(demonstracao.propriedades_de_investimento));
+      console.log(Number(demonstracao.goodwill));
+      console.log(Number(demonstracao.ativos_intangiveis));
+      console.log(Number(demonstracao.ativos_biologicos));
+      console.log(Number(demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial));
+      console.log(Number(demonstracao.outros_investimentos_ﬁnanceiros));
+      console.log(Number(demonstracao.creditos_a_receber));
+      console.log(Number(demonstracao.ativos_por_impostos_diferidos));*/
+
+      var ativoCorrente = 
+      Number(demonstracao.inventarios) +
+      Number(demonstracao.ativos_biologicos_ativo_corrente)+
+      Number(demonstracao.clientes)+
+      Number(demonstracao.estado_e_outros_entes_publicos) +
+      Number(demonstracao.capital_subscrito_e_nao_realizado)+
+      Number(demonstracao.outros_creditos_a_receber) +
+      Number(demonstracao.diferimentos) +
+      Number(demonstracao.ativos_financeiros_detidos_para_negociacao) +
+      Number(demonstracao.outros_ativos_financeiros) +
+      Number(demonstracao.ativos_nao_correntes_detidos_para_venda) +
+      //Number(demonstracao.outros_ativos_correntes);
+      Number(demonstracao.caixa_e_depositos_bancarios);
+
+      var ativo = Number(ativoNaoCorrente) + Number(ativoCorrente);
+      /*
       console.log("JAS");
       console.log(demonstracao.ativos_ﬁxos_tangiveis);
       console.log(demonstracao.propriedades_de_investimento);
@@ -838,12 +889,12 @@ export class AppComponent {
       console.log(demonstracao.ativos_intangiveis);
       console.log(demonstracao.ativos_biologicos);
       console.log(demonstracao.participações_ﬁnanceiras_metodo_da_equivalencia_patrimonial);
-      //demonstracao.outros_investimentos_ﬁnanceiros +
+      console.log(demonstracao.outros_investimentos_ﬁnanceiros);
       console.log(demonstracao.creditos_a_receber);
-      console.log(demonstracao.ativos_por_impostos_diferidos);
-      console.log(demonstracao.investimentos_ﬁnanceiros);
-      console.log(demonstracao.creditos_e_outros_ativos_nao_correntes);
-      console.log(ativoNaoCorrente);
+      console.log(demonstracao.ativos_por_impostos_diferidos);*/
+      //console.log(demonstracao.investimentos_ﬁnanceiros);
+      //console.log(demonstracao.creditos_e_outros_ativos_nao_correntes);
+      console.log(ativo);
 
   }
 

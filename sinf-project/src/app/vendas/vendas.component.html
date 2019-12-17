@@ -60,7 +60,7 @@
             </div>
 
         </div>
-        <div class="col-sm-12 col-md-6" *ngIf="username == 'Manager'">
+        <div class="col-sm-12 col-md-6" *ngIf="username != 'Manager'">
             <div class="card">
                 <div class="card-body">
                     <div class="cardTitle" > Vendas por Região</div>
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4" *ngIf="username == 'CEO'">
+        <div class="col-sm-12 col-md-4" *ngIf="username != 'CEO'">
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="cardTitle" > Clientes mais Rentáveis</div>

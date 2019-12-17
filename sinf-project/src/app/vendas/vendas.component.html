@@ -58,10 +58,10 @@
             </div>
 
         </div>
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-6" *ngIf="username == 'Manager'">
             <div class="card">
                 <div class="card-body">
-                    <div class="cardTitle"> Vendas por Região</div>
+                    <div class="cardTitle" > Vendas por Região</div>
                     <app-grafico-barras [dataSets]="barChartData" [labels]="barChartLabels" [legend]="legendBar"></app-grafico-barras>
                 </div>
             </div>
@@ -77,10 +77,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-4" *ngIf="username == 'CEO'">
             <div class="card">
                 <div class="card-body">
-                    <div class="cardTitle"> Clientes mais Rentáveis</div>
+                    <div class="cardTitle" > Clientes mais Rentáveis</div>
                     <table class="table table-bordered table-hover genTable">
                         <tr *ngIf="costumers != null">
                             <th>Rank</th>

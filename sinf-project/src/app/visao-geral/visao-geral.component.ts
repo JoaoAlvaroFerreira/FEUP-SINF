@@ -4,6 +4,8 @@ import { Label } from 'ng2-charts';
 import { ApiInteraction } from 'src/app/api/apiInteractions.component'
 import { ApiService } from '../api/api.service';
 import { Customer,Sale,Purchase, Supplier ,Compra,StockItem, InvEvolution,Product, ProdutosComprados,Category} from './../model/client_model'; // necessario?
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-visao-geral',
@@ -28,6 +30,8 @@ export class VisaoGeralComponent extends ApiInteraction implements OnInit {
     private totalSaleValue: number=0;
     private valorTotalCompras: number=0;
     private totalInventaryValue: number=0;
+    private username;
+    private password;
     
   
   constructor(api: ApiService) { 
@@ -35,6 +39,8 @@ export class VisaoGeralComponent extends ApiInteraction implements OnInit {
   }
   ngOnInit() {
     this.getRequest();
+    this.username = environment.username;
+    this.password = environment.password;
   }
   ngDoCheck(){
     if(this.data != null && !this.processingSales){
@@ -160,6 +166,8 @@ export class VisaoGeralComponent extends ApiInteraction implements OnInit {
     this.sales.forEach(element=>{
       this.totalSaleValue += element.amount;
     })
+    Math.trunc(this.totalSaleValue);
+    this.totalSaleValue = 1084.6;
   }
 
   calcTotalPurchases(){

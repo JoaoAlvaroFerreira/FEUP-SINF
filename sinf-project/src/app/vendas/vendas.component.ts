@@ -4,6 +4,7 @@ import { Label } from 'ng2-charts';
 import { ApiInteraction } from 'src/app/api/apiInteractions.component'
 import { ApiService } from '../api/api.service';
 import { Customer,Sale,Category,Product, Compra,ProdutosComprados } from './../model/client_model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-vendas',
@@ -24,6 +25,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
   private selectedYear;
   private selectedMonth;
 
+  private username;
   
   public processingDone: boolean = false;
   public processingItens: boolean = false;
@@ -56,7 +58,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
   ngOnInit() {
     
     this.getRequest();
-    
+    this.username = environment.username;
   }
 
   ngDoCheck() {
@@ -355,6 +357,7 @@ export class VendasComponent extends ApiInteraction implements OnInit {
     this.sales.forEach(element=>{
       this.totalSaleValue += element.amount;
     })
+    Math.trunc(this.totalSaleValue);
   }
 
   categoryType(){

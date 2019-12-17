@@ -23,6 +23,8 @@ import { ApiService } from './api/api.service';
 import { ApiInteraction } from './api/apiInteractions.component';
 import { LoginComponent } from './login/login.component';
 import { NavegacaoComponent } from './navegacao/navegacao.component';
+import { NavbarLoginComponent } from './navbar-login/navbar-login.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -41,7 +43,9 @@ import { NavegacaoComponent } from './navegacao/navegacao.component';
     FinanceiroComponent,
     ApiInteraction,
     LoginComponent,
-    NavegacaoComponent
+    NavegacaoComponent,
+    NavbarLoginComponent,
+    NavbarComponent
   ],
   imports: [
     FormsModule,

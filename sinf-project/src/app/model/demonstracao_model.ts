@@ -90,4 +90,11 @@ export class Demonstracao{
     outros_passivos_financeiros: number;
     passivos_nao_correntes_detidos_para_venda: number;
     outros_passivos_correntes: number;
+
+    // ATIVO
+    ativo: number;
+
+    //PASSIVO
+
+    passivo: number;
 }

@@ -907,7 +907,30 @@ export class FinanceiroComponent implements OnInit {
       //Number(this.demonstracao.outros_ativos_correntes);
       Number(this.demonstracao.caixa_e_depositos_bancarios);
 
-      var ativo = Number(ativoNaoCorrente) + Number(ativoCorrente);
+      var passivoNaoCorrente = 
+      Number(this.demonstracao.provisoes) +
+      Number(this.demonstracao.financiamentos_obtidos)+
+      Number(this.demonstracao.responsabilidades_por_beneficios_pos_emprego)+
+      Number(this.demonstracao.passivos_por_impostos_diferidos) +
+      Number(this.demonstracao.outras_dividas_a_pagar);
+
+      
+      var passivoCorrente = 
+      Number(this.demonstracao.fornecedores) +
+      Number(this.demonstracao.adiantamentos_de_clientes)+
+      Number(this.demonstracao.estado_e_outros_entes_publicos_passivo_corrente)+
+      Number(this.demonstracao.financiamentos_obtidos_passivo_corrente) +
+      Number(this.demonstracao.outras_dividas_a_pagar_passivo_corrente) +
+      Number(this.demonstracao.diferimentos_passivo_corrente) +
+      Number(this.demonstracao.passivos_financeiros_detidos_para_negociacao)+
+      Number(this.demonstracao.outros_passivos_financeiros)+
+      Number(this.demonstracao.passivos_nao_correntes_detidos_para_venda);
+
+    
+      this.demonstracao.ativo = Number(ativoNaoCorrente) + Number(ativoCorrente);
+      
+    
+      this.demonstracao.passivo = Number(passivoCorrente) + Number(passivoNaoCorrente);
       /*
       console.log("JAS");
       console.log(this.demonstracao.ativos_ﬁxos_tangiveis);
@@ -921,7 +944,6 @@ export class FinanceiroComponent implements OnInit {
       console.log(this.demonstracao.ativos_por_impostos_diferidos);*/
       //console.log(this.demonstracao.investimentos_ﬁnanceiros);
       //console.log(this.demonstracao.creditos_e_outros_ativos_nao_correntes);
-      console.log(ativo);
 
   }
 

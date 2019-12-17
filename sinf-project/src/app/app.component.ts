@@ -18,8 +18,8 @@ export class AppComponent {
   title = '360º Company Dashboard';
   public xmlItems: any;
   constructor(private _http: HttpClient) {
-    this.loadXML();
-    this.loadXMLfinancial();
+    //this.loadXML();
+    //this.loadXMLfinancial();
   }
   loadXML() {
     this._http.get('/assets/saft.xml',

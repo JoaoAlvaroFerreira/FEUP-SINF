@@ -10,3 +10,7 @@ Para correr, entrar na pasta sinf-project e correr os seguintes comandos:
 >ng serve
 
 O projeto estará a correr em localhost:4200
+
+Para fazer log-in, um par de credenciais funcionais é:
+Username: developer
+Password: password

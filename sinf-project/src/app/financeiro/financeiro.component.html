@@ -100,7 +100,7 @@
                     <div class="cardTitle"> Contas a Receber</div>
                     <div class="value-card d-flex flew-row align-items-center">
                         <div class="updown green"><i class="fas fa-arrow-up"></i></div>
-                        <div class="value">{{demonstracao.creditos_a_receber}} €</div>
+                        <div class="value">{{demonstracao.creditos_a_receber.toFixed(2)}} €</div>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                     <div class="cardTitle"> Contas a Pagar</div>
                     <div class="value-card d-flex flew-row align-items-center">
                         <div class="updown red"><i class="fas fa-arrow-down"></i></div>
-                        <div class="value">{{demonstracao.outras_dividas_a_pagar_passivo_corrente }} €</div>
+                        <div class="value">{{demonstracao.outras_dividas_a_pagar_passivo_corrente.toFixed(2) }} €</div>
                     </div>
                 </div>
             </div>

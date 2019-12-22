@@ -319,13 +319,14 @@ export class VendasComponent extends ApiInteraction implements OnInit {
     
     this.sales.sort((a,b)=>{if(a.date>b.date) return 1; else return -1;});
     this.sales.forEach(element=>{
-      if(this.lineChartLabels.includes(element.date.toString()))
+      var dat= element.date.toString().split('T');
+      if(this.lineChartLabels.includes(dat[0].toString()))
       {
-        i = this.lineChartLabels.indexOf(element.date.toString());
+        i = this.lineChartLabels.indexOf(dat[0].toString());
         this.lineChartData[0][i]+=element.amount;
       }
       else{
-        this.lineChartLabels.push(element.date.toString());
+        this.lineChartLabels.push(dat[0].toString());
         this.lineChartData[0].data.push(element.amount);
       }
   

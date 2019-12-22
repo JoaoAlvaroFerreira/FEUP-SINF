@@ -157,10 +157,10 @@ export class VisaoGeralComponent extends ApiInteraction implements OnInit {
 }
 
   salesDistribution() {
-    console.log("NOME DO GAJO"+this.produtosComprados[0].product.name);
+   
     this.produtosCompradosDist = this.produtosComprados;
     this.produtosCompradosDist.sort((a,b)=>{if(a.quantity < b.quantity) return 1; else return 0;});
-    console.log("NOME DO GAJO DOIS"+this.produtosCompradosDist[0].product.name);
+  
   }
 
   processPurchases(){
@@ -245,16 +245,21 @@ export class VisaoGeralComponent extends ApiInteraction implements OnInit {
   }
   salesTendency() {
     var i;
-    
+    /*var date_array = date.split('-');
+    purchase.year = date_array[0];
+    purchase.month = date_array[1];
+    var day= date_array[2].split('T');
+    purchase.day = day[0];*/
     this.sales.sort((a,b)=>{if(a.date>b.date) return 1; else return -1;});
     this.sales.forEach(element=>{
-      if(this.lineChartLabels.includes(element.date.toString()))
+      var dat= element.date.toString().split('T');
+      if(this.lineChartLabels.includes(dat[0].toString()))
       {
-        i = this.lineChartLabels.indexOf(element.date.toString());
+        i = this.lineChartLabels.indexOf(dat[0].toString());
         this.lineChartData[0][i]+=element.amount;
       }
       else{
-        this.lineChartLabels.push(element.date.toString());
+        this.lineChartLabels.push(dat[0].toString());
         this.lineChartData[0].data.push(element.amount);
       }
   

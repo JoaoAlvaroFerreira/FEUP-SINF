@@ -61,8 +61,8 @@
                 <div class="card-body">
                     <div class="cardTitle"> Ativo</div>
                     <div class="value-card d-flex flew-row align-items-center">
-                        <div class="updown green"><i class="fas fa-arrow-up"></i></div>
-                        <div class="value">{{demonstracao.ativo.toFixed(0)}} €</div>
+                        <div class="updown green"></div>
+                        <div class="value">{{-demonstracao.ativo.toFixed(0)}} €</div>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                 <div class="card-body">
                     <div class="cardTitle"> Passivo</div>
                     <div class="value-card d-flex flew-row align-items-center">
-                        <div class="updown red"><i class="fas fa-arrow-down"></i></div>
+                        <div class="updown red"></div>
                         <div class="value">{{demonstracao.passivo.toFixed(2)}} €</div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                 <div class="card-body">
                     <div class="cardTitle"> Contas a Pagar</div>
                     <div class="value-card d-flex flew-row align-items-center">
-                        <div class="updown red"><i class="fas fa-arrow-down"></i></div>
+                        <div class="updown red"></div>
                         <div class="value">{{demonstracao.outras_dividas_a_pagar_passivo_corrente.toFixed(2)}} €</div>
                     </div>
                 </div>

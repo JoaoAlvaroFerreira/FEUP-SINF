@@ -16,7 +16,7 @@ export class InventarioComponent extends ApiInteraction implements OnInit {
   public lineChartData: ChartDataSets[] = [
     { data: [], label: 'Series A' }
   ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'agost', 'set','out', 'nov', 'de'];
+  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December'];
   public legendLine: boolean = false;
   public processingDone: boolean=false;
   public processingPurchases: boolean=false;
